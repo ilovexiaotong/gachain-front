@@ -10,9 +10,9 @@
 ----------
 
 ## 安装
-该项目需要安装 [Node.js](https://nodejs.org/) v6+ 才能运行。
+该项目需要安装 [Node.js v6+](https://nodejs.org/) 才能运行。
 
-我们使用 [yarn](https://yarnpkg.com/en/docs/install) 作为包管理工具, 所以你也需要安装yarn。具体的安装方法请到[npm官网](https://www.npmjs.com/)
+我们使用 [yarn](https://yarnpkg.com/en/docs/install) 作为包管理工具, 所以你也需要安装yarn。具体的安装方法请到 [npm官网](https://www.npmjs.com/)
 安装项目依赖并启动服务器。
 
 ```bash
@@ -76,10 +76,10 @@ $ REACT_APP_API_URL='http://example.org:8080/api/v2' yarn build-desktop
 ```bash
 $ yarn release --publish never -mwl
 ```
-将发布macOS，windows和linux的桌面应用程序
+将发布macOS，windows和linux的桌面应用程序。
 
 ----------
 
 ### 有问题
 
-如果你在使用Gachain时遇到任何问题，请随时与我们联系 support@gachain.org
+如果你在使用Gachain时遇到任何问题，请随时与我们联系 support@gachain.org 。
