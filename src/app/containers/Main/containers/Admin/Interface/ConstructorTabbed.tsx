@@ -72,6 +72,7 @@ interface IConstructorTabbedContainerDispatch {
 
 interface IConstructorTabbedState {
     grid: boolean;
+    logic: boolean;
     canSave: boolean;
 }
 
@@ -80,6 +81,7 @@ class ConstructorTabbedContainer extends React.Component<IConstructorTabbedConta
         super(props);
         this.state = {
             grid: true,
+            logic: true,
             canSave: false
         };
     }
@@ -185,14 +187,21 @@ class ConstructorTabbedContainer extends React.Component<IConstructorTabbedConta
         });
     }
 
+    toggleLogic() {
+        this.setState({
+            ...this.state,
+            logic: !this.state.logic
+        });
+    }
+
     undo() {
         this.props.constructorUndo({pageID: this.props.pageID});
-        this.props.generatePageTemplate({pageID: this.props.pageID, vde: this.props.vde});        
+        this.props.generatePageTemplate({pageID: this.props.pageID, vde: this.props.vde});
     }
 
     redo() {
         this.props.constructorRedo({pageID: this.props.pageID});
-        this.props.generatePageTemplate({pageID: this.props.pageID, vde: this.props.vde});        
+        this.props.generatePageTemplate({pageID: this.props.pageID, vde: this.props.vde});
     }
 
     onSave(block: string, error?: { type: string, error: string }) {
@@ -231,7 +240,9 @@ class ConstructorTabbedContainer extends React.Component<IConstructorTabbedConta
                 removeTag={this.removeTag.bind(this)}
                 selectedTag={selectedTag}
                 grid={this.state.grid}
+                logic={this.state.logic}
                 toggleGrid={this.toggleGrid.bind(this)}
+                toggleLogic={this.toggleLogic.bind(this)}
                 undo={this.undo.bind(this)}
                 redo={this.redo.bind(this)}
                 canUndo={canUndo}

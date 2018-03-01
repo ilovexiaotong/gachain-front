@@ -107,15 +107,6 @@ export function convertToTreeData(data: any, selectedTag?: any): any {
             let children = null;
             let subtitle = item.text;
             if (item.children) {
-                // if (item.children.length === 1 && item.children[0] && item.children[0].tag === 'text') {
-                //     subtitle = _.truncate(item.children[0].text, {
-                //         'length': 24,
-                //         'separator': /,? +/
-                //     });
-                // }
-                // else {
-                //     children = convertToTreeData(item.children, item, selectedTag);
-                // }
                 if (item.children.length && item.children[0] && item.children[0].tag === 'text') {
                     subtitle = _.truncate(item.children[0].text, {
                         'length': 24,
@@ -135,17 +126,24 @@ export function convertToTreeData(data: any, selectedTag?: any): any {
                 selected = true;
             }
 
-            let treeItem = {
-                // title: ((item.tag !== 'text') ? item.tag : '') + ' ' + (subtitle ? subtitle : ''),
-                title: item.tag  + (subtitle ? (': ' + subtitle) : ''),
-                // subtitle: subtitle,
-                children: children,
-                expanded: true,
-                id: item.id,
-                selected: selected,
-                tag: item
-            };
-            result.push(treeItem);
+            const Handler = resolveTagHandler(item.tag);
+            if (Handler) {
+                const tagObj = new Handler();
+                let treeItem = {
+                    // title: ((item.tag !== 'text') ? item.tag : '') + ' ' + (subtitle ? subtitle : ''),
+                    title: item.tag  + (subtitle ? (': ' + subtitle) : ''),
+                    // subtitle: subtitle,
+                    children: children,
+                    expanded: true,
+                    id: item.id,
+                    selected: selected,
+                    logic: tagObj.isLogic(),
+                    tag: item
+                };
+                result.push(treeItem);
+            }
+
+
         }
     }
     return result;
@@ -211,6 +209,7 @@ const constructorTemplates: any = {
                                             {
                                                 tag: 'input',
                                                 attr: {
+                                                    class: 'form-control',
                                                     name: 'Input3',
                                                     type: 'text'
                                                 }
@@ -259,6 +258,7 @@ const constructorTemplates: any = {
                                             {
                                                 tag: 'input',
                                                 attr: {
+                                                    class: 'form-control',
                                                     name: 'Input3',
                                                     type: 'text'
                                                 }
@@ -307,6 +307,7 @@ const constructorTemplates: any = {
                                             {
                                                 tag: 'input',
                                                 attr: {
+                                                    class: 'form-control',
                                                     name: 'Input3',
                                                     type: 'text'
                                                 }
@@ -452,7 +453,7 @@ const constructorTemplates: any = {
                                                     {
                                                         tag: 'input',
                                                         attr: {
-                                                            'class': 'form-control',
+                                                            class: 'form-control',
                                                             name: 'Search',
                                                             type: 'text',
                                                             value: '#v_Search#'
@@ -697,6 +698,7 @@ class Tag {
     protected canHaveChildren: boolean = true;
     protected offset: number = 0;
     protected generateTextElement = true;
+    protected logic = false;
 
     protected attr: any = {
         'class': 'Class'
@@ -871,6 +873,10 @@ class Tag {
     hasEditProp(prop: string): boolean {
         return this.editProps.indexOf(prop) !== -1;
     }
+
+    isLogic(): boolean {
+        return this.logic;
+    }
 }
 
 class Button extends Tag {
@@ -1036,7 +1042,7 @@ class Input extends Tag {
             id: generateId(),
             attr: {
                 name: 'sample image',
-
+                class: 'form-control'
             }
         };
     }
@@ -1073,6 +1079,7 @@ class DBFind extends Tag {
         super(element);
         this.tagName = 'DBFind';
         this.canHaveChildren = false;
+        this.logic = true;
         this.attr = {
             'name': 'Name',
             'source': 'Source'
