@@ -250,11 +250,6 @@ export default (state: State = initialState, action: Action): State => {
                             break;
                         }
                     }
-                    // let child = tag.children[0];
-                    // if (child.text) {
-                    //     child.text = action.payload.text + '';
-                    // }
-                    // tag.children = [child];
                 }
             }
 
@@ -276,6 +271,10 @@ export default (state: State = initialState, action: Action): State => {
 
             if ('string' === typeof action.payload.source) {
                 tag.attr.source = action.payload.source;
+            }
+
+            if ('string' === typeof action.payload.condition) {
+                tag.attr.condition = action.payload.condition;
             }
 
             if ('string' === typeof action.payload.class) {
@@ -575,7 +574,10 @@ export default (state: State = initialState, action: Action): State => {
         if (tagCopy.children) {
             setIds(tagCopy.children, true);
         }
-
+        if (tagCopy.tail) {
+            setIds(tagCopy.tail, true);
+        }
+        
         if ('string' === typeof action.payload.destinationTagID &&
             'string' === typeof action.payload.position) {
             let tag = findTagById(pageTree, action.payload.destinationTagID);
