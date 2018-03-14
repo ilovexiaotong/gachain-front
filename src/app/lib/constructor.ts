@@ -1130,10 +1130,12 @@ class If extends Tag {
         result += ')';
 
         let body = this.renderChildren();
-
+        let body = this.renderChildren();
+        result += '{\n';
         if (this.element.children && this.element.children.length) {
-            result += ' {\n' + body + '\n' + this.renderOffset() + '}';
+            result += body + '\n' + this.renderOffset();
         }
+        result += '}';
 
         if (this.element.tail && this.element.tail.length) {
             result += this.element.tail.map((element, index) => {
@@ -1194,10 +1196,11 @@ class ElseIf extends Tag {
         result += ')';
 
         let body = this.renderChildren();
-
+        result += '{\n';
         if (this.element.children && this.element.children.length) {
-            result += '{\n' + body + '\n' + this.renderOffset() + '}';
+            result += body + '\n' + this.renderOffset();
         }
+        result += '}';
         return this.renderOffset() + result;
     }
 
@@ -1227,13 +1230,18 @@ class Else extends Tag {
     }
 
     renderCode(): string {
-        let result: string = '.' + this.tagName;
 
+        if(this.element.children && this.element.children.length === 0)
+            return  '';
+
+        let result: string = '.' + this.tagName;
+        result += '{\n';
         let body = this.renderChildren();
 
         if (this.element.children && this.element.children.length) {
-            result += '{\n' + body + '\n' + this.renderOffset() + '}';
+            result += body + '\n' + this.renderOffset();
         }
+        result += '}';
         return this.renderOffset() + result;
     }
 
