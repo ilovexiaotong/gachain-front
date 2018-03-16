@@ -1155,7 +1155,6 @@ class If extends Tag {
         result += ')';
 
         let body = this.renderChildren();
-        let body = this.renderChildren();
         result += '{\n';
         if (this.element.children && this.element.children.length) {
             result += body + '\n' + this.renderOffset();
