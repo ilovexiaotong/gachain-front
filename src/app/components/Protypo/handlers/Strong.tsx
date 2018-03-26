@@ -90,7 +90,7 @@ class Strong extends React.Component<IStrongProps, IStrongState> {
                         onClick={this.onClick.bind(this)}
                         removeTag={this.removeTag.bind(this)}
                         connectDragSource={connectDragSource}
-                        canMove={true}                        
+                        canMove={true}
                     >
                     <strong
                         className={classes}

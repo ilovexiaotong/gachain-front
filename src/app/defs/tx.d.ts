@@ -15,10 +15,20 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 declare module 'gachain/tx' {
+    type TxError =
+        'E_CONTRACT' |
+        'E_ERROR' |
+        'E_INFO' |
+        'E_INVALID_PASSWORD' |
+        'E_SERVER' |
+        'E_WARNING' |
+        'panic';
+
     interface ITransaction {
         uuid: string;
         contract: string;
         block: string;
+        result?: string;
         error?: {
             type: string;
             error: string;
@@ -29,6 +39,7 @@ declare module 'gachain/tx' {
         uuid: string;
         name: string;
         vde?: boolean;
+        silent?: boolean;
         params: {
             [key: string]: any;
         };

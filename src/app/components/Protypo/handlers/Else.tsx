@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
+
 import * as React from 'react';
 import StyledComponent from './StyledComponent';
 import TagWrapper from '../components/TagWrapper';
@@ -79,7 +80,7 @@ class Else extends React.Component<IElseProps, IElseState> {
                     onClick={this.onClick.bind(this)}
                     removeTag={this.removeTag.bind(this)}
                     connectDragSource={connectDragSource}
-                    canMove={true}
+                    canMove={false}
                 >
                 <div
                     className={classes}

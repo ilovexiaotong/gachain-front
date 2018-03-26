@@ -147,7 +147,6 @@ export interface ITagWrapperProps {
     removeTag?: any;
     connectDragSource: any;
     dropEffect?: string;
-
     canMove?: boolean;
 }
 
@@ -200,7 +199,7 @@ class TagWrapper extends React.Component<ITagWrapperProps, ITagWrapperState> {
             >
                 { this.props.selected &&
                     <div className="b-controls">
-+                        {this.props.canMove && this.props.connectDragSource(<span><span className="b-control fa fa-arrows b-control_move" onMouseDown={this.setDropEffect.bind(this, 'move')}/> <span className="b-control fa fa-clone" onMouseDown={this.setDropEffect.bind(this, 'copy')}/></span>)} <span className="b-control fa fa-times" onClick={this.props.removeTag.bind(this)}/>
+                        {this.props.canMove && this.props.connectDragSource(<span><span className="b-control fa fa-arrows b-control_move" onMouseDown={this.setDropEffect.bind(this, 'move')}/> <span className="b-control fa fa-clone" onMouseDown={this.setDropEffect.bind(this, 'copy')}/></span>)} <span className="b-control fa fa-times" onClick={this.props.removeTag.bind(this)}/>
                     </div>
                 }
                 {this.props.canDrop && this.props.canDropPosition === 'before' && this.props.display === 'block' &&

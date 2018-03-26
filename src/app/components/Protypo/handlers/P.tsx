@@ -94,7 +94,7 @@ class P extends React.Component<IPProps, IPState> {
                         onClick={this.onClick.bind(this)}
                         removeTag={this.removeTag.bind(this)}
                         connectDragSource={connectDragSource}
-                        canMove={true}                        
+                        canMove={true}
                     >
                     <p
                         className={classes}

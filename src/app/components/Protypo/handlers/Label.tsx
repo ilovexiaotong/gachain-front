@@ -87,7 +87,7 @@ class Label extends React.Component<ILabelProps> {
                         onClick={this.onClick.bind(this)}
                         removeTag={this.removeTag.bind(this)}
                         connectDragSource={connectDragSource}
-                        canMove={true}                        
+                        canMove={true}
                     >
                     <label
                         className={classes}

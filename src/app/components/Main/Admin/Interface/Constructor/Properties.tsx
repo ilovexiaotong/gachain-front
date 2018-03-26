@@ -36,13 +36,13 @@ interface IPropertiesState {
 export default class Properties extends React.Component<IPropertiesProps, IPropertiesState> {
     onChange(attr: string, e: React.ChangeEvent<HTMLInputElement>) {
         if (this.props && this.props.tag) {
-            this.props.changePage({ [attr]: e.target.value, tagID: this.props.tag.id });
+            this.props.changePage({[attr]: e.target.value, tagID: this.props.tag.id});
         }
     }
 
     onAttrChange(attr: string, value: string) {
         if (this.props && this.props.tag) {
-            this.props.changePage({ [attr]: value, tagID: this.props.tag.id });
+            this.props.changePage({[attr]: value, tagID: this.props.tag.id});
         }
     }
 
@@ -72,7 +72,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                                 value={this.props.tag && this.props.tag.id || ''}
                                 readOnly={true}
                             />
-                            {Tag.hasEditProp('class') && (
+                            { Tag.hasEditProp('class') && (
                                 <PropertiesInput
                                     name="class"
                                     title="CSS CLASS"
@@ -83,29 +83,29 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                             )}
                         </form>
                     </div>
-                    <div className="content-wrapper" />
+                    <div className="content-wrapper"/>
                     <div className="content-wrapper b-panel-light">
                         <Row className="g-padding-bottom hidden">
                             <Col xs={3} className="text-uppercase">
                                 position
                             </Col>
                             <Col xs={9}>
-                                <div className="b-position-bullet b-position-bullet_selected" />
-                                <div className="b-position-bullet b-position-bullet_selected" />
-                                <div className="b-position-bullet b-position-bullet_selected" />
-                                <div className="b-position-bullet b-position-bullet_selected" />
-                                <div className="b-position-bullet b-position-bullet_selected" />
-                                <div className="b-position-bullet b-position-bullet_selected" />
-                                <div className="b-position-bullet" />
-                                <div className="b-position-bullet" />
-                                <div className="b-position-bullet" />
-                                <div className="b-position-bullet" />
-                                <div className="b-position-bullet" />
-                                <div className="b-position-bullet" />
+                                <div className="b-position-bullet b-position-bullet_selected"/>
+                                <div className="b-position-bullet b-position-bullet_selected"/>
+                                <div className="b-position-bullet b-position-bullet_selected"/>
+                                <div className="b-position-bullet b-position-bullet_selected"/>
+                                <div className="b-position-bullet b-position-bullet_selected"/>
+                                <div className="b-position-bullet b-position-bullet_selected"/>
+                                <div className="b-position-bullet"/>
+                                <div className="b-position-bullet"/>
+                                <div className="b-position-bullet"/>
+                                <div className="b-position-bullet"/>
+                                <div className="b-position-bullet"/>
+                                <div className="b-position-bullet"/>
                             </Col>
                         </Row>
                         <form className="form-horizontal">
-                            {Tag.hasEditProp('width') && (
+                            { Tag.hasEditProp('width') && (
                                 <PropertiesInput
                                     name="width"
                                     title="Width"
@@ -114,7 +114,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                                     onChange={this.onChange.bind(this, 'width')}
                                 />
                             )}
-                            {Tag.hasEditProp('ratio') && (
+                            { Tag.hasEditProp('ratio') && (
                                 <PropertiesInput
                                     name="ratio"
                                     title="Height / ratio"
@@ -123,7 +123,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                                     onChange={this.onChange.bind(this, 'ratio')}
                                 />
                             )}
-                            {Tag.hasEditProp('name') && (
+                            { Tag.hasEditProp('name') && (
                                 <PropertiesInput
                                     name="name"
                                     title="Table name"
@@ -131,7 +131,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                                     onChange={this.onChange.bind(this, 'name')}
                                 />
                             )}
-                            {Tag.hasEditProp('source') && (
+                            { Tag.hasEditProp('source') && (
                                 <PropertiesInput
                                     name="source"
                                     title="Source"
@@ -149,7 +149,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                             )}
                         </form>
                         <Row className="g-padding-bottom">
-                            {Tag.hasEditProp('align') && (
+                            { Tag.hasEditProp('align') && (
                                 <Col xs={4} className="text-center">
                                     <div className="text-uppercase">
                                         alignment
@@ -160,7 +160,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                                     />
                                 </Col>
                             )}
-                            {Tag.hasEditProp('transform') && (
+                            { Tag.hasEditProp('transform') && (
                                 <Col xs={4} className="text-center">
                                     <div className="text-uppercase">
                                         transform
@@ -171,7 +171,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                                     />
                                 </Col>
                             )}
-                            {Tag.hasEditProp('wrap') && (
+                            { Tag.hasEditProp('wrap') && (
                                 <Col xs={4} className="text-center">
                                     <div className="text-center text-uppercase">
                                         no wrap
@@ -186,7 +186,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                             )}
                         </Row>
                         <Row className="g-padding-bottom">
-                            {Tag.hasEditProp('btn') && (
+                            { Tag.hasEditProp('btn') && (
                                 <div>
                                     <Col xs={12}>
                                         <div className="text-uppercase">
@@ -201,7 +201,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                                     </Col>
                                 </div>
                             )}
-                            {Tag.hasEditProp('color') && (
+                            { Tag.hasEditProp('color') && (
                                 <div>
                                     <Col xs={12}>
                                         <div className="text-uppercase">
@@ -223,7 +223,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
         }
         else {
             return (
-                <Panel title="Properties" />
+                <Panel title="Properties"/>
             );
         }
     }

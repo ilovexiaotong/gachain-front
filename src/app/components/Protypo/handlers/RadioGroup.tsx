@@ -94,7 +94,7 @@ const RadioGroup: React.SFC<IRadioGroupProps> = (props, context: IRadioGroupCont
                     onClick={onClick}
                     removeTag={removeTag}
                     connectDragSource={connectDragSource}
-                    canMove={true}                    
+                    canMove={true}
                 >
                     <div className={classes}>
                         <label>

@@ -270,7 +270,7 @@ const keyring = {
         return result;
     },
 
-    verify: (privateKey: string, publicKey: string, data: string = 'GACHAIN') => {
+    verify: (privateKey: string, publicKey: string, data: string = 'GENESIS') => {
         const encryptedData = keyring.sign(data, privateKey);
         const signature = new KJUR.crypto.Signature({
             alg: signAlg,
