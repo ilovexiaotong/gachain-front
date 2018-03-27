@@ -13,6 +13,7 @@
 /build
 /releases
 config.json
+package-lock.json
 
 # build artifacts
 /src/app/styles/built
