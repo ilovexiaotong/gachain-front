@@ -15,13 +15,13 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IStoredAccount } from 'gachain/storage';
-import { INotificationsMessage } from 'gachain/socket';
+import { IAccount } from 'gachain/auth';
+import { INotificationsMessage, IConnectCall } from 'gachain/socket';
 
 const actionCreator = actionCreatorFactory('socket');
-export const connect = actionCreator.async<{ userID: string, socketToken: string, timestamp: string }, ICentrifuge, string>('CONNECT');
+export const connect = actionCreator.async<IConnectCall, ICentrifuge, string>('CONNECT');
 export const disconnect = actionCreator.async('DISCONNECT');
-export const subscribe = actionCreator.async<{ account: IStoredAccount }, any, string>('SUBSCRIBE');
-export const unsubscribe = actionCreator.async<{ account: IStoredAccount }, void, void>('UNSUBSCRIBE');
+export const subscribe = actionCreator.async<IAccount, any, string>('SUBSCRIBE');
+export const unsubscribe = actionCreator.async<IAccount, void, void>('UNSUBSCRIBE');
 export const setNotificationsCount = actionCreator<INotificationsMessage>('SET_NOTIFICATIONS_COUNT');
 export const getNotificationsCount = actionCreator<{ ids: { id: string, ecosystem: string }[] }>('GET_NOTIFICATIONS_COUNT');

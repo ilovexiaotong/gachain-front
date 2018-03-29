@@ -15,12 +15,10 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IStoredAccount } from 'gachain/storage';
+import { IAccount } from 'gachain/auth';
 
 const actionCreator = actionCreatorFactory('storage');
 export const saveLocale = actionCreator<string>('SAVE_LOCALE');
-export const saveAccount = actionCreator<IStoredAccount>('SAVE_ACCOUNT');
-export const removeAccount = actionCreator<IStoredAccount>('REMOVE_ACCOUNT');
+export const saveAccount = actionCreator<IAccount>('SAVE_ACCOUNT');
+export const removeAccount = actionCreator<IAccount>('REMOVE_ACCOUNT');
 export const saveNavigationSize = actionCreator<number>('SAVE_NAVIGATION_SIZE');
-export const addTabList = actionCreator<{ addID?: string, addName?: string, addType?: string }>('ADD_TAB_LIST');
-export const removeTabList = actionCreator<{ id: string, type: string }>('REMOVE_TAB_LIST');

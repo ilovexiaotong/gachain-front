@@ -17,14 +17,14 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { ITransactionCall, TxError } from 'gachain/tx';
+import { ITransactionCall, TTxError } from 'gachain/tx';
 
 import Modal from '../';
 
 export interface ITxErrorModalProps {
     tx: ITransactionCall;
     error: {
-        type: TxError,
+        type: TTxError,
         error?: string
     };
 }

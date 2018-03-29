@@ -18,7 +18,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import imgAvatar from 'images/avatar.svg';
 import { FormattedMessage } from 'react-intl';
-import { IStoredAccount } from 'gachain/storage';
+import { IAccount } from 'gachain/auth';
 
 import { CloseDropdownButton } from 'components/DropdownButton';
 import PageLink from 'containers/Routing/PageLink';
@@ -74,9 +74,9 @@ const StyledUserMenu = styled.div`
 `;
 
 export interface IUserMenuProps {
-    account: IStoredAccount;
-    ecosystemAccounts: IStoredAccount[];
-    switchAccount: (options: { account: IStoredAccount }) => void;
+    account: IAccount;
+    ecosystemAccounts: IAccount[];
+    switchAccount: (account: IAccount) => void;
     logout: () => void;
 }
 
@@ -124,7 +124,7 @@ class UserMenu extends React.Component<IUserMenuProps> {
                         <ul className="dropdown-group">
                             {this.props.ecosystemAccounts.map(account => (
                                 <li key={account.ecosystem}>
-                                    <CloseDropdownButton onClick={account.ecosystem !== this.props.account.ecosystem && this.props.switchAccount.bind(this, { account })}>
+                                    <CloseDropdownButton onClick={account.ecosystem !== this.props.account.ecosystem && this.props.switchAccount.bind(this, account)}>
                                         {account.ecosystemName ?
                                             (
                                                 account.ecosystemName

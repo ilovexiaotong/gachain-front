@@ -14,39 +14,15 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-import { Action } from 'redux';
-import { Observable } from 'rxjs/Observable';
-import { combineEpics, Epic } from 'redux-observable';
-import { IRootState } from 'modules';
-import * as actions from './actions';
-import platform from 'lib/platform';
-
-export const switchWindowEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(actions.switchWindow.started)
-        .map(action => {
-            platform.on('desktop', () => {
-                const Electron = require('electron');
-                Electron.ipcRenderer.sendSync('switchWindow', action.payload.window);
-            });
-
-            return actions.switchWindow.done({
-                params: action.payload,
-                result: action.payload.window
-            });
-        });
-
-export const setBadgeCountEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(actions.setBadgeCount)
-        .flatMap(action => {
-            platform.on('desktop', () => {
-                const Electron = require('electron');
-                Electron.remote.app.setBadgeCount(action.payload);
-            });
-
-            return Observable.empty();
-        });
+import { combineEpics } from 'redux-observable';
+import switchWindowEpic from './epics/switchWindowEpic';
+import setBadgeCountEpic from './epics/setBadgeCountEpic';
+import switchWindowOnLoginEpic from './epics/switchWindowOnLoginEpic';
+import setBadgeCountOnLogoutEpic from './epics/setBadgeCountOnLogoutEpic';
 
 export default combineEpics(
+    setBadgeCountEpic,
     switchWindowEpic,
-    setBadgeCountEpic
+    switchWindowOnLoginEpic,
+    setBadgeCountOnLogoutEpic
 );

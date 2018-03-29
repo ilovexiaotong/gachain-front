@@ -15,8 +15,8 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { TWindowType } from './reducer';
+import { TWindowType } from 'gachain/gui';
 
 const actionCreator = actionCreatorFactory('gui');
-export const switchWindow = actionCreator.async<{ window: TWindowType }, TWindowType, void>('SWITCH_WINDOW');
+export const switchWindow = actionCreator.async<TWindowType, TWindowType, void>('SWITCH_WINDOW');
 export const setBadgeCount = actionCreator<number>('SET_BADGE_COUNT');

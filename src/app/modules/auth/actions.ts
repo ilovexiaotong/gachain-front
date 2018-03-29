@@ -16,17 +16,17 @@
 
 import actionCreatorFactory from 'typescript-fsa';
 import { ILoginResponse } from 'lib/api';
-import { IStoredAccount } from 'gachain/storage';
+import { IAccount } from 'gachain/auth';
+import { ICreateAccountCall, IImportAccountCall } from 'gachain/auth';
 
 const actionCreator = actionCreatorFactory('auth');
-export const selectAccount = actionCreator.async<{ account: IStoredAccount }, { sessionToken: string, refreshToken: string }, string>('SELECT_ACCOUNT');
-export const authorizeAccount = actionCreator<{ account: IStoredAccount }>('AUTHORIZE_ACCOUNT');
-export const login = actionCreator.async<{ encKey: string, ecosystem: string, password: string }, ILoginResponse & { account: IStoredAccount, privateKey: string, publicKey: string }, string>('LOGIN');
+export const selectAccount = actionCreator.async<IAccount, { sessionToken: string, refreshToken: string }, string>('SELECT_ACCOUNT');
+export const login = actionCreator.async<{ encKey: string, ecosystem: string, password: string }, ILoginResponse & { account: IAccount, privateKey: string, publicKey: string }, string>('LOGIN');
 export const logout = actionCreator.async('LOGOUT');
 export const createEcosystem = actionCreator<{ name: string, id: string }>('CREATE_ECOSYSTEM');
 export const setAction = actionCreator<string>('SET_ACTION');
 export const importSeed = actionCreator.async<Blob, string, undefined>('IMPORT_SEED');
-export const importAccount = actionCreator.async<{ backup: string, password: string, isDefault?: boolean }, IStoredAccount[], string>('IMPORT_ACCOUNT');
-export const createAccount = actionCreator.async<{ seed: string, password: string }, IStoredAccount, string>('CREATE_ACCOUNT');
-export const authorize = actionCreator<{ privateKey: string }>('AUTHORIZE');
-export const deauthorize = actionCreator<void>('DEAUTHORIZE');
+export const importAccount = actionCreator.async<IImportAccountCall, IAccount[], string>('IMPORT_ACCOUNT');
+export const createAccount = actionCreator.async<ICreateAccountCall, IAccount, string>('CREATE_ACCOUNT');
+export const authorize = actionCreator<string>('AUTHORIZE');
+export const deauthorize = actionCreator('DEAUTHORIZE');

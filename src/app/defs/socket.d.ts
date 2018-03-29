@@ -21,4 +21,10 @@ declare module 'gachain/socket' {
         role: number;
         count: number;
     }
+
+    interface IConnectCall {
+        userID: string;
+        socketToken: string;
+        timestamp: string;
+    }
 }

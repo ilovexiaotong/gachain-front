@@ -14,18 +14,18 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-declare module 'gachain/storage' {
-    interface IStoredAccount {
-        id: string;
-        encKey: string;
-        address: string;
-        ecosystem: string;
-        ecosystemName: string;
-        avatar: string;
-        username: string;
-        sessionToken: string;
-        refreshToken: string;
-        socketToken: string;
-        timestamp: string;
-    }
+import { State } from '../reducer';
+import { Failure } from 'typescript-fsa';
+import { IExecutionCall, ITxError } from 'gachain/tx';
+
+export default function (state: State, payload: Failure<IExecutionCall, ITxError>): State {
+    return {
+        ...state,
+        transactions: state.transactions.set(payload.params.tx.uuid, {
+            block: null,
+            error: payload.error,
+            contract: payload.params.tx.name,
+            uuid: payload.params.tx.uuid
+        })
+    };
 }
