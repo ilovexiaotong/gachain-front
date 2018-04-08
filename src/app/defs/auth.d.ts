@@ -29,9 +29,13 @@ declare module 'gachain/auth' {
         timestamp: string;
     }
 
+    interface IRole {
+        id: number;
+        name: string;
+    }
+
     interface ILoginCall {
-        encKey: string;
-        ecosystem: string;
+        account: IAccount;
         password: string;
     }
 

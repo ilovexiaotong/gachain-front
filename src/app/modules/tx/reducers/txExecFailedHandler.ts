@@ -17,15 +17,15 @@
 import { State } from '../reducer';
 import { Failure } from 'typescript-fsa';
 import { IExecutionCall, ITxError } from 'gachain/tx';
+import setTxData from './setTxData';
 
 export default function (state: State, payload: Failure<IExecutionCall, ITxError>): State {
-    return {
-        ...state,
-        transactions: state.transactions.set(payload.params.tx.uuid, {
+    return setTxData(state, {
+        tx: payload.params.tx,
+        data: {
             block: null,
             error: payload.error,
-            contract: payload.params.tx.name,
-            uuid: payload.params.tx.uuid
-        })
-    };
+            contract: payload.params.tx.name
+        }
+    });
 }

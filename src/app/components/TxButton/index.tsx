@@ -35,7 +35,6 @@ export interface ITxButtonProps {
     confirm?: ITxButtonConfirm;
     page?: string;
     pageParams?: { [key: string]: any };
-    alert: (type: string, title: string, text: string, buttonText: string) => void;
     execContract: (contractName: string, contractParams: { [key: string]: any }, confirm?: ITxButtonConfirm) => void;
     navigate: (page: string, params: { [key: string]: any }, confirm?: ITxButtonConfirm) => void;
     onExec?: (block: string, error?: { type: string, error: string }) => void;

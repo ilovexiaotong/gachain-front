@@ -16,10 +16,11 @@
 
 import * as React from 'react';
 import * as uuid from 'uuid';
-import { Map } from 'immutable';
+import { OrderedMap } from 'immutable';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { txCall } from 'modules/tx/actions';
+import { TTransactionStatus, ITransaction } from 'gachain/tx';
 import { alertShow, navigatePage } from 'modules/content/actions';
 
 import TxButton, { ITxButtonConfirm } from 'components/TxButton';
@@ -37,7 +38,7 @@ interface ITxButtonContainerProps {
 }
 
 interface ITxButtonStateProps {
-    transactions: Map<string, { block: string, error?: { type: string, error: string } }>;
+    transactions: OrderedMap<string, TTransactionStatus>;
     confirmation: { id: string, success: string, error: string };
 }
 
@@ -166,30 +167,20 @@ class TxButtonContainer extends React.Component<ITxButtonContainerProps & ITxBut
         }
     }
 
-    onAlert(type: string, title: string, text: string, buttonText: string) {
-        this.props.alertShow({
-            id: this._uuid,
-            type,
-            title,
-            text,
-            cancelButton: buttonText
-        });
-    }
-
     render() {
-        const transaction = this.props.transactions.get(this._uuid);
+        const transaction = this.props.transactions.get(this._uuid) as ITransaction;
         const pending = transaction && !transaction.block && !transaction.error;
+        const contractStatus = transaction && { block: transaction.block, error: transaction.error };
 
         return (
             <TxButton
                 {...this.props}
                 pending={pending}
-                alert={this.onAlert.bind(this)}
                 disabled={this.props.disabled}
                 className={this.props.className}
                 contractName={this.props.contractName}
                 contractParams={this.props.contractParams}
-                contractStatus={this.props.transactions.get(this._uuid)}
+                contractStatus={contractStatus}
                 execContract={this.onExecContract.bind(this)}
                 onExec={this.props.onExec}
                 navigate={this.onNavigate.bind(this)}

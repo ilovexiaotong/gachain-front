@@ -15,18 +15,19 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { ILoginResponse } from 'lib/api';
-import { IAccount } from 'gachain/auth';
+import { IAccount, ILoginCall, IRole } from 'gachain/auth';
 import { ICreateAccountCall, IImportAccountCall } from 'gachain/auth';
 
 const actionCreator = actionCreatorFactory('auth');
-export const selectAccount = actionCreator.async<IAccount, { sessionToken: string, refreshToken: string }, string>('SELECT_ACCOUNT');
-export const login = actionCreator.async<{ encKey: string, ecosystem: string, password: string }, ILoginResponse & { account: IAccount, privateKey: string, publicKey: string }, string>('LOGIN');
+export const login = actionCreator.async<ILoginCall, { account: IAccount, roles: IRole[], privateKey: string, publicKey: string }, string>('LOGIN');
 export const logout = actionCreator.async('LOGOUT');
 export const createEcosystem = actionCreator<{ name: string, id: string }>('CREATE_ECOSYSTEM');
-export const setAction = actionCreator<string>('SET_ACTION');
+export const generateSeed = actionCreator.async<void, string>('GENERATE_SEED');
 export const importSeed = actionCreator.async<Blob, string, undefined>('IMPORT_SEED');
-export const importAccount = actionCreator.async<IImportAccountCall, IAccount[], string>('IMPORT_ACCOUNT');
 export const createAccount = actionCreator.async<ICreateAccountCall, IAccount, string>('CREATE_ACCOUNT');
+export const importAccount = actionCreator.async<IImportAccountCall, IAccount[], string>('IMPORT_ACCOUNT');
+export const removeAccount = actionCreator<IAccount>('REMOVE_ACCOUNT');
+export const selectAccount = actionCreator.async<IAccount, { sessionToken: string, refreshToken: string }, string>('SELECT_ACCOUNT');
+export const selectRole = actionCreator.async<number, IAccount>('SELECT_ROLE');
 export const authorize = actionCreator<string>('AUTHORIZE');
 export const deauthorize = actionCreator('DEAUTHORIZE');

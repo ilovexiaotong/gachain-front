@@ -23,42 +23,14 @@ import Page from 'components/Main/Page';
 import ConstructorTabbed from 'containers/Main/containers/Admin/Interface/ConstructorTabbed';
 
 export interface IEditorProps {
-    open?: string;
-    create?: string;
-    name?: string;
-
     tabIndex: number;
     tabs: TEditorTab[];
-    onTabCreate: (type: string) => void;
-    onTabLoad: (params: { type: string, name: string }) => void;
     onTabChange: (index: number) => void;
     onTabUpdate: (value: string) => void;
     onTabClose: (index: number) => void;
 }
 
 class Editor extends React.Component<IEditorProps> {
-    constructor(props: IEditorProps) {
-        super(props);
-        this.loadData(props);
-    }
-
-    componentWillReceiveProps(props: IEditorProps) {
-        this.loadData(props);
-    }
-
-    loadData(props: IEditorProps) {
-        if (props.open && props.name) {
-            props.onTabLoad({
-                type: props.open,
-                name: props.name
-            });
-        }
-
-        if (props.create) {
-            props.onTabCreate(props.create);
-        }
-    }
-
     renderTool(tab: TEditorTab) {
         switch (tab.tool) {
             case 'constructor':

@@ -16,13 +16,13 @@
 
 declare module 'gachain/tx' {
     type TTxError =
+        'error' |
+        'info' |
+        'warning' |
+        'panic' |
         'E_CONTRACT' |
-        'E_ERROR' |
-        'E_INFO' |
         'E_INVALID_PASSWORD' |
-        'E_SERVER' |
-        'E_WARNING' |
-        'panic';
+        'E_SERVER';
 
     interface ITxResult {
         block: string;
@@ -34,7 +34,11 @@ declare module 'gachain/tx' {
         error: string;
     }
 
+    type TTransactionStatus =
+        ITransaction | ITransactionCollection;
+
     interface ITransaction {
+        type: 'single';
         uuid: string;
         contract: string;
         block: string;
@@ -45,14 +49,31 @@ declare module 'gachain/tx' {
         }
     }
 
+    interface ITransactionCollection {
+        type: 'collection';
+        uuid: string;
+        transactions: ITransaction[];
+    }
+
     interface ITransactionCall {
         uuid: string;
         name: string;
-        vde?: boolean;
+        parent?: string;
         silent?: boolean;
         params: {
             [key: string]: any;
         };
+    }
+
+    interface ITransactionBatchCall {
+        uuid: string;
+        contracts: {
+            name: string;
+            data: {
+                [key: string]: any;
+            }[];
+        }[];
+        silent?: boolean;
     }
 
     interface IExecutionCall {
