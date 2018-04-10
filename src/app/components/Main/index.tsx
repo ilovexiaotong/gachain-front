@@ -219,7 +219,7 @@ class Main extends React.Component<IMainProps> {
 
     render() {
         const apiUrlTokens = url.parse(apiUrl);
-        const appTitle = `GAChain (${apiUrlTokens.protocol}//${apiUrlTokens.host})`;
+        const appTitle = `Gachain (${apiUrlTokens.protocol}//${apiUrlTokens.host})`;
 
         return (
             <StyledWrapper className="wrapper component-main">

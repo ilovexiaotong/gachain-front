@@ -43,8 +43,8 @@ export interface IWelcomeProps {
 const Welcome: React.SFC<IWelcomeProps> = (props) => (
     <General>
         <div className="text-center">
-            <h4>Welcome to GAChain</h4>
-            <p className="pv">Before proceeding, you will now be guided through the account creation process. This will not take too much of your time. After completing this process you will be able to use all features of GAChain</p>
+            <h4>Welcome to Gachain</h4>
+            <p className="pv">Before proceeding, you will now be guided through the account creation process. This will not take too much of your time. After completing this process you will be able to use all features of Gachain</p>
             <p>Press 'Get started' button to begin the process of creating or restoring your account</p>
             <hr />
             <Button bsStyle="primary" className="btn-block" onClick={props.navigate.bind(null, '/account')}>Get started</Button>

@@ -19,7 +19,7 @@ import { window } from './windows';
 
 const template: MenuItemConstructorOptions[] = [
     {
-        label: 'GAChain',
+        label: 'Gachain',
         submenu: [
             { label: 'Quit', accelerator: 'Command+Q', click: app.quit }
         ]

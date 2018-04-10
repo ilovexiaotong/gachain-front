@@ -28,7 +28,7 @@ const DocumentTitle: React.SFC<IDocumentTitleProps & InjectedIntlProps> = (props
         title={props.title ? props.intl.formatMessage(
             {
                 id: 'general.title',
-                defaultMessage: '{title} | GAChain'
+                defaultMessage: '{title} | Gachain'
             }, {
                 title: props.intl.formatMessage({
                     id: props.title,

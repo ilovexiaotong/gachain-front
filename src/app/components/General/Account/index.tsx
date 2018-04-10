@@ -56,7 +56,7 @@ const Account: React.SFC<IAccountProps> = (props) => (
                     <Col {...colProps}>
                         <em className="fa fa-key fa-5x text-muted p-lg" />
                         <h4>I have a key</h4>
-                        <p>If you are already familiar with GAChain and have a backup of your private key - choose this option to guide you through the process of restoring of your account data</p>
+                        <p>If you are already familiar with Gachain and have a backup of your private key - choose this option to guide you through the process of restoring of your account data</p>
 
                     </Col>
                     <Col {...colProps}>

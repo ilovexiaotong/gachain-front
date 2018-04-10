@@ -159,7 +159,7 @@ const General: React.SFC<IGeneralProps> = props => (
                     web: (
                         <div className="p-lg text-center text-white">
                             <div className="pull-left">
-                                <div>GAChain &copy; 2017 - {new Date().getFullYear()} - <a href="http://gac.one">http://gac.one</a></div>
+                                <div>Gachain &copy; 2017 - {new Date().getFullYear()} - <a href="http://gac.one">http://gac.one</a></div>
                             </div>
                             <div className="pull-right">
                                 <a href="#">English(US)</a>
