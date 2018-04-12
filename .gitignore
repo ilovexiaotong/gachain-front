@@ -2,7 +2,7 @@
 
 # workspaces
 /.vscode
-
+/.idea
 # dependencies
 /node_modules
 

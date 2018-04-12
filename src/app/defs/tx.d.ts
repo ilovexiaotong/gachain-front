@@ -63,6 +63,15 @@ declare module 'gachain/tx' {
         params: {
             [key: string]: any;
         };
+        confirm?: ITransactionConfirm;
+    }
+
+    interface ITransactionConfirm {
+        type?: string;
+        title?: string;
+        text?: string;
+        confirmButton?: string;
+        cancelButton?: string;
     }
 
     interface ITransactionBatchCall {
@@ -74,6 +83,7 @@ declare module 'gachain/tx' {
             }[];
         }[];
         silent?: boolean;
+        confirm?: ITransactionConfirm;
     }
 
     interface IExecutionCall {
@@ -81,6 +91,5 @@ declare module 'gachain/tx' {
         privateKey?: string;
         signature?: string;
         time?: string;
-        signParams?: { [key: string]: string };
     }
 }

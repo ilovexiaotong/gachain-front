@@ -14,19 +14,16 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-import { Action } from 'redux';
-import { Epic } from 'redux-observable';
-import { IRootState } from 'modules';
+import { Epic } from 'modules';
 import { generateSeed } from '../actions';
 import keyring from 'lib/keyring';
 
-const authorizeEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(generateSeed.started)
-        .map(action =>
-            generateSeed.done({
-                params: action.payload,
-                result: keyring.generateSeed()
-            })
-        );
+const authorizeEpic: Epic = (action$, store) => action$.ofAction(generateSeed.started)
+    .map(action =>
+        generateSeed.done({
+            params: action.payload,
+            result: keyring.generateSeed()
+        })
+    );
 
 export default authorizeEpic;

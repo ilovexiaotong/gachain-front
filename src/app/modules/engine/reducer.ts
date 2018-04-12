@@ -20,6 +20,8 @@ import { isType } from 'typescript-fsa';
 import defaultLocale from 'lib/en-US.json';
 
 export type State = {
+    readonly apiHost: string;
+    readonly wsHost: string;
     readonly localeMessages: { [key: string]: string };
     readonly isInstalled: boolean;
     readonly isInstalling: boolean;
@@ -27,19 +29,17 @@ export type State = {
     readonly isConnected: boolean;
     readonly isConnecting: boolean;
     readonly isCollapsed: boolean;
-    readonly isCreatingVDE: boolean;
-    readonly createVDEResult: boolean;
 };
 
 export const initialState: State = {
+    apiHost: 'http://127.0.0.1:7079',
+    wsHost: 'ws://127.0.0.1:8000',
     localeMessages: defaultLocale,
     isInstalled: null,
     isInstalling: false,
     isLoading: true,
     isConnected: null,
     isConnecting: false,
-    isCreatingVDE: false,
-    createVDEResult: null,
     isCollapsed: true
 };
 
@@ -105,28 +105,6 @@ export default (state: State = initialState, action: Action): State => {
         };
     }
 
-    if (isType(action, actions.install.started)) {
-        return {
-            ...state,
-            isInstalling: true
-        };
-    }
-
-    if (isType(action, actions.install.done)) {
-        return {
-            ...state,
-            isInstalled: true,
-            isInstalling: false
-        };
-    }
-
-    if (isType(action, actions.install.failed)) {
-        return {
-            ...state,
-            isInstalling: false
-        };
-    }
-
     if (isType(action, actions.setCollapsed)) {
         return {
             ...state,
@@ -134,31 +112,18 @@ export default (state: State = initialState, action: Action): State => {
         };
     }
 
-    if (isType(action, actions.createVDE.started)) {
-        return {
-            ...state,
-            isCreatingVDE: true
-        };
-    }
-    else if (isType(action, actions.createVDE.done)) {
-        return {
-            ...state,
-            isCreatingVDE: false,
-            createVDEResult: action.payload.result
-        };
-    }
-    else if (isType(action, actions.createVDE.failed)) {
-        return {
-            ...state,
-            isCreatingVDE: false,
-            createVDEResult: action.payload.error
-        };
-    }
-
     if (isType(action, actions.setLocale.done)) {
         return {
             ...state,
             localeMessages: action.payload.result
+        };
+    }
+
+    if (isType(action, actions.initialize.done)) {
+        return {
+            ...state,
+            apiHost: action.payload.result.apiHost || state.apiHost,
+            wsHost: action.payload.result.wsHost || state.wsHost
         };
     }
 
