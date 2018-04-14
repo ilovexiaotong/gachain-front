@@ -16,11 +16,13 @@
 
 import needle from 'needle';
 import GachainAPI from 'lib/gachainAPI';
+import constructorModule from 'lib/constructor';
 
 export const apiEndpoint = 'api/v2';
 
 export interface IStoreDependencies {
     api: IAPIDependency;
+    constructorModule: typeof constructorModule;
 }
 
 export interface IAPIDependency {
@@ -33,5 +35,6 @@ export default {
         apiHost,
         apiEndpoint,
         session
-    })
+    }),
+    constructorModule
 } as IStoreDependencies;
