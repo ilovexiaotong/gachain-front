@@ -18,10 +18,10 @@ import { Action } from 'redux';
 import { Epic } from 'redux-observable';
 import { IRootState } from 'modules';
 import { reset } from '../actions';
-import { selectAccount } from 'modules/auth/actions';
+import { login } from 'modules/auth/actions';
 
 const resetOnAccountSelectEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(selectAccount.done)
+    (action$, store) => action$.ofAction(login.done)
         .map(action =>
             reset.started(null)
         );

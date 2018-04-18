@@ -14,22 +14,21 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-import { State } from '../reducer';
-import { Success } from 'typescript-fsa';
-import { ILoginCall, IRole, ISession } from 'gachain/auth';
-import { IAccount } from 'gachain/auth';
+import { Observable } from 'rxjs';
+import { IAPIDependency } from 'modules/dependencies';
 
-export default function (state: State, payload: Success<ILoginCall, { account: IAccount, roles: IRole[], privateKey: string, publicKey: string, session: ISession }>): State {
-    const hasRoles = !!(payload.result.roles && payload.result.roles.length);
-    return {
-        ...state,
-        isAuthenticated: !hasRoles,
-        isLoggingIn: hasRoles,
-        account: payload.result.account,
-        roles: payload.result.roles,
-        ecosystem: payload.result.account.ecosystem,
-        session: payload.result.session,
-        privateKey: payload.result.privateKey,
-        id: payload.result.account.id
-    };
-}
+const NodeObservable = (params: { nodes: string[], count: number, timeout?: number, concurrency?: number, api: IAPIDependency }) =>
+    Observable.from(params.nodes)
+        .distinct()
+        .flatMap(l => {
+            const client = params.api({ apiHost: l });
+            return Observable.from(client.getUid())
+                .map(() => l)
+
+                // Set request timeout, try the next one
+                .timeout(params.timeout)
+                .catch(timeout => Observable.empty<never>());
+        }, params.concurrency)
+        .take(params.count);
+
+export default NodeObservable;

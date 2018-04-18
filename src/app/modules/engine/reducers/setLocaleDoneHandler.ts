@@ -16,20 +16,10 @@
 
 import { State } from '../reducer';
 import { Success } from 'typescript-fsa';
-import { ILoginCall, IRole, ISession } from 'gachain/auth';
-import { IAccount } from 'gachain/auth';
 
-export default function (state: State, payload: Success<ILoginCall, { account: IAccount, roles: IRole[], privateKey: string, publicKey: string, session: ISession }>): State {
-    const hasRoles = !!(payload.result.roles && payload.result.roles.length);
+export default function (state: State, payload: Success<string, { [key: string]: string }>): State {
     return {
         ...state,
-        isAuthenticated: !hasRoles,
-        isLoggingIn: hasRoles,
-        account: payload.result.account,
-        roles: payload.result.roles,
-        ecosystem: payload.result.account.ecosystem,
-        session: payload.result.session,
-        privateKey: payload.result.privateKey,
-        id: payload.result.account.id
+        localeMessages: payload.result
     };
 }

@@ -23,6 +23,7 @@ declare module 'gachain/socket' {
     }
 
     interface IConnectCall {
+        wsHost: string;
         userID: string;
         socketToken: string;
         timestamp: string;

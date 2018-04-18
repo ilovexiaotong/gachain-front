@@ -26,15 +26,15 @@ export interface IStoreDependencies {
 }
 
 export interface IAPIDependency {
-    (apiURL: string, session?: string): GachainAPI;
+    (options: { apiHost: string, sessionToken?: string }): GachainAPI;
 }
 
 export default {
-    api: (apiHost: string, session?: string) => new GachainAPI({
+    api: (options: { apiHost: string, sessionToken?: string }) => new GachainAPI({
         transport: needle,
-        apiHost,
+        apiHost: options.apiHost,
         apiEndpoint,
-        session
+        session: options.sessionToken
     }),
     constructorModule
 } as IStoreDependencies;
