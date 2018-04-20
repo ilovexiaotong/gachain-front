@@ -19,7 +19,7 @@ import { IAccount } from 'gachain/auth';
 import { INotificationsMessage, IConnectCall } from 'gachain/socket';
 
 const actionCreator = actionCreatorFactory('socket');
-export const connect = actionCreator.async<IConnectCall, ICentrifuge, string>('CONNECT');
+export const connect = actionCreator.async<IConnectCall, { session: string, instance: ICentrifuge }, string>('CONNECT');
 export const disconnect = actionCreator.async('DISCONNECT');
 export const subscribe = actionCreator.async<IAccount, any, string>('SUBSCRIBE');
 export const unsubscribe = actionCreator.async<IAccount, void, void>('UNSUBSCRIBE');

@@ -26,6 +26,7 @@ declare module 'gachain/socket' {
         wsHost: string;
         userID: string;
         socketToken: string;
+        session: string;
         timestamp: string;
     }
 }

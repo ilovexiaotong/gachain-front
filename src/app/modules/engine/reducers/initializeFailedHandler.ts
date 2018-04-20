@@ -15,22 +15,13 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { Success } from 'typescript-fsa';
+import { Failure } from 'typescript-fsa';
 
-export default function (state: State, payload: Success<number, { sessionToken: string, refreshToken: string }>): State {
+export default function (state: State, payload: Failure<void, void>): State {
     return {
         ...state,
-        isAuthenticated: true,
-        isLoggingIn: false,
-        roles: null,
-        role: 'number' === typeof payload.params ? {
-            id: payload.params,
-            name: state.roles.find(l => l.id === payload.params).name
-        } : null,
-        session: {
-            ...state.session,
-            sessionToken: payload.result.sessionToken,
-            refreshToken: payload.result.refreshToken
-        }
+        isOffline: true,
+        isConnecting: false,
+        isLoaded: true
     };
 }
