@@ -15,13 +15,13 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { IImportAccountCall } from 'gachain/auth';
-import { Failure } from 'typescript-fsa';
+import { importAccount } from '../actions';
+import { Reducer } from 'modules';
 
-export default function (state: State, payload: Failure<IImportAccountCall, string>): State {
-    return {
-        ...state,
-        isImportingAccount: false,
-        importAccountError: payload.error
-    };
-}
+const importAccountFailedHandler: Reducer<typeof importAccount.failed, State> = (state, payload) => ({
+    ...state,
+    isImportingAccount: false,
+    importAccountError: payload.error
+});
+
+export default importAccountFailedHandler;

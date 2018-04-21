@@ -15,28 +15,27 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { ISelectTagResult } from 'gachain/editor';
-import { TProtypoElement } from 'gachain/protypo';
-import { Success } from 'typescript-fsa';
+import { selectTag } from '../actions';
+import { Reducer } from 'modules';
 
-export default function (state: State, payload: Success<TProtypoElement, ISelectTagResult>): State {
-    return {
-        ...state,
-        tabs: [
-            ...state.tabs.slice(0, state.tabIndex),
-            {
-                ...state.tabs[state.tabIndex],
-                designer: {
-                    ...state.tabs[state.tabIndex].designer,
-                    data: {
-                        ...state.tabs[state.tabIndex].designer.data,
-                        treeData: payload.result.treeData,
-                        selectedTag: payload.result.selectedTag
-                    }
+const selectTagDoneHandler: Reducer<typeof selectTag.done, State> = (state, payload) => ({
+    ...state,
+    tabs: [
+        ...state.tabs.slice(0, state.tabIndex),
+        {
+            ...state.tabs[state.tabIndex],
+            designer: {
+                ...state.tabs[state.tabIndex].designer,
+                data: {
+                    ...state.tabs[state.tabIndex].designer.data,
+                    treeData: payload.result.treeData,
+                    selectedTag: payload.result.selectedTag
                 }
+            }
 
-            },
-            ...state.tabs.slice(state.tabIndex + 1),
-        ]
-    };
-}
+        },
+        ...state.tabs.slice(state.tabIndex + 1),
+    ]
+});
+
+export default selectTagDoneHandler;

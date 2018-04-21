@@ -15,12 +15,12 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { Failure } from 'typescript-fsa';
-import { ILoginCall } from 'gachain/auth';
+import { login } from '../actions';
+import { Reducer } from 'modules';
 
-export default function (state: State, payload: Failure<ILoginCall, string>): State {
-    return {
-        ...state,
-        isLoggingIn: false
-    };
-}
+const loginFailedHandler: Reducer<typeof login.failed, State> = (state, payload) => ({
+    ...state,
+    isLoggingIn: false
+});
+
+export default loginFailedHandler;

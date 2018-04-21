@@ -15,12 +15,23 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { Success } from 'typescript-fsa';
-import { TWindowType } from 'gachain/gui';
+import { reset } from '../actions';
+import { Reducer } from 'modules';
 
-export default function (state: State, payload: Success<TWindowType, TWindowType>): State {
-    return {
-        ...state,
-        window: payload.result
-    };
-}
+const resetHandler: Reducer<typeof reset.done, State> = (state, payload) => ({
+    ...state,
+    sections: {
+        ...state.sections,
+        [state.section]: {
+            ...state.sections[state.section],
+            menus: [payload.result.menu],
+            page: {
+                params: {},
+                ...payload.result.page
+            },
+            pending: false
+        }
+    }
+});
+
+export default resetHandler;

@@ -15,11 +15,12 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { IAccount } from 'gachain/auth';
+import { selectAccount } from '../actions';
+import { Reducer } from 'modules';
 
-export default function (state: State, account: IAccount): State {
-    return {
-        ...state,
-        account
-    };
-}
+const selectAccountHandler: Reducer<typeof selectAccount, State> = (state, payload) => ({
+    ...state,
+    account: payload
+});
+
+export default selectAccountHandler;

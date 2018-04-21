@@ -15,11 +15,12 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { IModalCloseCall } from 'gachain/modal';
+import { modalClose } from '../actions';
+import { Reducer } from 'modules';
 
-export default function (state: State, payload: IModalCloseCall): State {
-    return {
-        ...state,
-        result: payload
-    };
-}
+const modalCloseHandler: Reducer<typeof modalClose, State> = (state, payload) => ({
+    ...state,
+    result: payload
+});
+
+export default modalCloseHandler;

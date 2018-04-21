@@ -15,14 +15,14 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { IAccount } from 'gachain/auth';
-import { Success } from 'typescript-fsa';
+import { renderSection } from '../actions';
+import { Reducer } from 'modules';
 
-export default function (state: State, payload: Success<IAccount, void>): State {
-    return {
+const switchSectionHandler: Reducer<typeof renderSection, State> = (state, payload) => {
+    return state.sections[payload] ? {
         ...state,
-        subscriptions: state.subscriptions.filter(l =>
-            l.account.id !== payload.params.id
-        )
-    };
-}
+        section: payload
+    } : state;
+};
+
+export default switchSectionHandler;

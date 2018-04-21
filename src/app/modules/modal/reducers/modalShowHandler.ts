@@ -15,16 +15,17 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
-import { IModalCall } from 'gachain/modal';
+import { modalShow } from '../actions';
+import { Reducer } from 'modules';
 
-export default function (state: State, payload: IModalCall): State {
-    return {
-        ...state,
-        id: payload.id,
-        type: payload.type,
-        params: {
-            ...payload.params
-        },
-        result: null
-    };
-}
+const modalShowHandler: Reducer<typeof modalShow, State> = (state, payload) => ({
+    ...state,
+    id: payload.id,
+    type: payload.type,
+    params: {
+        ...payload.params
+    },
+    result: null
+});
+
+export default modalShowHandler;
