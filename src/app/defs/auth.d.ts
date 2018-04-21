@@ -21,7 +21,6 @@ declare module 'gachain/auth' {
         address: string;
         ecosystem: string;
         ecosystemName: string;
-        avatar: string;
         username: string;
     }
 
