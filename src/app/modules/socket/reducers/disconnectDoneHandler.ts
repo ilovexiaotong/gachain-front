@@ -22,7 +22,8 @@ const disconnectDone: Reducer<typeof disconnect.done, State> = (state, payload) 
     ...state,
     socket: null,
     session: null,
-    subscriptions: []
+    subscriptions: [],
+    connected: false
 });
 
 export default disconnectDone;

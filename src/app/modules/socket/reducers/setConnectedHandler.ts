@@ -14,40 +14,13 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-declare module 'gachain/auth' {
-    interface IAccount {
-        id: string;
-        encKey: string;
-        address: string;
-        ecosystem: string;
-        ecosystemName: string;
-        username: string;
-    }
+import { State } from '../reducer';
+import { setConnected } from '../actions';
+import { Reducer } from 'modules';
 
-    interface IRole {
-        id: number;
-        name: string;
-    }
+const setConnectedHandler: Reducer<typeof setConnected, State> = (state, payload) => ({
+    ...state,
+    connected: payload
+});
 
-    interface ISession {
-        apiHost: string;
-        sessionToken: string;
-        refreshToken: string;
-    }
-
-    interface ILoginCall {
-        account: IAccount;
-        password: string;
-    }
-
-    interface ICreateAccountCall {
-        seed: string;
-        password: string
-    }
-
-    interface IImportAccountCall {
-        backup: string;
-        password: string;
-        isDefault?: boolean
-    }
-}
+export default setConnectedHandler;
