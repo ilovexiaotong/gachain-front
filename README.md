@@ -82,4 +82,4 @@ $ yarn release --publish never -mwl
 
 ### 有问题
 
-如果你在使用Gachain时遇到任何问题，请随时与我们联系 support@gachain.org 。
+如果你在使用Gachain时遇到任何问题，请随时与我们联系 bugs@gachain.org 。
