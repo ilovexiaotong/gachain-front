@@ -22,6 +22,7 @@ declare module 'gachain/tx' {
         'panic' |
         'E_CONTRACT' |
         'E_INVALID_PASSWORD' |
+        'E_INVALIDATED' |
         'E_SERVER';
 
     interface ITxResult {

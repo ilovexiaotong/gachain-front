@@ -63,6 +63,18 @@ declare module 'gachain/api' {
         ecosystem: string;
     }
 
+    interface ISystemParamsRequest {
+        names: string[];
+    }
+
+    interface ISystemParamsResponse {
+        list: {
+            name: string;
+            value: string;
+            conditions: string;
+        }[];
+    }
+
     type TConfigRequest =
         'centrifugo'
 
