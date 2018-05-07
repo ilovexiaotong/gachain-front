@@ -23,7 +23,7 @@ import { changeEditorTab, closeEditorTab, updateEditorTab, loadEditorTab, create
 import { TEditorTab } from 'gachain/editor';
 import { IModalResult } from 'gachain/modal';
 
-import Editor from 'components/Main/Admin/Editor';
+import Editor from 'components/Main/Editor';
 
 interface IEditorContainerProps {
     open?: string;
