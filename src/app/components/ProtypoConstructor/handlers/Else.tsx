@@ -14,50 +14,15 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-import React from 'react';
+import * as React from 'react';
+import * as classnames from 'classnames';
 import StyledComponent from './StyledComponent';
 import TagWrapper from '../components/TagWrapper';
 import DnDComponent from './DnDComponent';
-import classnames from 'classnames';
-import Switch from 'components/Main/Editor/Designer/Switch';
-import { IConstructorElementProps } from 'gachain/editor';
+import EditableBlock from './EditableBlock';
 
-export interface IElseIfProps extends IConstructorElementProps {
-    'className'?: string;
-    'class'?: string;
-}
-
-interface IElseIfState {
-    condition: boolean;
-}
-
-class ElseIf extends React.Component<IElseIfProps, IElseIfState> {
-    constructor(props: IElseIfProps) {
-        super(props);
-        this.state = {
-            condition: true
-        };
-    }
-
-    onClick(e: any) {
-        e.stopPropagation();
-        this.props.selectTag(this.props.tag);
-    }
-
-    removeTag() {
-        this.props.removeTag({ tag: this.props.tag });
-    }
-
-    toggleCondition() {
-        this.setState({
-            condition: !this.state.condition
-        });
-    }
-
+class Else extends EditableBlock {
     render() {
-        if (!this.props.logic) {
-            return null;
-        }
         const { connectDropTarget, connectDragSource, connectDragPreview, isOver } = this.props;
 
         const classes = classnames({
@@ -79,16 +44,9 @@ class ElseIf extends React.Component<IElseIfProps, IElseIfState> {
                 <div
                     className={classes}
                 >
-                    <span style={{'backgroundColor': '#FFCC66'}}>ElseIf
-                        <Switch
-                            initialValue={this.state.condition}
-                            onValue={true}
-                            offValue={false}
-                            onChange={this.toggleCondition.bind(this)}
-                        /> &#123;
-                    </span>
+                    <span style={{'backgroundColor': '#FFCC66'}}>Else &#123;</span>
                     <div>
-                        {this.state.condition && this.props.children}
+                        {this.props.children}
                     </div>
                     <span style={{'backgroundColor': '#FFCC66'}}>&#125;</span>
                 </div>
@@ -98,4 +56,4 @@ class ElseIf extends React.Component<IElseIfProps, IElseIfState> {
     }
 }
 
-export default DnDComponent(StyledComponent(ElseIf));
+export default DnDComponent(StyledComponent(Else));
