@@ -14,6 +14,18 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-@import "bootstrap.scss";
-@import "app.scss";
-@import "fluent.scss";
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { INotificationProto } from 'gachain/notifications';
+
+const TxBatchNotification: INotificationProto<void> = {
+    icon: 'o-checkround-1',
+    title: (
+        <FormattedMessage id="tx.error.info" defaultMessage="Information" />
+    ),
+    body: params => (
+        <FormattedMessage id="notification.tx_batch" defaultMessage="Batch processing completed" />
+    )
+};
+
+export default TxBatchNotification;

@@ -14,6 +14,18 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-@import "bootstrap.scss";
-@import "app.scss";
-@import "fluent.scss";
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import { INotificationProto } from 'gachain/notifications';
+
+const InvalidPasswordNotification: INotificationProto<void> = {
+    icon: 'o-warninground-1',
+    title: (
+        <FormattedMessage id="tx.error.error" defaultMessage="Error" />
+    ),
+    body: (
+        <FormattedMessage id="auth.error.E_INVALID_PASSWORD" defaultMessage="Invalid password" />
+    )
+};
+
+export default InvalidPasswordNotification;

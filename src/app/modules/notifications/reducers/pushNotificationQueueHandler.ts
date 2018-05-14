@@ -14,6 +14,16 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-@import "bootstrap.scss";
-@import "app.scss";
-@import "fluent.scss";
+import { State } from '../reducer';
+import { spawnNotification } from '../actions';
+import { Reducer } from 'modules';
+
+const pushNotificationQueueHandler: Reducer<typeof spawnNotification, State> = (state, payload) => ({
+    ...state,
+    queue: [
+        ...state.queue,
+        payload
+    ]
+});
+
+export default pushNotificationQueueHandler;

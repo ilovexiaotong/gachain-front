@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-@import "bootstrap.scss";
-@import "app.scss";
-@import "fluent.scss";
+import reducer, { State } from './reducer';
+import epic from './epic';
+import * as actions from './actions';
+
+export type State = State;
+export {
+    actions,
+    reducer,
+    epic
+};

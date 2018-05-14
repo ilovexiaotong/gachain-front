@@ -1,0 +1,52 @@
+/*
+    Icon Font gachain-front generated from orioniconlibrary.com
+  */
+
+  @font-face {
+  font-family: "gachain-front";
+  src: url("../fonts/gachain-front.eot");
+  src: url("../fonts/gachain-front.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/gachain-front.woff2") format("woff2"),
+       url("../fonts/gachain-front.woff") format("woff"),
+       url("../fonts/gachain-front.ttf") format("truetype"),
+       url("../fonts/gachain-front.svg#gachain-front") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "gachain-front";
+    src: url("../fonts/gachain-front.svg#gachain-front") format("svg");
+  }
+}
+
+  [data-icon]::before { content: attr(data-icon); }
+
+  [data-icon]::before,
+  .o-checkround-1::before,
+.o-inforound-1::before,
+.o-shieldcheck-1::before,
+.o-shieldcross-1::before,
+.o-warninground-1::before {
+    display: inline-block;
+  font-family: "gachain-front";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  }
+
+  .o-checkround-1::before { content: "\11df4"; }
+.o-inforound-1::before { content: "\11df5"; }
+.o-shieldcheck-1::before { content: "\11df6"; }
+.o-shieldcross-1::before { content: "\11df7"; }
+.o-warninground-1::before { content: "\11df8"; }
+
+  

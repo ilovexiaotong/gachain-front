@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-@import "bootstrap.scss";
-@import "app.scss";
-@import "fluent.scss";
+import { Epic } from 'modules';
+import { spawnNotification, destroyNotification } from '../actions';
+
+const spawnNotificationEpic: Epic = (action$, store) => action$.ofAction(spawnNotification)
+    .delay(5000)
+    .map(action =>
+        destroyNotification(action.payload.id)
+    );
+
+export default spawnNotificationEpic;

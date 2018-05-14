@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-@import "bootstrap.scss";
-@import "app.scss";
-@import "fluent.scss";
+import { combineEpics } from 'redux-observable';
+import spawnNotificationEpic from './epics/spawnNotificationEpic';
+import enqueueNotificationEpic from './epics/enqueueNotificationEpic';
+import destroyNotificationEpic from './epics/destroyNotificationEpic';
+
+export default combineEpics(
+    destroyNotificationEpic,
+    enqueueNotificationEpic,
+    spawnNotificationEpic
+);

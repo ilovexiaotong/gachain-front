@@ -14,6 +14,13 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
-@import "bootstrap.scss";
-@import "app.scss";
-@import "fluent.scss";
+import { State } from '../reducer';
+import { destroyNotification } from '../actions';
+import { Reducer } from 'modules';
+
+const destroyNotificationHandler: Reducer<typeof destroyNotification, State> = (state, payload) => ({
+    ...state,
+    notifications: state.notifications.filter(l => l.id !== payload)
+});
+
+export default destroyNotificationHandler;
