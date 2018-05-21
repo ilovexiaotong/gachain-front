@@ -15,19 +15,18 @@
 // along with the gachain-front library. If not, see <http://www.gnu.org/licenses/>.
 
 import { State } from '../reducer';
+import { txExecBatch } from '../actions';
 import { Reducer } from 'modules';
-import { ITransaction, ITransactionCall } from 'gachain/tx';
 
-const setTxData: Reducer<{ tx: ITransactionCall, data: Partial<ITransaction> }, State> = (state, payload) => {
-    const tx = state.transactions.get(payload.tx.uuid) as ITransaction;
-    return {
-        ...state,
-        transactions: state.transactions.set(payload.tx.uuid, {
-            ...tx,
-            ...payload.data,
-            type: 'single'
-        })
-    };
-};
+const txExecBatchFailedHandler: Reducer<typeof txExecBatch.failed, State> = (state, payload) => ({
+    ...state,
+    transactions: state.transactions.set(payload.params.uuid, {
+        type: 'collection',
+        uuid: payload.params.uuid,
+        pending: 0,
+        transactions: [],
+        error: payload.error.error
+    })
+});
 
-export default setTxData;
+export default txExecBatchFailedHandler;
