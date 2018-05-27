@@ -27,7 +27,7 @@ import imgLogo from 'images/logoInverse.svg';
 import Modal from './';
 import { FormattedMessage } from 'react-intl';
 
-const MAIN_WEBSITE = 'http://gac.one';
+const MAIN_WEBSITE = 'http://gachain.org';
 
 class AboutModal extends Modal<void, void> {
     openWebsite() {

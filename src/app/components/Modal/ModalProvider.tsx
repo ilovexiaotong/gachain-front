@@ -20,9 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import * as React from 'react';
+import React from 'react';
 import { IModal, TModalResultReason } from 'gachain/modal';
-import { styles } from 'components/Main';
 
 import Wrapper from 'components/Modal/Wrapper';
 import DebugContractModal from 'components/Modal/Editor/DebugContractModal';
@@ -39,13 +38,13 @@ import AuthorizeModal from 'components/Modal/Tx/AuthorizeModal';
 import SignatureModal from 'components/Modal/Tx/SignatureModal';
 import TxErrorModal from 'components/Modal/Tx/ErrorModal';
 import AuthErrorModal from 'components/Modal/Auth/AuthErrorModal';
-import AuthRemoveAccountModal from 'components/Modal/Auth/AuthRemoveAccountModal';
+import AuthRemoveWalletModal from 'components/Modal/Auth/AuthRemoveWalletModal';
 import TxConfirmModal from './Tx/ConfirmModal';
 
 const MODAL_COMPONENTS = {
     'AUTHORIZE': AuthorizeModal,
     'AUTH_ERROR': AuthErrorModal,
-    'AUTH_REMOVE_ACCOUNT': AuthRemoveAccountModal,
+    'AUTH_REMOVE_WALLET': AuthRemoveWalletModal,
     'TX_CONFIRM': TxConfirmModal,
     'TX_ERROR': TxErrorModal,
     'TX_SIGNATURE': SignatureModal,
@@ -84,7 +83,7 @@ class ModalProvider extends React.Component<IModalProviderProps> {
     render() {
         const Modal = this.props.modal && !this.props.modal.result && MODAL_COMPONENTS[this.props.modal.type] || null;
         return (
-            <Wrapper topOffset={styles.headerHeight - 1}>
+            <Wrapper>
                 {Modal && (
                     <Modal
                         key={this.props.modal.id}

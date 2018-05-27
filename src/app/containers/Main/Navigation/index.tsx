@@ -29,7 +29,7 @@ import { TMenu } from 'gachain/content';
 import Navigation from 'components/Main/Navigation';
 
 interface INavigationContainerProps {
-    topOffset: number;
+
 }
 
 interface INavigationContainerState {

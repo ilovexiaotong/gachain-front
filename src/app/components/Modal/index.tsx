@@ -20,36 +20,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import * as React from 'react';
-import styled from 'styled-components';
-import { ReactNode } from 'react';
+import React from 'react';
+
+import themed from 'components/Theme/themed';
 
 export interface IModalProps<P, R> {
     params: P;
     onResult: (data: R) => void;
     onCancel: () => void;
-    children: ReactNode[];
+    children: React.ReactNode[];
 }
 
 export type TModalComponentClass<P, R> =
     React.ComponentType<IModalProps<P, R>> |
     React.SFC<IModalProps<P, R>>;
 
-const StyledHeader = styled.div`
-    background: #4b7dbd;
-    color: #fff;
+const StyledHeader = themed.div`
+    background: ${props => props.theme.modalHeaderBackground};
+    color: ${props => props.theme.modalHeaderForeground};
     margin: -1px -1px 0 -1px;
     height: 40px;
     line-height: 40px;
     padding: 0 15px;
 `;
 
-const StyledBody = styled.div`
+const StyledBody = themed.div`
     padding: 15px;
     min-width: 300px;
 `;
 
-const StyledFooter = styled.div`
+const StyledFooter = themed.div`
     padding: 15px;
     background: #efefef;
     border-top: solid 1px #d0dff3;
