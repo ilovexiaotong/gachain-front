@@ -20,27 +20,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { combineEpics } from 'redux-observable';
-import txCallEpic from './epics/txCallEpic';
-import txAuthorizeEpic from './epics/txAuthorizeEpic';
-import txPrepareEpic from './epics/txPrepareEpic';
-import txExecEpic from './epics/txExecEpic';
-import newEcosystemEpic from './epics/newEcosystemEpic';
-import txExecFailedEpic from './epics/txExecFailedEpic';
-import txExecBatchEpic from './epics/txExecBatchEpic';
-import txExecBatchDoneEpic from './epics/txExecBatchDoneEpic';
-import txExecBatchFailedEpic from './epics/txExecBatchFailedEpic';
-import txPrepareBatchEpic from './epics/txPrepareBatchEpic';
+import React from 'react';
+import propTypes from 'prop-types';
 
-export default combineEpics(
-    txExecBatchDoneEpic,
-    txExecBatchEpic,
-    txExecBatchFailedEpic,
-    txCallEpic,
-    txAuthorizeEpic,
-    txPrepareEpic,
-    txExecEpic,
-    txExecFailedEpic,
-    newEcosystemEpic,
-    txPrepareBatchEpic
-);
+import Protypo from '../';
+
+export interface IArrayToSourceProps {
+    source: string;
+    columns: string[];
+    types: string[];
+    data: string[][];
+}
+
+interface IArrayToSourceContext {
+    protypo: Protypo;
+}
+
+const ArrayToSource: React.SFC<IArrayToSourceProps> = (props, context: IArrayToSourceContext) => {
+    context.protypo.registerSource(props.source, {
+        columns: props.columns,
+        types: props.types,
+        data: props.data
+    });
+    return null;
+};
+
+ArrayToSource.contextTypes = {
+    protypo: propTypes.object.isRequired
+};
+
+export default ArrayToSource;

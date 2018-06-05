@@ -20,27 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { combineEpics } from 'redux-observable';
-import txCallEpic from './epics/txCallEpic';
-import txAuthorizeEpic from './epics/txAuthorizeEpic';
-import txPrepareEpic from './epics/txPrepareEpic';
-import txExecEpic from './epics/txExecEpic';
-import newEcosystemEpic from './epics/newEcosystemEpic';
-import txExecFailedEpic from './epics/txExecFailedEpic';
-import txExecBatchEpic from './epics/txExecBatchEpic';
-import txExecBatchDoneEpic from './epics/txExecBatchDoneEpic';
-import txExecBatchFailedEpic from './epics/txExecBatchFailedEpic';
-import txPrepareBatchEpic from './epics/txPrepareBatchEpic';
+const TxDissect = (forsign: string) => {
+    const matches = /([a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}),[0-9]+,([0-9]+),(.*)/i.exec(forsign);
+    return {
+        requestID: matches[1],
+        timestamp: parseInt(matches[2], 10),
+        body: matches[3]
+    };
+};
 
-export default combineEpics(
-    txExecBatchDoneEpic,
-    txExecBatchEpic,
-    txExecBatchFailedEpic,
-    txCallEpic,
-    txAuthorizeEpic,
-    txPrepareEpic,
-    txExecEpic,
-    txExecFailedEpic,
-    newEcosystemEpic,
-    txPrepareBatchEpic
-);
+export default TxDissect;

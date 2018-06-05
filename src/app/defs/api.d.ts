@@ -322,8 +322,7 @@ declare module 'gachain/api' {
     }
 
     interface ITxPrepareBatchRequest {
-        name: string;
-        data: TTxParams[];
+        contracts: ITxPrepareRequest[];
     }
 
     interface ITxPrepareBatchResponse {
