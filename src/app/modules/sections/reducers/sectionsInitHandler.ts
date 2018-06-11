@@ -21,12 +21,28 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { ecosystemInit } from '../actions';
+import { sectionsInit } from '../actions';
 import { Reducer } from 'modules';
+import { TSection } from 'gachain/content';
 
-const ecosystemInitDoneHandler: Reducer<typeof ecosystemInit.done, State> = (state, payload) => ({
-    ...state,
-    stylesheet: payload.result.stylesheet,
-});
+const sectionsInitHandler: Reducer<typeof sectionsInit.started, State> = (state, payload) => {
+    const sections: { [key: string]: TSection } = {};
+    for (let itr in state.sections) {
+        if (state.sections.hasOwnProperty(itr)) {
+            sections[itr] = {
+                ...state.sections[itr],
+                pending: payload.section === itr ? true : false,
+                page: null,
+                menus: []
+            };
+        }
+    }
 
-export default ecosystemInitDoneHandler;
+    return {
+        ...state,
+        section: payload.section,
+        sections
+    };
+};
+
+export default sectionsInitHandler;

@@ -21,10 +21,10 @@
 // SOFTWARE.
 
 import { Epic } from 'modules';
+import { modalPage, modalShow } from '../actions';
 import { Observable } from 'rxjs/Observable';
-import { renderPage } from 'modules/content/actions';
 
-const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(renderPage.started)
+const modalPageEpic: Epic = (action$, store, { api }) => action$.ofAction(modalPage)
     .flatMap(action => {
         const state = store.getState();
         const client = api(state.auth.session);
@@ -36,27 +36,20 @@ const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
             locale: state.storage.locale
 
         })).map(payload =>
-            renderPage.done({
-                params: action.payload,
-                result: {
-                    menu: {
-                        name: payload.menu,
-                        content: payload.menutree
-                    },
-                    page: {
-                        params: action.payload.params,
-                        name: action.payload.name,
-                        content: payload.tree
-                    }
+            modalShow({
+                id: 'PAGE_MODAL',
+                type: 'PAGE_MODAL',
+                params: {
+                    title: action.payload.title || action.payload.name,
+                    width: action.payload.width,
+                    tree: payload.tree
                 }
+
             })
 
         ).catch(e =>
-            Observable.of(renderPage.failed({
-                params: action.payload,
-                error: e.error
-            }))
+            Observable.empty<never>()
         );
     });
 
-export default renderPageEpic;
+export default modalPageEpic;

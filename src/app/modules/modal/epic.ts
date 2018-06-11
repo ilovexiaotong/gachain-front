@@ -20,17 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import * as queryString from 'query-string';
-import { Epic } from 'modules';
-import { push } from 'react-router-redux';
-import { renderSection } from 'modules/content/actions';
+import { combineEpics } from 'redux-observable';
+import modalPageEpic from './epics/modalPageEpic';
+import closeModalOnInteractionEpic from './epics/closeModalOnInteractionEpic';
 
-const renderSectionEpic: Epic = (action$, store) => action$.ofAction(renderSection)
-    .map(action => {
-        const state = store.getState();
-        const section = state.content.sections[action.payload];
-        const params = section.page ? queryString.stringify(section.page.params) : '';
-        return push(`/${section.name}/${section.page ? section.page.name : ''}${params ? '?' + params : ''}`);
-    });
-
-export default renderSectionEpic;
+export default combineEpics(
+    modalPageEpic,
+    closeModalOnInteractionEpic
+);

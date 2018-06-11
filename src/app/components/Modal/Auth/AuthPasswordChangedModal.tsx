@@ -20,13 +20,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { ecosystemInit } from '../actions';
-import { Reducer } from 'modules';
+import * as React from 'react';
+import { Button } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 
-const ecosystemInitDoneHandler: Reducer<typeof ecosystemInit.done, State> = (state, payload) => ({
-    ...state,
-    stylesheet: payload.result.stylesheet,
-});
+import Modal from '../';
 
-export default ecosystemInitDoneHandler;
+class AuthPasswordChangedModal extends Modal<{}, void> {
+    render() {
+        return (
+            <div>
+                <Modal.Header>
+                    <FormattedMessage id="alert.info" defaultMessage="Information" />
+                </Modal.Header>
+                <Modal.Body>
+                    <div><FormattedMessage id="auth.password.changed" defaultMessage="Password changed. Please login with new password." /></div>
+                </Modal.Body>
+                <Modal.Footer className="text-right">
+                    <Button type="button" bsStyle="primary" onClick={this.props.onCancel.bind(this)}>
+                        <FormattedMessage id="close" defaultMessage="Close" />
+                    </Button>
+                </Modal.Footer>
+            </div>
+        );
+    }
+}
+export default AuthPasswordChangedModal;

@@ -1,17 +1,17 @@
 // MIT License
-// 
+//
 // Copyright (c) 2016-2018 GACHAIN
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,43 +22,28 @@
 
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
-import { reloadPage } from 'modules/content/actions';
+import { setDefaultPage, sectionsInit } from 'modules/sections/actions';
 
-const reloadPageEpic: Epic = (action$, store, { api }) => action$.ofAction(reloadPage.started)
+const sectionsInitDoneEpic: Epic = (action$, store, { api }) => action$.ofAction(sectionsInit.done)
     .flatMap(action => {
         const state = store.getState();
-        const section = state.content.sections[state.content.section];
         const client = api(state.auth.session);
 
-        return Observable.fromPromise(client.content({
-            type: 'page',
-            name: section.page.name,
-            params: section.page.params,
-            locale: state.storage.locale,
-
-        })).map(payload =>
-            reloadPage.done({
-                params: action.payload,
-                result: {
-                    params: section.page.params,
-                    menu: {
-                        name: payload.menu,
-                        content: payload.menutree
-                    },
-                    page: {
-                        params: section.page.params,
-                        name: section.page.name,
-                        content: payload.tree
-                    }
-                }
+        return Observable.from(
+            client.getRow({
+                table: 'roles',
+                id: state.auth.role.id.toString() || null,
             })
-
-        ).catch(e =>
-            Observable.of(reloadPage.failed({
-                params: action.payload,
-                error: e.error
-            }))
+                .then(row => row.value.default_page)
+        ).flatMap(payload =>
+            Observable.of(
+                setDefaultPage(payload)
+            )
         );
-    });
+    }).catch(e =>
+        Observable.of(
+            setDefaultPage(null)
+        )
+    );
 
-export default reloadPageEpic;
+export default sectionsInitDoneEpic;

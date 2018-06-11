@@ -23,7 +23,7 @@
 import { Action } from 'redux';
 import { Epic } from 'redux-observable';
 import { IRootState } from 'modules';
-import { reset } from '../actions';
+import { reset } from '..//actions';
 import { login } from 'modules/auth/actions';
 
 const resetOnWalletSelectEpic: Epic<Action, IRootState> =

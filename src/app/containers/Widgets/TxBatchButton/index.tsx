@@ -27,7 +27,7 @@ import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { txCall } from 'modules/tx/actions';
 import { TTransactionStatus, ITransactionCollection } from 'gachain/tx';
-import { navigatePage } from 'modules/content/actions';
+import { navigatePage } from 'modules/sections/actions';
 
 import TxBatchButton, { ITxButtonConfirm } from 'components/TxBatchButton';
 
@@ -43,6 +43,10 @@ interface ITxBatchButtonContainerProps {
     confirm?: ITxButtonConfirm;
     page?: string;
     pageParams?: { [key: string]: any };
+    popup?: {
+        title?: string;
+        width?: number;
+    };
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     onExec?: (success: boolean) => void;
 }
@@ -110,6 +114,7 @@ class TxBatchButtonContainer extends React.Component<ITxBatchButtonContainerProp
             name: page,
             params: pageParams,
             confirm: this.props.confirm,
+            popup: this.props.popup,
             force: true
         });
     }

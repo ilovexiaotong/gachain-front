@@ -20,13 +20,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { ecosystemInit } from '../actions';
-import { Reducer } from 'modules';
+import { combineEpics } from 'redux-observable';
+import closeSectionEpic from './epics/closeSectionEpic';
+import renderSectionEpic from './epics/renderSectionEpic';
+import resetEpic from './epics/resetEpic';
+import resetOnLoginEpic from './epics/resetOnLoginEpic';
+import navigatePageEpic from './epics/navigatePageEpic';
+import reloadPageEpic from './epics/reloadPageEpic';
+import renderLegacyPageEpic from './epics/renderLegacyPageEpic';
+import renderPageEpic from './epics/renderPageEpic';
+import sectionsInitEpic from './epics/sectionsInitEpic';
+import sectionsInitDoneEpic from './epics/sectionsInitDoneEpic';
 
-const ecosystemInitDoneHandler: Reducer<typeof ecosystemInit.done, State> = (state, payload) => ({
-    ...state,
-    stylesheet: payload.result.stylesheet,
-});
-
-export default ecosystemInitDoneHandler;
+export default combineEpics(
+    closeSectionEpic,
+    renderSectionEpic,
+    resetEpic,
+    resetOnLoginEpic,
+    navigatePageEpic,
+    reloadPageEpic,
+    renderLegacyPageEpic,
+    renderPageEpic,
+    sectionsInitEpic,
+    sectionsInitDoneEpic
+);
