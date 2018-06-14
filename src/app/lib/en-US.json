@@ -204,6 +204,8 @@
     "install.database.name": "DB name",
     "install.database.pass": "Password",
     "install.database.port": "Port",
+    "tx.error.undefined":"undefined",
+    "tx.error.undefined.desc":"undefined.desc",
     "install.database.user": "Username",
     "install.database_settings": "Database settings",
     "install.first_block_dir": "First block dir",
