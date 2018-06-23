@@ -20,42 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React from 'react';
-import { connect } from 'react-redux';
-import { IRootState } from 'modules';
-import { initialize } from 'modules/engine/actions';
-import platform from 'lib/platform';
+declare module 'gachain/gui' {
+    type TWindowType =
+        'general' | 'main';
 
-export interface IInitHookProps {
-
-}
-
-interface IInitHookState {
-
-}
-
-interface IInitHookDispatch {
-    initialize: typeof initialize.started;
-}
-
-class InitHook extends React.Component<IInitHookProps & IInitHookState & IInitHookDispatch> {
-    componentDidMount() {
-        this.props.initialize({
-            defaultKey: platform.args.privateKey
-        });
-    }
-
-    render() {
-        return null as JSX.Element;
+    interface IInferredArguments {
+        readonly privateKey?: string;
+        readonly fullNode?: string[];
+        readonly dry?: boolean;
+        readonly offsetX?: number;
+        readonly offsetY?: number;
+        readonly socketUrl?: string;
     }
 }
-
-const mapStateToProps = (state: IRootState) => ({
-
-});
-
-const mapDispatchToProps = {
-    initialize: initialize.started
-};
-
-export default connect<IInitHookState, IInitHookDispatch, IInitHookProps>(mapStateToProps, mapDispatchToProps)(InitHook);
