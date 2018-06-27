@@ -20,23 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import * as React from 'react';
-import * as propTypes from 'prop-types';
+import React from 'react';
+import propTypes from 'prop-types';
+import { ISource } from 'gachain/protypo';
+
 import Protypo from '../';
 
-export interface IDBFindProps {
-    columns: string[];
-    types: string[];
-    data: string[][];
-    name: string;
+export interface IGetContractHistoryProps extends ISource {
     source: string;
 }
 
-interface IDBFindContext {
+interface IGetContractHistoryContext {
     protypo: Protypo;
 }
 
-const DBFind: React.SFC<IDBFindProps> = (props, context: IDBFindContext) => {
+const GetContractHistory: React.SFC<IGetContractHistoryProps> = (props, context: IGetContractHistoryContext) => {
     context.protypo.registerSource(props.source, {
         columns: props.columns,
         types: props.types,
@@ -45,8 +43,8 @@ const DBFind: React.SFC<IDBFindProps> = (props, context: IDBFindContext) => {
     return null;
 };
 
-DBFind.contextTypes = {
+GetContractHistory.contextTypes = {
     protypo: propTypes.object.isRequired
 };
 
-export default DBFind;
+export default GetContractHistory;
