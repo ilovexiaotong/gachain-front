@@ -21,5 +21,9 @@
 // SOFTWARE.
 
 declare module 'gachain' {
-
+    interface IWebSettings {
+        fullNodes?: string[];
+        socketUrl?: string;
+        disableFullNodesSync?: boolean;
+    }
 }

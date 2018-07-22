@@ -31,5 +31,6 @@ declare module 'gachain/gui' {
         readonly offsetX?: number;
         readonly offsetY?: number;
         readonly socketUrl?: string;
+        readonly disableFullNodesSync?: boolean;
     }
 }
