@@ -22,6 +22,8 @@
 
 declare module 'gachain/theme' {
     interface IThemeDefinition {
+        windowBorder: string;
+        
         headerBackground: string;
         headerForeground: string;
         headerBackgroundActive: string;
