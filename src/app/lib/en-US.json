@@ -1,5 +1,6 @@
 {
     "LANG_NAME": "English(US)",
+    "main.website":"Gachain",
     "wallet.create": "Create wallet",
     "wallet.createimport": "Create or import wallet",
     "wallet.import": "Import wallet",
@@ -16,7 +17,7 @@
     "auth.wallet.actions": "Wallet actions",
     "auth.wallet.import": "Import",
     "auth.wallets": "Wallets",
-    "auth.authentication": "Authentication",
+    "auth.authentication": "Login Authentication",
     "auth.create.success": "Wallet has been successfully created",
     "auth.error.E_INVALID_KEY": "Provided key is corrupted or contains invalid data",
     "auth.error.E_INVALID_PASSWORD": "Invalid password",

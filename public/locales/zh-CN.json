@@ -1,5 +1,6 @@
 {
     "LANG_NAME": "Chinese(Simplified)",
+    "main.website":"智乾区块链",
     "wallet.create": "创建账户",
     "wallet.createimport": "创建或导入账户",
     "wallet.import": "导入账户",
@@ -16,7 +17,7 @@
     "auth.wallet.actions": "帐户操作",
     "auth.wallet.import": "导入",
     "auth.wallets": "帐户",
-    "auth.authentication": "身份验证",
+    "auth.authentication": "登录验证",
     "auth.create.success": "帐户已成功新建",
     "auth.error.E_INVALID_KEY": "提供的私钥已损坏或包含无效的数据",
     "auth.error.E_INVALID_PASSWORD": "密码无效",

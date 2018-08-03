@@ -62,7 +62,7 @@ const Auth: React.SFC<IAuthProps> = props => (
                     web: (
                         <div className="clearfix p-lg text-center text-white">
                             <div className="pull-left">
-                                <div>Gachain &copy; 2017 - 2018 - <a href="http://gachain.org">http://gachain.org</a></div>
+                                <div>Gachain &copy; 2017 - 2018 - <a href="https://gachain.org"><FormattedMessage id="main.website" defaultMessage="Gachain" /></a></div>
                             </div>
                             <div className="pull-right">
                                 <a href="#" onClick={props.changeLocale}>
