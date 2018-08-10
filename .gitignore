@@ -2,7 +2,7 @@
 
 # workspaces
 /.vscode
-
+/.idea
 # dependencies
 /node_modules
 
@@ -12,6 +12,7 @@
 # production
 /build
 /releases
+/public/settings.json
 config.json
 package-lock.json
 

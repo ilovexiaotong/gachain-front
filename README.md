@@ -20,14 +20,18 @@ $ yarn install
 $ yarn start
 ```
 
-``yarn start`` 将请求服务器的地址默认绑定到``http://127.0.0.1:7079/api/v2``。 你还可以使用``yarn start-desktop``在桌面环境中调试项目。
+``yarn start`` 将请求服务器的地址默认绑定到``http://127.0.0.1:7079/api/v2``。 可以使用``yarn start-desktop``在桌面环境中调试项目。
 
-如果你需要将请求地址绑定为其它的值，可以设置``REACT_APP_API_URL``这个参数来改变请求服务器的地址。
+如果需要自定义更多的API请求服务器的地址，需在*public*目录下创建*settings.json*文件，示例配置在*public*目录下*settings.json.dist*。
 
 ### 示例
 
 ```bash
-$ REACT_APP_API_URL='http://example.org:8080/api/v2' yarn start
+{
+    "fullNodes": [
+        "http://127.0.0.1:7079"
+    ]
+}
 ```
 
 在开发服务器的环境下会发出某些错误警告，并以可读格式报告错误。你可以不用管它，注意：它只适合开发/测试。
@@ -41,14 +45,14 @@ $ REACT_APP_API_URL='http://example.org:8080/api/v2' yarn start
 $ yarn install
 ```
 
-如果你的后端使用的API地址不是默认的``http://127.0.0.1:7079/api/v2``， 那么你需要通过``REACT_APP_API_URL``参数手动指定请求的地址
+如果使用的API请求服务器不是默认的``http://127.0.0.1:7079``，你需创建*settings.json*配置文件并构建项目
 ### 示例
 
 ```bash
-$ REACT_APP_API_URL='http://example.org:8080/api/v2' yarn build
+$ yarn build
 ```
 
-项目构建完毕之后，在你的项目根目录下你会找到 *build/* 的文件夹。你可以使用任意网络服务器来访问它。
+项目构建完毕之后，部署的文件会放到 *build/* 目录。你可以使用任何web服务器来部署。
 
 ----------
 
@@ -58,18 +62,17 @@ $ REACT_APP_API_URL='http://example.org:8080/api/v2' yarn build
 $ yarn install
 ```
 
-构建项目
-手动指定``REACT_APP_API_URL``参数将应用程序绑定到后端使用的API
+创建*settings.json*配置文件并构建项目。
 
 ### 示例
 
 ```bash
-$ REACT_APP_API_URL='http://example.org:8080/api/v2' yarn build-desktop
+$  yarn build-desktop
 ```
 
 项目构建完成后，你需要使用``release``命令来打包你的应用程序。你还需要指``-publish neve``，这样你的项目就不会被发布到[github](https://github.com/)上。
 
-可以用m/w/l参数的组合来指定需要构建应用程序的平台，其中``m``代表macOS，``w``代表windows，``l``代表linux。
+可以用*m/w/l*参数的组合来指定需要构建应用程序的平台，其中``m``代表macOS，``w``代表windows，``l``代表linux。
 
 ### 示例
 
@@ -82,4 +85,4 @@ $ yarn release --publish never -mwl
 
 ### 有问题
 
-如果你在使用Gachain时遇到任何问题，请随时与我们联系 support@gachain.org 。
+如果你在使用Gachain时遇到任何问题，请随时与我们联系 bugs@gachain.org 。
