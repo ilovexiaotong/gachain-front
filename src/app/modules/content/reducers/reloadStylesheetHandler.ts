@@ -20,11 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Tag from './Tag';
+import { State } from '../reducer';
+import { reloadStylesheet } from '../actions';
+import { Reducer } from 'modules';
 
-class Strong extends Tag {
-    protected tagName: string = 'Strong';
-    protected HTMLTag: string = 'b';
-}
+const reloadStylesheetHandler: Reducer<typeof reloadStylesheet, State> = (state, payload) => ({
+    ...state,
+    stylesheet: payload,
+});
 
-export default Strong;
+export default reloadStylesheetHandler;

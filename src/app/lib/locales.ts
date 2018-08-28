@@ -26,7 +26,7 @@ export default [
         title: 'English(US)'
     },
     {
-        name: 'zh-CN',
-        title: 'Chinese(Simplified)'
+        name: 'ru-RU',
+        title: 'Русский'
     }
 ];

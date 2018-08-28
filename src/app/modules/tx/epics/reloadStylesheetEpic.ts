@@ -20,11 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import Tag from './Tag';
+import { IRootState } from 'modules';
+import { Epic } from 'redux-observable';
+import { Action } from 'redux';
+import { txExec } from '../actions';
+import { reloadStylesheet } from 'modules/content/actions';
 
-class Strong extends Tag {
-    protected tagName: string = 'Strong';
-    protected HTMLTag: string = 'b';
-}
+const reloadStylesheetEpic: Epic<Action, IRootState> =
+    (action$, store) => action$.ofAction(txExec.done)
+        .filter(l => l.payload.params.tx.contract && l.payload.params.tx.contract.name === 'EditParameter' && l.payload.params.tx.contract.params.name === 'stylesheet')
+        .map(action => {
+            return reloadStylesheet(action.payload.params.tx.contract.params.value);
+        });
 
-export default Strong;
+export default reloadStylesheetEpic;
