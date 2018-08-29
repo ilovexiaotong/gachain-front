@@ -37,6 +37,7 @@ declare module 'gachain/content' {
     };
 
     type TSection = {
+        readonly key: string;
         readonly visible: boolean;
         readonly closeable?: boolean;
         readonly menuDisabled?: boolean;
