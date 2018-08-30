@@ -8094,9 +8094,9 @@ react-router@^4.1.1:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-react-scripts-ts-electron@^0.2.1:
+"react-scripts-ts-electron@git+https://git@github.com/zhouxianyou/cra-typescript-electron.git":
   version "0.2.1"
-  resolved "http://registry.npm.taobao.org/react-scripts-ts-electron/download/react-scripts-ts-electron-0.2.1.tgz#e30c82fb9148b28456f2b8ded3411dbaa326bb4a"
+  resolved "git+https://git@github.com/zhouxianyou/cra-typescript-electron.git#a26b5d6b7d3b5493a8df6fd4c0090dca41261bcd"
   dependencies:
     autoprefixer "7.1.2"
     case-sensitive-paths-webpack-plugin "2.1.1"
