@@ -23,6 +23,7 @@
 import { combineEpics } from 'redux-observable';
 import closeSectionEpic from './epics/closeSectionEpic';
 import renderSectionEpic from './epics/renderSectionEpic';
+import resetEpic from './epics/resetEpic';
 import resetOnLoginEpic from './epics/resetOnLoginEpic';
 import navigatePageEpic from './epics/navigatePageEpic';
 import reloadPageEpic from './epics/reloadPageEpic';
@@ -33,6 +34,7 @@ import sectionsInitEpic from './epics/sectionsInitEpic';
 export default combineEpics(
     closeSectionEpic,
     renderSectionEpic,
+    resetEpic,
     resetOnLoginEpic,
     navigatePageEpic,
     reloadPageEpic,

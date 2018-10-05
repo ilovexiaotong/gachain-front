@@ -26,7 +26,7 @@ import { IRootState } from 'modules';
 import { createEditorTab } from '../actions';
 import { updateSection } from 'modules/sections/actions';
 import { Observable } from 'rxjs/Observable';
-import { replace } from 'connected-react-router';
+import { replace } from 'react-router-redux';
 
 const createEditorTabEpic: Epic<Action, IRootState> =
     (action$, store) => action$.ofAction(createEditorTab.started)

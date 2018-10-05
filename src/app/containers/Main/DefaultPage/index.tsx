@@ -20,26 +20,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { ecosystemInit } from 'modules/content/actions';
+import { navigatePage } from 'modules/sections/actions';
 
 export interface IDefaultPageContainerProps {
 }
 
 interface IDefaultPageContainerState {
-    initialized: boolean;
+    inited: boolean;
 }
 
 interface IDefaultPageContainerDispatch {
-    ecosystemInit: typeof ecosystemInit.started;
+    navigatePage: typeof navigatePage.started;
 }
 
 class DefaultPageContainer extends React.Component<IDefaultPageContainerProps & IDefaultPageContainerState & IDefaultPageContainerDispatch> {
     componentDidMount() {
-        if (!this.props.initialized) {
-            this.props.ecosystemInit({});
+        this.props.navigatePage({params: {}});
+    }
+
+    componentWillReceiveProps(props: IDefaultPageContainerProps & IDefaultPageContainerState & IDefaultPageContainerDispatch) {
+        if (props.inited && props.inited !== this.props.inited) {
+            this.props.navigatePage({params: {}});
         }
     }
 
@@ -49,11 +53,11 @@ class DefaultPageContainer extends React.Component<IDefaultPageContainerProps & 
 }
 
 const mapStateToProps = (state: IRootState) => ({
-    initialized: state.sections.inited
+    inited: state.sections.inited
 });
 
 const mapDispatchToProps = {
-    ecosystemInit: ecosystemInit.started
+    navigatePage: navigatePage.started
 };
 
 export default connect<IDefaultPageContainerState, IDefaultPageContainerDispatch, IDefaultPageContainerProps>(mapStateToProps, mapDispatchToProps)(DefaultPageContainer);

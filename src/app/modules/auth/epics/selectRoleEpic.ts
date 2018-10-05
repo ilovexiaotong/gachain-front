@@ -24,6 +24,7 @@ import { Action } from 'redux';
 import { Epic } from 'modules';
 import { selectRole } from '../actions';
 import { Observable } from 'rxjs/Observable';
+import { setDefaultPage } from 'modules/sections/actions';
 import keyring from 'lib/keyring';
 
 const selectRoleEpic: Epic = (action$, store, { api }) => action$.ofAction(selectRole.started)
@@ -56,6 +57,7 @@ const selectRoleEpic: Epic = (action$, store, { api }) => action$.ofAction(selec
 
                 ) : Observable.of(null)).flatMap(roleResult =>
                     Observable.of<Action>(
+                        setDefaultPage(roleResult),
                         selectRole.done({
                             params: action.payload,
                             result: {

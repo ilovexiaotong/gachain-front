@@ -56,13 +56,9 @@ const mapStateToProps = (state: IRootState) => {
     return {
         preloading: state.content.preloading,
         preloadingError: state.content.preloadingError,
-        visible: state.sections.sections[state.sections.section] && (
-            state.sections.sections[state.sections.section].menuDisabled ?
-                false :
-                state.sections.sections[state.sections.section].menuVisible
-        ),
+        visible: state.sections.sections[state.sections.section].menuDisabled ? false : state.sections.sections[state.sections.section].menuVisible,
         width: state.storage.navigationSize,
-        menus: section ? section.menus : []
+        menus: section.menus
     };
 };
 

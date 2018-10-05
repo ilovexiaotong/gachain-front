@@ -37,7 +37,6 @@ export interface IPageLinkContainerProps {
 }
 
 interface IPageLinkContainerState {
-    mainSection: string;
     currentSection: string;
 }
 
@@ -50,7 +49,6 @@ const PageLinkContainer: React.SFC<IPageLinkContainerProps & IPageLinkContainerS
 );
 
 const mapStateToProps = (state: IRootState) => ({
-    mainSection: state.sections.mainSection,
     currentSection: state.sections.section
 });
 

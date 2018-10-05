@@ -21,22 +21,24 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { txExecBatch } from '../actions';
+import { reset } from '../actions';
 import { Reducer } from 'modules';
 
-const txExecBatchFailedHandler: Reducer<typeof txExecBatch.failed, State> = (state, payload) => {
-    const tx = state.transactions.get(payload.params.uuid);
-    return {
-        ...state,
-        transactions: state.transactions.set(payload.params.uuid, {
-            ...tx,
-            error: payload.error,
-            batch: {
-                ...tx.batch,
-                pending: 0
-            }
-        })
-    };
-};
+const resetFailedHandler: Reducer<typeof reset.failed, State> = (state, payload) => ({
+    ...state,
+    sections: {
+        ...state.sections,
+        [state.section]: {
+            ...state.sections[state.section],
+            page: {
+                params: {},
+                name: null,
+                content: null,
+                error: payload.error
+            },
+            pending: false
+        }
+    }
+});
 
-export default txExecBatchFailedHandler;
+export default resetFailedHandler;

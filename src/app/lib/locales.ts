@@ -23,10 +23,10 @@
 export default [
     {
         name: 'en-US',
-        title: 'English(US)'
+        title: 'English (US)'
     },
     {
         name: 'zh-CN',
-        title: 'Chinese(Simplified)'
+        title: 'Chinese (Simplified)'
     }
 ];

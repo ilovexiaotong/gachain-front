@@ -105,7 +105,7 @@ class UserMenu extends React.Component<IUserMenuProps> {
                                 </CloseDropdownButton>
                             </li>
                             <li>
-                                <PageLink page="backup">
+                                <PageLink page="backup" section="home">
                                     <CloseDropdownButton>
                                         <em className="icon icon-shield text-muted" />
                                         <span>

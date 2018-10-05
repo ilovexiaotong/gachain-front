@@ -20,23 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { txExecBatch } from '../actions';
-import { Reducer } from 'modules';
+import * as React from 'react';
+import DnDComponent from './DnDComponent';
+import EditableBlock from './EditableBlock';
+import { HintWrapper } from 'components/Protypo/handlers/Hint';
 
-const txExecBatchHandler: Reducer<typeof txExecBatch.started, State> = (state, payload) => ({
-    ...state,
-    transactions: state.transactions.set(payload.uuid, {
-        uuid: payload.uuid,
-        contract: payload.tx.contract && payload.tx.contract.name,
-        block: null,
-        result: null,
-        error: null,
-        batch: {
-            pending: payload.prepare.forsign.length,
-            contracts: payload.tx.contracts.map(tx => tx.name)
-        }
-    })
-});
+class Hint extends EditableBlock {
+    protected editableDisplay = 'inline';
+    protected editable = false;
+    renderChildren(classes: string) {
+        let className = 'tool-icon ' + (this.props.icon || 'icon-question');
+        return (
+            <HintWrapper>
+                <div className="tool-body">
+                    <em className={className}/>
+                </div>
+            </HintWrapper>
+        );
+    }
+}
 
-export default txExecBatchHandler;
+export default DnDComponent(Hint);

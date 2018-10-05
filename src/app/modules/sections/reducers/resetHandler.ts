@@ -24,9 +24,15 @@ import { State } from '../reducer';
 import { reset } from '../actions';
 import { Reducer } from 'modules';
 
-const resetHandler: Reducer<typeof reset, State> = (state, payload) => ({
+const resetHandler: Reducer<typeof reset.started, State> = (state, payload) => ({
     ...state,
-    inited: false
+    sections: {
+        ...state.sections,
+        [state.section]: {
+            ...state.sections[state.section],
+            pending: true
+        }
+    }
 });
 
 export default resetHandler;

@@ -20,21 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { IRootState } from 'modules';
-import { Epic } from 'redux-observable';
-import { Action } from 'redux';
-import { txExecBatch } from '../actions';
-import { modalShow } from '../../modal/actions';
+import IField from './';
 
-export const txExecBatchFailedEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(txExecBatch.failed)
-        .filter(l => !!l.payload.error)
-        .map(action =>
-            modalShow({
-                id: 'TX_ERROR',
-                type: 'TX_ERROR',
-                params: action.payload.error
-            })
-        );
+class StringCollection implements IField<string[]> {
+    private _value: string[] = [];
 
-export default txExecBatchFailedEpic;
+    set(value: string[] | object) {
+        if (!value) {
+            this._value = [];
+        }
+        else if (!Array.isArray(value)) {
+            this._value = [value.toString()];
+        }
+        else {
+            this._value = value.map(v => v.toString());
+        }
+    }
+
+    get(): string[] {
+        return this._value;
+    }
+}
+
+export default StringCollection;

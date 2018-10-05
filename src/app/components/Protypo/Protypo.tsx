@@ -27,7 +27,7 @@ import contextDefinitions from './contexts';
 import { TProtypoElement, ISource } from 'gachain/protypo';
 import { IValidationResult } from 'components/Validation/ValidatedForm';
 import Heading from 'components/Heading';
-import ToolButton, { IToolButtonProps } from 'components/Protypo/components/ToolButton';
+import ToolButton, { IToolButtonProps } from 'containers/ToolButton/ToolButton';
 import { IConstructorElementProps } from 'gachain/editor';
 
 export interface IProtypoProps extends IConstructorElementProps {

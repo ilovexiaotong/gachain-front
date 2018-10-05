@@ -20,12 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React from 'react';
+import * as React from 'react';
 import { LEGACY_PAGES } from 'lib/legacyPages';
 
 export interface IPageLinkProps {
     section?: string;
-    mainSection: string;
     currentSection: string;
     page: string;
     params?: {
@@ -36,7 +35,7 @@ export interface IPageLinkProps {
 }
 
 const PageLink: React.SFC<IPageLinkProps> = props => {
-    const sectionName = ((LEGACY_PAGES[props.page] && (LEGACY_PAGES[props.page].section || props.mainSection))) || props.section || props.currentSection;
+    const sectionName = ((LEGACY_PAGES[props.page] && LEGACY_PAGES[props.page].section)) || props.section || props.currentSection;
 
     const navigateUrl = `/${sectionName}/${props.page}`;
     const navigatePage = (e: React.MouseEvent<HTMLAnchorElement>) => {

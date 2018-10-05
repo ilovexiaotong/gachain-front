@@ -27,8 +27,10 @@ import closeSectionHandler from './reducers/closeSectionHandler';
 import renderSectionHandler from './reducers/renderSectionHandler';
 import switchSectionHandler from './reducers/switchSectionHandler';
 import updateSectionHandler from './reducers/updateSectionHandler';
-import resetHandler from './reducers/resetHandler';
-import sectionsInitDoneHandler from './reducers/sectionsInitDoneHandler';
+import setDefaultPageHandler from './reducers/setDefaultPageHandler';
+import resetDoneHandler from './reducers/resetDoneHandler';
+import resetFailedHandler from './reducers/resetFailedHandler';
+import sectionsInitHandler from './reducers/sectionsInitHandler';
 import menuPopHandler from './reducers/menuPopHandler';
 import menuPushHandler from './reducers/menuPushHandler';
 import navigatePageDoneHandler from './reducers/navigatePageDoneHandler';
@@ -40,33 +42,52 @@ import renderPageFailedHandler from './reducers/renderPageFailedHandler';
 import renderPageHandler from './reducers/renderPageHandler';
 
 export type State = {
-    readonly mainSection: string;
     readonly section: string;
     readonly sections: {
         readonly [name: string]: TSection;
     };
-    readonly systemSections: TSection[];
     readonly inited: boolean;
 };
 
 export const initialState: State = {
-    mainSection: null,
-    section: null,
-    sections: {},
-    systemSections: [{
-        key: 'editor',
-        name: 'editor',
-        title: 'Editor',
-        visible: false,
-        closeable: true,
-        defaultPage: 'editor',
-        pending: false,
-        force: false,
-        menus: [],
-        menuDisabled: true,
-        menuVisible: true,
-        page: null
-    }],
+    section: 'home',
+    sections: {
+        home: {
+            name: 'home',
+            title: 'Home',
+            visible: true,
+            pending: false,
+            force: false,
+            defaultPage: 'default_page',
+            menus: [],
+            menuVisible: true,
+            page: null
+        },
+        admin: {
+            name: 'admin',
+            title: 'Admin',
+            visible: true,
+            defaultPage: 'admin_index',
+            pending: false,
+            force: false,
+            menus: [],
+            menuVisible: true,
+            page: null
+        },
+        editor: {
+            name: 'editor',
+            title: 'Editor',
+            visible: false,
+            closeable: true,
+            defaultPage: 'editor',
+            pending: false,
+            force: false,
+            menus: [],
+            menuDisabled: true,
+            menuVisible: true,
+            page: null
+        }
+    },
     inited: false
 };
 
@@ -75,7 +96,9 @@ export default reducerWithInitialState(initialState)
     .case(actions.renderSection, renderSectionHandler)
     .case(actions.switchSection, switchSectionHandler)
     .case(actions.updateSection, updateSectionHandler)
-    .case(actions.reset, resetHandler)
+    .case(actions.setDefaultPage, setDefaultPageHandler)
+    .case(actions.reset.done, resetDoneHandler)
+    .case(actions.reset.failed, resetFailedHandler)
     .case(actions.menuPop, menuPopHandler)
     .case(actions.menuPush, menuPushHandler)
     .case(actions.navigatePage.done, navigatePageDoneHandler)
@@ -85,4 +108,4 @@ export default reducerWithInitialState(initialState)
     .case(actions.renderPage.done, renderPageDoneHandler)
     .case(actions.renderPage.failed, renderPageFailedHandler)
     .case(actions.renderPage.started, renderPageHandler)
-    .case(actions.sectionsInit.done, sectionsInitDoneHandler);
+    .case(actions.sectionsInit, sectionsInitHandler);
