@@ -300,6 +300,8 @@ declare module 'gachain/api' {
         blockid: string;
         result: string;
         errmsg?: {
+            id?: string;
+
             type: string;
             error: string;
         };
