@@ -25,7 +25,7 @@ script:
   - |
     if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ]; then
       yarn build-desktop
-      echo \{\"fullNodes\":[\"http://127.0.0.1:7079\"]\} > ./build/settings.json
+      echo \{\"fullNodes\":[\"http://127.0.0.1:7079\"]\} > ./build/app/settings.json
       yarn release -ml
       yarn release -w
     fi

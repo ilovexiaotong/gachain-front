@@ -27,6 +27,6 @@ export default [
     },
     {
         name: 'zh-CN',
-        title: 'Chinese (Simplified)'
+        title: 'Chinese (CN)'
     }
 ];
