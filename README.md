@@ -1,4 +1,5 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Build Status](https://travis-ci.org/GACHAIN/gachain-front.svg?branch=master)](https://travis-ci.org/GACHAIN/gachain-front)
 [![](https://tokei.rs/b1/github/GACHAIN/gachain-front)](https://github.com/GACHAIN/gachain-front)
 ![](https://reposs.herokuapp.com/?path=GACHAIN/gachain-front&style=flat)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/GACHAIN?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
