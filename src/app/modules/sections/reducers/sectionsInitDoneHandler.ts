@@ -21,24 +21,27 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { reset } from '../actions';
+import { sectionsInit } from '../actions';
 import { Reducer } from 'modules';
+import { TSection } from 'gachain/content';
 
-const resetFailedHandler: Reducer<typeof reset.failed, State> = (state, payload) => ({
-    ...state,
-    sections: {
-        ...state.sections,
-        [state.section]: {
-            ...state.sections[state.section],
-            page: {
-                params: {},
-                name: null,
-                content: null,
-                error: payload.error
-            },
-            pending: false
-        }
-    }
-});
+const sectionsInitDoneHandler: Reducer<typeof sectionsInit.done, State> = (state, payload) => {
+    const sections: { [key: string]: TSection } = {};
+    payload.result.sections.forEach(section => {
+        sections[section.name] = section;
+    });
 
-export default resetFailedHandler;
+    state.systemSections.forEach(section => {
+        sections[section.name] = section;
+    });
+
+    return {
+        ...state,
+        inited: true,
+        mainSection: payload.result.mainSection,
+        section: payload.result.section,
+        sections
+    };
+};
+
+export default sectionsInitDoneHandler;
