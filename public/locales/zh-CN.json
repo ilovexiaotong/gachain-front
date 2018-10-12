@@ -21,6 +21,7 @@
     "auth.create.success": "帐户已成功新建",
     "auth.error.E_INVALID_KEY": "提供的私钥已损坏或包含无效的数据",
     "auth.error.E_INVALID_PASSWORD": "密码无效",
+    "auth.error.E_KEYNOTFOUND": "钱包地址尚未注册",
     "auth.error.E_DELETEDKEY": "帐户已从生态系统中删除",
     "auth.error.E_OFFLINE": "无法连接到服务",
     "auth.error.E_UPDATING": "节点正在更新，请稍后重试",
