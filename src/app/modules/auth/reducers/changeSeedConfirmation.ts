@@ -21,12 +21,12 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { generateSeed } from '../actions';
+import { changeSeed } from '../actions';
 import { Reducer } from 'modules';
 
-const generateSeedDoneHandler: Reducer<typeof generateSeed.done, State> = (state, payload) => ({
+const changeSeedConfirmationHandler: Reducer<typeof changeSeed, State> = (state, payload) => ({
     ...state,
-    seed: payload.result
+    seedConfirm: payload
 });
 
-export default generateSeedDoneHandler;
+export default changeSeedConfirmationHandler;
