@@ -21,44 +21,37 @@
 // SOFTWARE.
 
 import { Epic } from 'modules';
-import { Action } from 'redux';
+import { loadWallets } from '../actions';
 import { Observable } from 'rxjs';
-import uuid from 'uuid';
-import { inviteEcosystem } from '../actions';
-import { enqueueNotification } from 'modules/notifications/actions';
-import { navigatePage } from 'modules/sections/actions';
-import { saveWallet } from 'modules/storage/actions';
+import { IKeyInfo } from 'gachain/api';
 
-const inviteEcosystemEpic: Epic = (action$, store) => action$.ofAction(inviteEcosystem)
+const loadWalletsEpic: Epic = (action$, store, { api }) => action$.ofAction(loadWallets.started)
     .flatMap(action => {
-        const wallet = store.getState().auth.wallet;
-        const notification = enqueueNotification({
-            id: uuid.v4(),
-            type: 'ECOSYSTEM_INVITED',
-            params: {
-                ecosystem: action.payload.ecosystem
-            }
-        });
+        const state = store.getState();
+        const client = api({ apiHost: state.engine.nodeHost });
 
-        const emitter = Observable.of<Action>(
-            notification,
-            saveWallet({
+        return Observable.from(state.storage.wallets).flatMap(wallet =>
+            Observable.from(client.keyinfo({
+                id: wallet.id
+            }).catch(e => null as IKeyInfo[])).map(keys => ({
                 id: wallet.id,
-                encKey: wallet.encKey,
                 address: wallet.address,
-                ecosystem: action.payload.ecosystem,
-                ecosystemName: null,
-                username: null
-            }),
-        );
+                encKey: wallet.encKey,
+                publicKey: wallet.publicKey,
+                access: keys.map(key => ({
+                    ...key,
+                    roles: key.roles || []
+                }))
+            }))
 
-        return action.payload.redirectPage ? emitter.concat(Observable.of(navigatePage.started({
-            name: action.payload.redirectPage,
-            force: true,
-            params: {
-                ecosystem: action.payload.ecosystem
-            }
-        }))) : emitter;
+        ).toArray().map(wallets => loadWallets.done({
+            params: action.payload,
+            result: wallets
+
+        })).catch(e => Observable.of(loadWallets.failed({
+            params: action.payload,
+            error: e
+        })));
     });
 
-export default inviteEcosystemEpic;
+export default loadWalletsEpic;

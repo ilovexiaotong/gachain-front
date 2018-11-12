@@ -20,21 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { IWallet } from 'gachain/auth';
+import { Epic } from 'modules';
+import { logout, loadWallets } from '../actions';
+import { initialize } from 'modules/engine/actions';
 
-export default function (state: State, payload: { wallet: IWallet, role?: number }): number {
-    if ('number' === typeof payload.role) {
-        return state.notifications.filter(l =>
-            l.id === payload.wallet.id &&
-            l.ecosystem === payload.wallet.ecosystem &&
-            l.role === payload.role
-        ).map(l => l.count).concat([0]).reduce((a, b) => a + b);
-    }
-    else {
-        return state.notifications.filter(l =>
-            l.id === payload.wallet.id &&
-            l.ecosystem === payload.wallet.ecosystem
-        ).map(l => l.count).concat([0]).reduce((a, b) => a + b);
-    }
-}
+const reloadWalletsEpic: Epic = (action$, store, { api }) => action$.ofType(logout.done.type, initialize.done.type)
+    .map(action => loadWallets.started(null));
+
+export default reloadWalletsEpic;

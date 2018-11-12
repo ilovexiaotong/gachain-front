@@ -76,7 +76,7 @@ class App extends React.Component<IAppProps> {
                 {platform.select({
                     web: !this.props.securityWarningClosed && (
                         <SecurityWarning>
-                            <FormattedMessage id="general.security.warning" defaultMessage="Please use desktop version for better security" />
+                            <FormattedMessage id="general.security.warning" defaultMessage="Please use desktop version or mobile application for better security" />
                         </SecurityWarning>
                     )
                 })}
