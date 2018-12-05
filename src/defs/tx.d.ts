@@ -26,6 +26,7 @@ declare module 'gachain/tx' {
         'info' |
         'warning' |
         'panic' |
+        'E_GUEST_VIOLATION' |
         'E_CONTRACT' |
         'E_SERVER';
 

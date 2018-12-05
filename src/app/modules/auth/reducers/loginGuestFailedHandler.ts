@@ -21,18 +21,12 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { login } from '../actions';
+import { loginGuest } from '../actions';
 import { Reducer } from 'modules';
 
-const loginDoneHandler: Reducer<typeof login.done, State> = (state, payload) => ({
+const loginGuestFailedHandler: Reducer<typeof loginGuest.failed, State> = (state, payload) => ({
     ...state,
-    isAuthenticated: true,
-    isLoggingIn: false,
-    ecosystem: state.wallet.access.ecosystem,
-    session: payload.result.session,
-    privateKey: payload.result.privateKey,
-    id: state.wallet.wallet.id,
-    isDefaultWallet: false
+    isLoggingIn: false
 });
 
-export default loginDoneHandler;
+export default loginGuestFailedHandler;

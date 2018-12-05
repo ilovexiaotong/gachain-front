@@ -20,35 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React from 'react';
-import { connect } from 'react-redux';
-import { IRootState } from 'modules';
-import { navigate } from 'modules/engine/actions';
+import { State } from '../reducer';
+import { loginGuest } from '../actions';
+import { Reducer } from 'modules';
 
-import Welcome from 'components/Auth/Welcome';
-
-export interface IWelcomeContainerProps {
-
-}
-
-interface IWelcomeContainerState {
-
-}
-
-interface IWelcomeContainerDispatch {
-    onConfirm: () => void;
-}
-
-const mapStateToProps = (state: IRootState) => ({
-
+const loginGuestDoneHandler: Reducer<typeof loginGuest.done, State> = (state, payload) => ({
+    ...state,
+    isAuthenticated: true,
+    isLoggingIn: false,
+    ecosystem: '1',
+    session: payload.result.session,
+    privateKey: payload.result.privateKey,
+    wallet: payload.result.wallet,
+    isDefaultWallet: true
 });
 
-const mapDispatchToProps = {
-    onConfirm: () => navigate('/wallet')
-};
-
-const WelcomeContainer: React.SFC<IWelcomeContainerProps & IWelcomeContainerState & IWelcomeContainerDispatch> = props => (
-    <Welcome {...props} />
-);
-
-export default connect<IWelcomeContainerState, IWelcomeContainerDispatch, IWelcomeContainerProps>(mapStateToProps, mapDispatchToProps)(WelcomeContainer);
+export default loginGuestDoneHandler;
