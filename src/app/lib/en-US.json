@@ -48,6 +48,7 @@
     "auth.import.existing": "Import existing key",
     "auth.login": "Login",
     "auth.login.guest": "Login using guest key",
+    "auth.login.guest.name": "Guest",
     "auth.login.guest.desc": "Proceed with this option if you want to try Gachain in test mode",
     "auth.nokey": "I don't have a key",
     "auth.nokey.desc": "If you are new to the system or just want to create a new wallet, choose this option to generate a new private key and protect it with your password",
