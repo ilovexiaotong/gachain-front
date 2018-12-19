@@ -48,6 +48,7 @@
     "auth.import.existing": "导入已有私钥",
     "auth.login": "登录",
     "auth.login.guest": "访客登录",
+    "auth.login.guest.name": "访客",
     "auth.login.guest.desc": "如果想在测试模式下尝试Gachain，请继续使用此选项",
     "auth.nokey": "我没有私钥",
     "auth.nokey.desc": "如果你对系统不熟悉或只想新建钱包 - 请继续使用此选项生成新的私钥并使用你的密码进行保护",
