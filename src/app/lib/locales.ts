@@ -27,6 +27,14 @@ export default [
     },
     {
         name: 'zh-CN',
-        title: 'Chinese (CN)'
+        title: '中文 (简体)'
+    },
+    {
+        name: 'zh-HK',
+        title: '中文 (繁體)'
+    },
+    {
+        name: 'ja-JP',
+        title: '日本語'
     }
 ];
