@@ -31,7 +31,7 @@ import NodeObservable from '../util/NodeObservable';
 import keyring from 'lib/keyring';
 import { mergeFullNodes, saveWallet } from 'modules/storage/actions';
 
-const fullNodesFallback = ['http://127.0.0.1:7079'];
+const fullNodesFallback = ['http://192.168.1.161:8073'];
 
 const initializeEpic: Epic = (action$, store, { api, defaultKey, defaultPassword }) => action$.ofAction(initialize.started)
     .flatMap(action => {

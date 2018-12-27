@@ -117,8 +117,8 @@ const Generator: React.SFC<IWalletGeneratorProps> = props => (
                         name="password"
                         type="password"
                         validators={props.comparePassword ?
-                            [Validation.validators.required, Validation.validators.minlength(6), Validation.validators.compare(props.comparePassword)] :
-                            [Validation.validators.required, Validation.validators.minlength(6)]
+                            [Validation.validators.required, Validation.validators.minlength(6), Validation.validators.maxlength(30), Validation.validators.space, Validation.validators.compare(props.comparePassword)] :
+                            [Validation.validators.required, Validation.validators.minlength(6), Validation.validators.maxlength(30), Validation.validators.space]
                         }
                     />
                     <div className="visible-md visible-lg text-left">
