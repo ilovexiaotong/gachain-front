@@ -142,7 +142,7 @@ class Backup extends React.Component<IBackupProps, IBackupState> {
                             <td>
                                 <FormattedMessage id="general.address" defaultMessage="Address" />
                             </td>
-                            <td>{this.props.wallet.wallet.address}</td>
+                            <td>{this.props.wallet.wallet ? this.props.wallet.wallet.address : ''}</td>
                         </tr>
                         <tr>
                             <td>
