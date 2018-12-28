@@ -103,6 +103,7 @@
     "exec": "執行",
     "general.about": "關於",
     "general.wallet.backup": "備份錢包",
+    "general.wallet.backup.desc": "備份您的錢包數據。如果忘記密碼或丟失私鑰，您將無法恢復對錢包的訪問",
     "general.wallet.changepassword": "更改密碼",
     "general.wallet.ecosystemNo": "生態系統 #{ecosystem}",
     "general.wallet.signout": "退出",
