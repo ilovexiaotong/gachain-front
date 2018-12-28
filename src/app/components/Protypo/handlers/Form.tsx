@@ -68,16 +68,18 @@ class Form extends React.Component<IFormProps, IFormState> {
             this.setState({
                 form
             });
-            form.onUpdate(e => {
-                this._interactionManager.on('input_change', {
-                    name: e.name,
-                    value: String(e.value)
-                });
+            if (form && form.onUpdate !== null) {
+                form.onUpdate(e => {
+                    this._interactionManager.on('input_change', {
+                        name: e.name,
+                        value: String(e.value)
+                    });
 
-                this.setState({
-                    conditionMap: this._interactionManager.getConditionMap()
+                    this.setState({
+                        conditionMap: this._interactionManager.getConditionMap()
+                    });
                 });
-            });
+            }
         }
     }
 
