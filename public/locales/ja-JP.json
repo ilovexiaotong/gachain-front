@@ -103,6 +103,7 @@
     "exec": "実行",
     "general.about": "について",
     "general.wallet.backup": "バックアップウォレット",
+    "general.wallet.backup.desc": "財布のデータをお預かりします。暗証番号を忘れたり、秘密鍵を紛失した場合、財布への訪問を再開することができない",
     "general.wallet.changepassword": "パスワードの変更",
     "general.wallet.ecosystemNo": "エコシステム＃{ecosystem}",
     "general.wallet.signout": "終了",
