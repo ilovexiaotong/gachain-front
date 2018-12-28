@@ -159,7 +159,7 @@
     "map.editor": "地图编辑器",
     "map.meter.short": "m",
     "modal.authorization.title": "授权",
-    "modal.authorization.password": "输入密码签署合约{contract}",
+    "modal.authorization.password": "输入您的密码执行合约{contract}",
     "modal.confirm.title": "确认",
     "modal.imageeditor.cancel": "取消",
     "modal.imageeditor.confirm": "确认",

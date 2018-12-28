@@ -30,8 +30,11 @@ import { saveLocale } from 'modules/storage/actions';
 import defaultLocaleMessages from 'lib/en-US.json';
 import platform from 'lib/platform';
 import urlJoin from 'url-join';
+import en from 'react-intl/locale-data/en';
+import zh from 'react-intl/locale-data/zh';
 
 const defaultLocale = 'en-US';
+addLocaleData([...en, ...zh]);
 
 const setLocaleEpic: Epic<Action, IRootState> =
     (action$, store) => action$.ofAction(setLocale.started)
