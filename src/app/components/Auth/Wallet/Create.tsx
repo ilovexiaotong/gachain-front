@@ -44,6 +44,7 @@ interface ICreateState {
     isConfirming: boolean;
     password: string;
     passwordConfirm: string;
+    flag: boolean;
 }
 
 class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateState> {
@@ -54,7 +55,8 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
         this.state = {
             isConfirming: false,
             password: '',
-            passwordConfirm: ''
+            passwordConfirm: '',
+            flag: false,
         };
     }
 
@@ -86,6 +88,9 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
 
     onGenerate = () => {
         this.props.onGenerateSeed();
+        this.setState({
+            flag: true
+        });
     }
 
     onSeedConfirmationChange = (seedConfirm: string) => {
@@ -119,6 +124,9 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
         else {
             this.props.onImportSeed(e.target.files[0]);
         }
+        this.setState({
+            flag: true
+        });
     }
 
     render() {
@@ -135,6 +143,7 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                                 <Generator
                                     seed={this.props.seed}
                                     onGenerate={this.onGenerate}
+                                    flag={this.state.flag}
                                     onLoad={this.onLoad}
                                     onSave={this.onSave}
                                     onSeedChange={this.props.onChangeSeed}
@@ -153,6 +162,7 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                                 <Generator
                                     seed={this.props.seedConfirm}
                                     onLoad={this.onLoad}
+                                    flag={this.state.flag}
                                     onSeedChange={this.onSeedConfirmationChange}
                                     onPasswordChange={this.onPasswordConfirmationChange}
                                     password={this.state.passwordConfirm}

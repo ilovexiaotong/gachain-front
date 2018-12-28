@@ -35,6 +35,7 @@ export interface IWalletGeneratorProps {
     password: string;
     compareSeed?: string;
     comparePassword?: string;
+    flag?: boolean;
     onSeedChange: (seed: string) => void;
     onPasswordChange: (password: string) => void;
     onGenerate?: () => void;
@@ -69,7 +70,7 @@ const Generator: React.SFC<IWalletGeneratorProps> = props => (
                         <Validation.components.ValidatedTextarea
                             className="input-seed"
                             onChange={e => props.onSeedChange(e.target.value)}
-                            value={props.seed}
+                            value={props.flag ? props.seed : ' '}
                             name="seed"
                             validators={props.compareSeed ?
                                 [Validation.validators.required, Validation.validators.compare(props.compareSeed)] :
