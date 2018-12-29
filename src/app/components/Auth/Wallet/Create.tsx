@@ -146,7 +146,6 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                                 <Generator
                                     seed={this.state.flag === false ? '' : this.props.seed}
                                     onGenerate={this.onGenerate}
-                                    // flag={this.state.flag}
                                     onLoad={this.onLoad}
                                     onSave={this.onSave}
                                     onSeedChange={this.props.onChangeSeed}
@@ -165,7 +164,6 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                                 <Generator
                                     seed={this.state.flag === false ? '' : this.props.seedConfirm}
                                     onLoad={this.onLoad}
-                                    // flag={this.state.flag}
                                     onSeedChange={this.onSeedConfirmationChange}
                                     onPasswordChange={this.onPasswordConfirmationChange}
                                     password={this.state.passwordConfirm}

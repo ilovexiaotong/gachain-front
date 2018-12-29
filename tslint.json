@@ -40,7 +40,7 @@
         "no-bitwise": true,
         "jsx-no-bind": false,
         "no-console": [
-            false,
+            true,
             "log",
             "error",
             "debug",

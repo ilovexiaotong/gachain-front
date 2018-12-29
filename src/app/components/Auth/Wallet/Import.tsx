@@ -110,7 +110,6 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
                                 onSeedChange={this.onBackupChange}
                                 onPasswordChange={this.onPasswordChange}
                                 password={this.state.password}
-                                // flag={this.state.flag}
                                 action="import"
                                 descriptionValue={
                                     <FormattedMessage
