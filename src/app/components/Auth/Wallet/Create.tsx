@@ -31,7 +31,7 @@ import Heading from 'components/Auth/Heading';
 export interface ICreateProps {
     seed: string;
     seedConfirm: string;
-    onCreate: (params: { seed: string, password: string }) => void;
+    onCreate: (params: { seed: string, password: string, flag: boolean }) => void;
     onGenerateSeed: () => void;
     onChangeSeed: (seed: string) => void;
     onChangeSeedConfirmation: (value: string) => void;
@@ -66,22 +66,25 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
 
     onReturn = () => {
         this.setState({
-            isConfirming: false
+            isConfirming: false,
+            flag: true
         });
     }
 
     onSubmit = (values: { [key: string]: any }) => {
         if (this.state.isConfirming) {
-            this.props.onCreate({
-                seed: this.props.seedConfirm,
-                password: this.state.passwordConfirm
+            this.props.onCreate({ 
+                seed: this.state.flag === false ? '' : this.props.seedConfirm,
+                password: this.state.passwordConfirm,
+                flag: false
             });
         }
         else {
             this.props.onChangeSeedConfirmation('');
             this.setState({
-                isConfirming: true,
-                password: values.password
+                isConfirming: this.state.flag === false ? false : true,
+                password: values.password,
+                flag: false
             });
         }
     }
@@ -141,9 +144,9 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                         <Validation.components.ValidatedForm onSubmitSuccess={this.onSubmit}>
                             {!this.state.isConfirming && (
                                 <Generator
-                                    seed={this.props.seed}
+                                    seed={this.state.flag === false ? '' : this.props.seed}
                                     onGenerate={this.onGenerate}
-                                    flag={this.state.flag}
+                                    // flag={this.state.flag}
                                     onLoad={this.onLoad}
                                     onSave={this.onSave}
                                     onSeedChange={this.props.onChangeSeed}
@@ -160,9 +163,9 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                             )}
                             {this.state.isConfirming && (
                                 <Generator
-                                    seed={this.props.seedConfirm}
+                                    seed={this.state.flag === false ? '' : this.props.seedConfirm}
                                     onLoad={this.onLoad}
-                                    flag={this.state.flag}
+                                    // flag={this.state.flag}
                                     onSeedChange={this.onSeedConfirmationChange}
                                     onPasswordChange={this.onPasswordConfirmationChange}
                                     password={this.state.passwordConfirm}

@@ -32,7 +32,7 @@ export interface IImportProps {
     backup: string;
     pending: boolean;
     onImportBackup: (file: File) => void;
-    onConfirm: (params: { backup: string, password: string }) => void;
+    onConfirm: (params: { backup: string, password: string, flag: boolean}) => void;
 }
 
 interface IImportState {
@@ -65,8 +65,9 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
 
     onSubmit = (values: { [key: string]: any }) => {
         this.props.onConfirm({
-            backup: this.state.backup,
-            password: this.state.password
+            backup: this.state.flag === false ? ' ' : this.state.backup,
+            password: this.state.password,
+            flag: false
         });
     }
 
@@ -104,12 +105,12 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
                     <div className="text-center">
                         <Validation.components.ValidatedForm onSubmitSuccess={this.onSubmit}>
                             <Generator
-                                seed={this.state.backup}
+                                seed={this.state.flag === false ? '' : this.state.backup}
                                 onLoad={this.onLoad}
                                 onSeedChange={this.onBackupChange}
                                 onPasswordChange={this.onPasswordChange}
                                 password={this.state.password}
-                                flag={this.state.flag}
+                                // flag={this.state.flag}
                                 action="import"
                                 descriptionValue={
                                     <FormattedMessage
