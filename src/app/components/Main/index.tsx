@@ -125,7 +125,8 @@ class Main extends React.Component<IMainProps> {
     }
 
     render() {
-        const appTitle = `Gachain (${this.props.nodeUrl})`;
+        // const appTitle = `Gachain (${this.props.nodeUrl})`;
+        const appTitle = '政务链客户端';
 
         return (
             <StyledWrapper className="wrapper component-main">
