@@ -94,6 +94,10 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
         });
     }
 
+    onInput = () => {
+       this.setState({ flag: true });
+    }
+
     render() {
         return (
             <LocalizedDocumentTitle title="wallet.import" defaultTitle="Import wallet">
@@ -107,6 +111,7 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
                             <Generator
                                 seed={this.state.flag === false ? '' : this.state.backup}
                                 onLoad={this.onLoad}
+                                onInput={this.onInput}
                                 onSeedChange={this.onBackupChange}
                                 onPasswordChange={this.onPasswordChange}
                                 password={this.state.password}

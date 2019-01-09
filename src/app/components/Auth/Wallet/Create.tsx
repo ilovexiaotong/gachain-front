@@ -132,6 +132,10 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
         });
     }
 
+    onInput = () => {
+        this.setState({ flag: true });
+     }
+
     render() {
         return (
             <LocalizedDocumentTitle title="wallet.create" defaultTitle="Create wallet">
@@ -148,6 +152,7 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                                     onGenerate={this.onGenerate}
                                     onLoad={this.onLoad}
                                     onSave={this.onSave}
+                                    onInput={this.onInput}
                                     onSeedChange={this.props.onChangeSeed}
                                     onPasswordChange={this.onPasswordChange}
                                     password={this.state.password}
@@ -164,6 +169,7 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                                 <Generator
                                     seed={this.state.flag === false ? '' : this.props.seedConfirm}
                                     onLoad={this.onLoad}
+                                    onInput={this.onInput}
                                     onSeedChange={this.onSeedConfirmationChange}
                                     onPasswordChange={this.onPasswordConfirmationChange}
                                     password={this.state.passwordConfirm}
