@@ -89,9 +89,7 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
 
     onLoadSuccess = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.props.onImportBackup(e.target.files[0]);
-        this.setState({
-            flag: true
-        });
+        this.onInput();
     }
 
     onInput = () => {

@@ -91,9 +91,7 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
 
     onGenerate = () => {
         this.props.onGenerateSeed();
-        this.setState({
-            flag: true
-        });
+        this.onInput();
     }
 
     onSeedConfirmationChange = (seedConfirm: string) => {
@@ -127,9 +125,7 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
         else {
             this.props.onImportSeed(e.target.files[0]);
         }
-        this.setState({
-            flag: true
-        });
+        this.onInput();
     }
 
     onInput = () => {
