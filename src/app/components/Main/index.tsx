@@ -30,13 +30,13 @@ import platform from 'lib/platform';
 import themed from 'components/Theme/themed';
 import Titlebar from './Titlebar';
 import UserMenu from 'containers/Widgets/UserMenu';
+import ToolMenu from 'containers/Widgets/ToolMenu';
 import Navigation from 'containers/Main/Navigation';
 import NotificationsMenu from 'containers/Widgets/NotificationsMenu';
 import Toolbar from './Toolbar';
 import SectionButton from 'components/Main/SectionButton';
 import ToolButton from 'components/Main/Toolbar/ToolButton';
 import EditorToolbar from 'containers/Main/Toolbar/EditorToolbar';
-import RightMenuButton from 'containers/Main/Toolbar/RightMenuButton';
 import ToolIndicator from 'components/Main/Toolbar/ToolIndicator';
 import LoadingBar from './LoadingBar';
 // import TransactionsMenu from './TransactionsMenu';
@@ -198,7 +198,7 @@ class Main extends React.Component<IMainProps> {
                 <StyledContent style={{ marginLeft: this.props.navigationVisible ? this.props.navigationSize : 0 }}>
                     {this.props.children}
                 </StyledContent>
-                <RightMenuButton />
+                <ToolMenu />
             </StyledWrapper >
         );
     }
