@@ -46,7 +46,7 @@ export interface INotificationsProviderProps {
 class NotificationsProvider extends React.Component<INotificationsProviderProps> {
     render() {
         return (
-            <div style={{ position: 'fixed', bottom: 20, right: 20, zIndex: 10000 }}>
+            <div style={{ position: 'fixed', top: '12%', left: '50%', marginLeft: '-175px', zIndex: 10000 }}>
                 <StreamGroup
                     items={this.props.notifications.map(n => {
                         const proto = definitions[n.type];
