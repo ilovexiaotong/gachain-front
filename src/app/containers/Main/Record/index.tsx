@@ -20,35 +20,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'gachain/content' {
-    import { TProtypoElement } from 'gachain/protypo';
+// import React from 'react';
+import { connect } from 'react-redux';
+import { IRootState } from 'modules';
+// import { IRecordCall } from 'gachain/auth';
+// import { FormattedMessage } from 'react-intl';
 
-    type TMenu = {
-        readonly name: string;
-        readonly content: TProtypoElement[];
-    };
+import Record from 'components/Main/Record';
 
-    type TPage = {
-        readonly name: string;
-        readonly legacy?: boolean;
-        readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
-        readonly error?: string;
-    };
-
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
-        readonly name: string;
-        readonly title: string;
-        readonly force: boolean;
-        readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
+const mapStateToProps = (state: IRootState) => ({
+    cmd: state.record.cmd,
+    data: {
+        amount: state.record.data.amount,
+        blocked: state.record.data.blocked,
+        deleted: state.record.data.deleted,
+        ecosystem: state.record.data.ecosystem,
+        id: state.record.data.id,
+        maxpay: state.record.data.maxpay,
+        multi: state.record.data.multi,
+        publickey: state.record.data.publickey,
     }
-}
+});
 
+// const mapDispatchToProps = {
+//     getRecord: (params: null) => renderRecord.started(params)
+// };
+
+export default connect(mapStateToProps)(Record);

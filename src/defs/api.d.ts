@@ -340,4 +340,31 @@ declare module 'gachain/api' {
     type TTxStatusResponse<T> = {
         [K in keyof T]: ITxStatus;
     }
+
+    interface IEcosystemKeyRequest {
+            version: string;
+            msgtype: string;
+            interface: string;
+            remark: string;
+            cmd: string;
+            page_size: number;
+            current_page: number;
+            ecosystem: string;
+            wallet: string;
+    }
+
+    interface IEcosystemKeyResponse {
+            cmd: string,
+            // data: {
+                amount: string,
+                blocked: number,
+                deleted: number,
+                ecosystem: number,
+                id: string,
+                maxpay: string,
+                multi: number,
+                publickey: string
+            // }[]
+    }
+
 }

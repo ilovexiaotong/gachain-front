@@ -61,4 +61,18 @@ declare module 'gachain/auth' {
         password: string;
         isDefault?: boolean
     }
+
+    interface IRecordCall {
+        // cmd: string,
+            // data: {
+                amount: string,
+                blocked: number,
+                deleted: number,
+                ecosystem: number,
+                id: string,
+                maxpay: string,
+                multi: number,
+                publickey: string
+            // };
+        }
 }
