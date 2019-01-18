@@ -101,6 +101,7 @@
     "editor.designer.emptyform": "空白表單",
     "editor.designer.emptyblock": "空白塊",
     "exec": "執行",
+    "general.transaction.record":"交易記錄",
     "general.about": "關於",
     "general.wallet.backup": "備份錢包",
     "general.wallet.backup.desc": "備份您的錢包數據。如果忘記密碼或丟失私鑰，您將無法恢復對錢包的訪問",

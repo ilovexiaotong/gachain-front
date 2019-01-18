@@ -101,6 +101,7 @@
     "editor.designer.emptyform": "Empty form. Drop elements here.",
     "editor.designer.emptyblock": "Empty block. Drop elements here.",
     "exec": "Exec",
+    "general.transaction.record":"Transaction record",
     "general.about": "About",
     "general.wallet.backup": "Backup wallet",
     "general.wallet.changepassword": "Change password",

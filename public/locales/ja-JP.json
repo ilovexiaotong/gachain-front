@@ -101,6 +101,7 @@
     "editor.designer.emptyform": "空白のフォーム",
     "editor.designer.emptyblock": "空白ブロック",
     "exec": "実行",
+    "general.transaction.record":"取引記録",
     "general.about": "について",
     "general.wallet.backup": "バックアップウォレット",
     "general.wallet.backup.desc": "財布のデータをお預かりします。暗証番号を忘れたり、秘密鍵を紛失した場合、財布への訪問を再開することができない",

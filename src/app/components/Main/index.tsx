@@ -31,6 +31,7 @@ import themed from 'components/Theme/themed';
 import Titlebar from './Titlebar';
 import UserMenu from 'containers/Widgets/UserMenu';
 import Navigation from 'containers/Main/Navigation';
+import Transaction from 'containers/Widgets/TransactionRecord';
 import NotificationsMenu from 'containers/Widgets/NotificationsMenu';
 import Toolbar from './Toolbar';
 import SectionButton from 'components/Main/SectionButton';
@@ -156,8 +157,9 @@ class Main extends React.Component<IMainProps> {
                             </li>
                         ) : null)}
                         <li className="user-menu">
+                            <Transaction />
                             <NotificationsMenu />
-                            {/*<TransactionsMenu />*/}
+                            {/* <TransactionsMenu /> */}
                             <UserMenu />
                         </li>
                     </StyledMenu>
