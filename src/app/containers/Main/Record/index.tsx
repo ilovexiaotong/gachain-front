@@ -23,6 +23,8 @@
 // import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
+import { Dispatch } from 'react-redux';
+import { renderRecord } from 'modules/record/actions';
 // import { IRecordCall } from 'gachain/auth';
 // import { FormattedMessage } from 'react-intl';
 
@@ -42,8 +44,10 @@ const mapStateToProps = (state: IRootState) => ({
     }
 });
 
-// const mapDispatchToProps = {
-//     getRecord: (params: null) => renderRecord.started(params)
-// };
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+    getRecode: () => {
+        dispatch(renderRecord.started(null));
+    }
+});
 
-export default connect(mapStateToProps)(Record);
+export default connect( mapStateToProps, mapDispatchToProps )(Record);

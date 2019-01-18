@@ -35,7 +35,7 @@ export interface IRequest {
     headers?: {
         [key: string]: string;
     };
-    body?: FormData;
+    body?: FormData | any;
 }
 
 export interface IRequestOptions<P, R> {
@@ -116,9 +116,9 @@ class GachainAPI {
 
         let json: any = null;
         let text: string = null;
-
+        console.log(params);
         const query = 'get' === method ? queryString.stringify(params) : '';
-        const body = 'get' === method ? null : this.serializeFormData(params);
+        const body = 'get' === method ? null : this._options.apiHost === 'https://explore.gac.one:8800/api/' ? params : this.serializeFormData(params);
 
         try {
             const response = await this._options.transport({
@@ -207,7 +207,7 @@ class GachainAPI {
    
     public getEcosystemKey = this.setSecuredEndpoint<IEcosystemKeyRequest, IEcosystemKeyResponse>('post', 'get_ecosystem_key', {
         requestTransformer: request => ({
-            head: {
+           head: {
                 interface: request.interface,
                 msgtype: request.msgtype,
                 remark:  request.remark,

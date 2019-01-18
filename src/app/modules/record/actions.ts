@@ -26,4 +26,4 @@ import { IRecordCall } from 'gachain/auth';
 
 const actionCreator = actionCreatorFactory('record');
 
-export const renderRecord = actionCreator.async<void, { cmd: string, data: IRecordCall} >('RENDER_RECORD');
+export const renderRecord = actionCreator.async< undefined, { cmd: string, data: IRecordCall }, undefined >('RENDER_RECORD');

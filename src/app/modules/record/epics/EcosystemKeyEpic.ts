@@ -27,9 +27,7 @@ import { Observable } from 'rxjs/Observable';
 const EcosystemKeyEpic: Epic = (action$, store, { api }) => action$.ofAction(renderRecord.started)
     .flatMap(action => {
         const wallet = store.getState().auth.wallet;
-        // const nodeHost = store.getState().engine.nodeHost;
-        // const client = api({ apiHost: nodeHost });
-        const client = api({ apiHost: 'https://explore.gac.one:8800/api' });
+        const client = api({ apiHost: 'https://explore.gac.one:8800/api/' });
         return Observable.from(client.getEcosystemKey({
                 interface: 'get_ecosystem_key',
                 msgtype: 'request',

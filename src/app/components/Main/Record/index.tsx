@@ -23,13 +23,14 @@
 import React from 'react';
 import { Row, Col, Panel, Button } from 'react-bootstrap';
 import { IRecordCall } from 'gachain/auth';
-import { renderRecord } from 'modules/record/actions';
+
 import Member from './Member';
 import Affair from './Affair';
 
 export interface IRecordPromptProps {
     cmd: string;
     data: IRecordCall;
+    getRecode: () => void;
 }
 class Record extends React.Component<IRecordPromptProps> {
     render () {
@@ -44,7 +45,7 @@ class Record extends React.Component<IRecordPromptProps> {
                             bsStyle="primary"
                             header={< span >成员信息</span>}
                         >
-                        <Button  onClick={(params: null) => { renderRecord.started(params); }}>调用</Button>
+                        <Button  onClick={() => { this.props.getRecode(); }}>调用</Button>
                             <Member />
                         </Panel>
                     </code>

@@ -28,15 +28,15 @@ const recordDoneHandler: Reducer<typeof renderRecord.done, State> = (state, payl
     ...state,
     // isAuthenticated: true,
     // ecosystem: '1',
-        cmd:  payload.result.cmd,
-        amount:  payload.result.data.amount,
-        blocked: payload.result.data.blocked,
-        deleted: payload.result.data.deleted,
-        ecosystem: payload.result.data.ecosystem,
-        id: payload.result.data.id,
-        maxpay: payload.result.data.maxpay,
-        multi: payload.result.data.multi,
-        publickey: payload.result.data.publickey
+    cmd: payload.result.cmd,
+    amount: payload.result.data.amount,
+    blocked: payload.result.data.blocked,
+    deleted: payload.result.data.deleted,
+    ecosystem: payload.result.data.ecosystem,
+    id: payload.result.data.id,
+    maxpay: payload.result.data.maxpay,
+    multi: payload.result.data.multi,
+    publickey: payload.result.data.publickey
 });
 
 export default recordDoneHandler;
