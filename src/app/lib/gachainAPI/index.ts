@@ -102,6 +102,13 @@ class GachainAPI {
         }
         return formData;
     }
+    protected serializeRequestPayload(values: { [key: string]: any }) {
+        const requestPayload = {
+            head: values.head,
+            params: values.params
+        };
+        return JSON.stringify(requestPayload);
+        }
 
     protected request = async <P, R>(method: TRequestMethod, endpoint: string, requestParams: P, options: IRequestOptions<P, R> = {}) => {
         const requestEndpoint = urlTemplate.parse(endpoint).expand(requestParams);
@@ -116,9 +123,12 @@ class GachainAPI {
 
         let json: any = null;
         let text: string = null;
+<<<<<<< HEAD
         console.log(this._options.apiHost);
+=======
+>>>>>>> 122a25fa019fecb8ab72cacce05520ce5233bff0
         const query = 'get' === method ? queryString.stringify(params) : '';
-        const body = 'get' === method ? null : this._options.apiHost === 'https://explore.gac.one:8800/api/' ? params : this.serializeFormData(params);
+        const body = 'get' === method ? null : this._options.apiHost === 'https://explore.gac.one:8800/api/' ? this.serializeRequestPayload(params) : this.serializeFormData(params);
 
         try {
             const response = await this._options.transport({
