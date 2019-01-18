@@ -127,8 +127,7 @@ class Main extends React.Component<IMainProps> {
     }
 
     render() {
-        // const appTitle = `Gachain (${this.props.nodeUrl})`;
-        const appTitle = '政务链客户端';
+        const appTitle = `Gachain (${this.props.nodeUrl})`;
 
         return (
             <StyledWrapper className="wrapper component-main">
@@ -145,7 +144,7 @@ class Main extends React.Component<IMainProps> {
                                 <em className="icon-menu" />
                             </SectionButton>
                         </li>
-                        {_.map(this.props.sections, l => l.visible ? (
+                        {_.map(this.props.sections, l => l.visible && l.name !== 'admin' && l.name !== 'developer' ? (
                             <li key={l.name}>
                                 <SectionButton
                                     active={this.props.section === l.name}
@@ -199,8 +198,8 @@ class Main extends React.Component<IMainProps> {
                 <Navigation />
                 <StyledContent style={{ marginLeft: this.props.navigationVisible ? this.props.navigationSize : 0 }}>
                     {this.props.children}
+                    <ToolMenu />
                 </StyledContent>
-                <ToolMenu />
             </StyledWrapper >
         );
     }

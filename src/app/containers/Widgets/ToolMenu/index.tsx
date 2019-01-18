@@ -1,7 +1,7 @@
 import { IRootState } from 'modules';
-import { connect } from 'react-redux';
-
-import ToolMenu from 'components/Main/ToolMenu';
+import { Dispatch, connect } from 'react-redux';
+import { menuPop, menuPush, renderSection, closeSection } from 'modules/sections/actions';
+import MenuTool from 'components/Main/MenuTool';
 
 const mapStateToProps = (state: IRootState) => {
     const section = state.sections.sections[state.sections.section] || state.sections.sections.home;
@@ -13,10 +13,15 @@ const mapStateToProps = (state: IRootState) => {
     };  
 };
 
-const mapDispatchToProps = {
-    onToogleButton: () => {
-        console.log(456);
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+    menuPop,
+    menuPush,
+    onSwitchSection: (section: string) => {
+        dispatch(renderSection(section));
+    },
+    onCloseSection: (section: string) => {
+        dispatch(closeSection(section));
     }
-};
+});
 
-export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(ToolMenu);
+export default connect<any, any, any>(mapStateToProps, mapDispatchToProps)(MenuTool);
