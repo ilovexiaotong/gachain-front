@@ -20,35 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'gachain/content' {
-    import { TProtypoElement } from 'gachain/protypo';
+import { State } from '../reducer';
+import { renderRecord } from '../actions';
+import { Reducer } from 'modules';
 
-    type TMenu = {
-        readonly name: string;
-        readonly content: TProtypoElement[];
-    };
+const recordFailedHandler: Reducer<typeof renderRecord.failed, State> = (state, payload) => ({
+    ...state,
+    // isLoggingIn: false
+});
 
-    type TPage = {
-        readonly name: string;
-        readonly legacy?: boolean;
-        readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
-        readonly error?: string;
-    };
-
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
-        readonly name: string;
-        readonly title: string;
-        readonly force: boolean;
-        readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
-    }
-}
-
+export default recordFailedHandler;

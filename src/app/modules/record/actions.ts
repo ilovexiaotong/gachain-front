@@ -20,35 +20,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'gachain/content' {
-    import { TProtypoElement } from 'gachain/protypo';
+import actionCreatorFactory from 'typescript-fsa';
+import { IRecordCall } from 'gachain/auth';
+// import {ISession, IAccountContext } from 'gachain/auth';
 
-    type TMenu = {
-        readonly name: string;
-        readonly content: TProtypoElement[];
-    };
+const actionCreator = actionCreatorFactory('record');
 
-    type TPage = {
-        readonly name: string;
-        readonly legacy?: boolean;
-        readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
-        readonly error?: string;
-    };
-
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
-        readonly name: string;
-        readonly title: string;
-        readonly force: boolean;
-        readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
-    }
-}
-
+export const renderRecord = actionCreator.async< void, { cmd: string, data: IRecordCall }, undefined >('RENDER_RECORD');

@@ -20,35 +20,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'gachain/content' {
-    import { TProtypoElement } from 'gachain/protypo';
+import * as actions from './actions';
+import { reducerWithInitialState } from 'typescript-fsa-reducers';
+import { IRecordCall } from 'gachain/auth';
+import recordHandler from './reducers/recordHandler';
+import recordDoneHandler from './reducers/recordDoneHandler';
+import recordFailedHandler from './reducers/recordFailedHandler';
 
-    type TMenu = {
-        readonly name: string;
-        readonly content: TProtypoElement[];
-    };
+export type State = {
+    readonly cmd: string,
+    readonly data: IRecordCall
+};
 
-    type TPage = {
-        readonly name: string;
-        readonly legacy?: boolean;
-        readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
-        readonly error?: string;
-    };
+export const initialState: State = {
+    cmd: null,
+    data: {
+        amount: '',
+        blocked: null,
+        deleted: null,
+        ecosystem: null,
+        id: '',
+        maxpay: '',
+        multi: null,
+        publickey: '',
+    },
+};
 
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
-        readonly name: string;
-        readonly title: string;
-        readonly force: boolean;
-        readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
-    }
-}
-
+export default reducerWithInitialState<State>(initialState)
+    .case(actions.renderRecord.started, recordHandler)
+    .case(actions.renderRecord.done, recordDoneHandler)
+    .case(actions.renderRecord.failed, recordFailedHandler);
