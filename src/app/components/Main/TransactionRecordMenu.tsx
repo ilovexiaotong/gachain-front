@@ -21,9 +21,7 @@
 // SOFTWARE.
 
 import React from 'react';
-// import Protypo from 'containers/Widgets/Protypo';
 import { FormattedMessage } from 'react-intl';
-// import { TProtypoElement } from 'gachain/protypo';
 import PageLink from 'containers/Routing/PageLink';
 import { CloseDropdownButton } from 'components/DropdownButton';
 
@@ -34,8 +32,6 @@ const TransactionMenu: React.SFC<{}> = props => (
         className="p0"
         width={225}
         align="right"
-        // badge={props.count}
-        // warning={props.offline}
         content={
             (
                 <ul className="dropdown-group">
