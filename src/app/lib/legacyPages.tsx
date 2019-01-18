@@ -32,8 +32,8 @@ export interface ILegacyPage {
 }
 
 const LEGACY_PAGES: { [page: string]: ILegacyPage } = {
-    'backup': { section: null, menu: null, render: () => <Backup /> },
     'record': { section: null, menu: null, render: () => <Record /> },
+    'backup': { section: null, menu: null, render: () => <Backup /> },
     'editor': { section: 'editor', menu: null, render: (props: { open?: string, create?: string, name?: string, vde?: string }) => <Editor {...props} /> }
 };
 

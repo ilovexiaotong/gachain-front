@@ -20,14 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-// import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { Dispatch } from 'react-redux';
 import { renderRecord } from 'modules/record/actions';
-// import { IRecordCall } from 'gachain/auth';
-// import { FormattedMessage } from 'react-intl';
-
 import Record from 'components/Main/Record';
 
 const mapStateToProps = (state: IRootState) => ({
@@ -44,10 +39,18 @@ const mapStateToProps = (state: IRootState) => ({
     }
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-    getRecode: () => {
-        dispatch(renderRecord.started(null));
-    }
-});
+const mapDispatchToProps = {
+    getRecord: renderRecord.started
+};
 
-export default connect( mapStateToProps, mapDispatchToProps )(Record);
+export default connect(mapStateToProps, mapDispatchToProps)(Record);
+
+// interface: 'get_ecosystem_key',
+//         msgtype: 'request',
+//         remark: '',
+//         version: '1.0',
+//         cmd: '001',
+//         page_size: 10,
+//         current_page: 1,
+//         ecosystem: wallet.access.ecosystem,
+//         wallet: wallet.wallet.id

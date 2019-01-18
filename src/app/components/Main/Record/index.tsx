@@ -30,42 +30,41 @@ import Affair from './Affair';
 export interface IRecordPromptProps {
     cmd: string;
     data: IRecordCall;
-    getRecode: () => void;
+    getRecord?: () => any;
 }
+
 class Record extends React.Component<IRecordPromptProps> {
-    render () {
-    console.log(this.props.cmd);
-    console.log(this.props.data);
+    render() {
         return (
-        <div style={{ margin: '0 20px' }}>
-            <Row className="show-grid" >
-                <Col xs={12} md={5}>
-                    <code>
-                        <Panel
-                            bsStyle="primary"
-                            header={< span >成员信息</span>}
-                        >
-                        <Button  onClick={() => { this.props.getRecode(); }}>调用</Button>
-                            <Member />
-                        </Panel>
-                    </code>
-                </Col>
-                <Col xs={12} md={7}>
-                    <code>
-                        <div>
+            <div style={{ margin: '0 20px' }}>
+                <Row className="show-grid" >
+                    <Col xs={12} md={5}>
+                        <code>
                             <Panel
                                 bsStyle="primary"
-                                header={<span>交易/事务</span>}
+                                header={< span >成员信息</span>}
                             >
-                                <Affair/>
+                                <Button onClick={() => { this.props.getRecord(); }}>调用</Button>
+                                <Member />
                             </Panel>
-                        </div>
-                    </code>
-                </Col>
-            </Row>
-        </div>
+                        </code>
+                    </Col>
+                    <Col xs={12} md={7}>
+                        <code>
+                            <div>
+                                <Panel
+                                    bsStyle="primary"
+                                    header={<span>交易/事务</span>}
+                                >
+                                    <Affair />
+                                </Panel>
+                            </div>
+                        </code>
+                    </Col>
+                </Row>
+            </div>
         );
-}
+    }
 }
 
 export default Record;

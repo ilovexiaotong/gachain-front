@@ -116,7 +116,7 @@ class GachainAPI {
 
         let json: any = null;
         let text: string = null;
-        console.log(params);
+        console.log(this._options.apiHost);
         const query = 'get' === method ? queryString.stringify(params) : '';
         const body = 'get' === method ? null : this._options.apiHost === 'https://explore.gac.one:8800/api/' ? params : this.serializeFormData(params);
 

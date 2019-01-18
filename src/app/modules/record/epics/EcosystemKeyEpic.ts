@@ -28,17 +28,18 @@ const EcosystemKeyEpic: Epic = (action$, store, { api }) => action$.ofAction(ren
     .flatMap(action => {
         const wallet = store.getState().auth.wallet;
         const client = api({ apiHost: 'https://explore.gac.one:8800/api/' });
-        return Observable.from(client.getEcosystemKey({
-                interface: 'get_ecosystem_key',
-                msgtype: 'request',
-                remark: '',
-                version: '1.0',
-                cmd: '001',
-                page_size: 10,
-                current_page: 1,
-                ecosystem: wallet.access.ecosystem,
-                wallet: wallet.wallet.id
-        })) 
+        
+        return Observable.from(client.getEcosystemKey(
+            {interface: 'get_ecosystem_key',
+            msgtype: 'request',
+            remark: '',
+            version: '1.0',
+            cmd: '001',
+            page_size: 10,
+            current_page: 1,
+            ecosystem: wallet.access.ecosystem,
+            wallet: wallet.wallet.id}
+        )) 
         .flatMap(session => {
             return Observable.of<Action>(
                 renderRecord.done({
