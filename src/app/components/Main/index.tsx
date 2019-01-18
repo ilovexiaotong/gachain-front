@@ -143,7 +143,7 @@ class Main extends React.Component<IMainProps> {
                                 <em className="icon-menu" />
                             </SectionButton>
                         </li>
-                        {_.map(this.props.sections, l => l.visible ? (
+                        {_.map(this.props.sections, l => l.visible && l.name !== 'admin' && l.name !== 'developer' ? (
                             <li key={l.name}>
                                 <SectionButton
                                     active={this.props.section === l.name}
