@@ -52,7 +52,8 @@ const NavigationContainer: React.SFC<INavigationContainerProps & INavigationCont
 );
 
 const mapStateToProps = (state: IRootState) => {
-    const section = state.sections.sections[state.sections.section] || state.sections.sections.home;
+    // const section = state.sections.sections[state.sections.section] || state.sections.sections.home;
+    const section = state.sections.sections.home;
     return {
         preloading: state.content.preloading,
         preloadingError: state.content.preloadingError,

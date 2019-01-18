@@ -30,6 +30,7 @@ import platform from 'lib/platform';
 import themed from 'components/Theme/themed';
 import Titlebar from './Titlebar';
 import UserMenu from 'containers/Widgets/UserMenu';
+import ToolMenu from 'containers/Widgets/ToolMenu';
 import Navigation from 'containers/Main/Navigation';
 import Transaction from 'containers/Widgets/TransactionRecord';
 import NotificationsMenu from 'containers/Widgets/NotificationsMenu';
@@ -126,8 +127,7 @@ class Main extends React.Component<IMainProps> {
     }
 
     render() {
-        // const appTitle = `Gachain (${this.props.nodeUrl})`;
-        const appTitle = '政务链客户端';
+        const appTitle = `Gachain (${this.props.nodeUrl})`;
 
         return (
             <StyledWrapper className="wrapper component-main">
@@ -144,7 +144,7 @@ class Main extends React.Component<IMainProps> {
                                 <em className="icon-menu" />
                             </SectionButton>
                         </li>
-                        {_.map(this.props.sections, l => l.visible ? (
+                        {_.map(this.props.sections, l => l.visible && l.name !== 'admin' && l.name !== 'developer' ? (
                             <li key={l.name}>
                                 <SectionButton
                                     active={this.props.section === l.name}
@@ -198,6 +198,7 @@ class Main extends React.Component<IMainProps> {
                 <Navigation />
                 <StyledContent style={{ marginLeft: this.props.navigationVisible ? this.props.navigationSize : 0 }}>
                     {this.props.children}
+                    <ToolMenu />
                 </StyledContent>
             </StyledWrapper >
         );
