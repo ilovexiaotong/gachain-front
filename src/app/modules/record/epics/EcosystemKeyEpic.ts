@@ -45,18 +45,20 @@ const EcosystemKeyEpic: Epic = (action$, store, { api }) => action$.ofAction(ren
                 renderRecord.done({
                     params: action.payload,
                     result: {
-                        cmd:  session.cmd,
+                    //   body: {
+                        cmd:  session.body.cmd,
                         data: {
-                            amount: session.amount,
-                            blocked: session.blocked,
-                            deleted: session.deleted,
-                            ecosystem: session.ecosystem,
-                            id: session.id,
-                            maxpay: session.maxpay,
-                            multi: session.multi,
-                            publickey: session.publickey
+                            amount: session.body.amount,
+                            blocked: session.body.blocked,
+                            deleted: session.body.deleted,
+                            ecosystem: session.body.ecosystem,
+                            id: session.body.id,
+                            maxpay: session.body.maxpay,
+                            multi: session.body.multi,
+                            publickey: session.body.publickey
                         }
-                    }
+                    // }
+                }
                 })
             );
         })

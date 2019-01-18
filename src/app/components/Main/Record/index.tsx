@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import React from 'react';
-import { Row, Col, Panel, Button } from 'react-bootstrap';
+import { Row, Col, Panel } from 'react-bootstrap';
 import { IRecordCall } from 'gachain/auth';
 
 import Member from './Member';
@@ -34,7 +34,12 @@ export interface IRecordPromptProps {
 }
 
 class Record extends React.Component<IRecordPromptProps> {
+    componentDidMount () {
+       this.props.getRecord();
+    }
     render() {
+        // console.log(this.props.cmd);
+        // console.log(this.props.data);
         return (
             <div style={{ margin: '0 20px' }}>
                 <Row className="show-grid" >
@@ -44,7 +49,6 @@ class Record extends React.Component<IRecordPromptProps> {
                                 bsStyle="primary"
                                 header={< span >成员信息</span>}
                             >
-                                <Button onClick={() => { this.props.getRecord(); }}>调用</Button>
                                 <Member />
                             </Panel>
                         </code>

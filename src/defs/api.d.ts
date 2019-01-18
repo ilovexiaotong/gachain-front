@@ -354,6 +354,7 @@ declare module 'gachain/api' {
     }
 
     interface IEcosystemKeyResponse {
+        body: {
             cmd: string,
             // data: {
                 amount: string,
@@ -366,5 +367,6 @@ declare module 'gachain/api' {
                 publickey: string
             // }[]
     }
+}
 
 }

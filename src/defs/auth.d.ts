@@ -71,5 +71,5 @@ declare module 'gachain/auth' {
         maxpay: string,
         multi: number,
         publickey: string
-    }
+      }
 }
