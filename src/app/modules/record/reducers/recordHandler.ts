@@ -25,7 +25,6 @@ import { Reducer } from 'modules';
 
 const recordHandler: Reducer<typeof renderRecord.started, State> = (state, payload) => ({
     ...state,
-    // isLoggingIn: true
 });
 
 export default recordHandler;

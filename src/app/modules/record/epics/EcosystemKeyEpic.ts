@@ -28,46 +28,37 @@ const EcosystemKeyEpic: Epic = (action$, store, { api }) => action$.ofAction(ren
     .flatMap(action => {
         const wallet = store.getState().auth.wallet;
         const client = api({ apiHost: 'https://explore.gac.one:8800/api/' });
-        
+
         return Observable.from(client.getEcosystemKey(
-            {interface: 'get_ecosystem_key',
-            msgtype: 'request',
-            remark: '',
-            version: '1.0',
-            cmd: '001',
-            page_size: 10,
-            current_page: 1,
-            ecosystem: wallet.access.ecosystem,
-            wallet: wallet.wallet.id}
-        )) 
-        .flatMap(session => {
-            return Observable.of<Action>(
-                renderRecord.done({
-                    params: action.payload,
-                    result: {
-                    //   body: {
-                        cmd:  session.body.cmd,
-                        data: {
-                            amount: session.body.amount,
-                            blocked: session.body.blocked,
-                            deleted: session.body.deleted,
-                            ecosystem: session.body.ecosystem,
-                            id: session.body.id,
-                            maxpay: session.body.maxpay,
-                            multi: session.body.multi,
-                            publickey: session.body.publickey
+            {
+                interface: 'get_ecosystem_key',
+                msgtype: 'request',
+                remark: '',
+                version: '1.0',
+                cmd: '001',
+                page_size: 10,
+                current_page: 1,
+                ecosystem: wallet.access.ecosystem,
+                wallet: wallet.wallet.id
+            }
+        ))
+            .flatMap(session => {
+                return Observable.of<Action>(
+                    renderRecord.done({
+                        params: action.payload,
+                        result: {
+                            cmd: session.body.cmd,
+                            data: session.body.data
                         }
-                    // }
-                }
-                })
-            );
-        })
-        .catch(e => Observable.of(
-            renderRecord.failed({
-                params: action.payload,
-                error: e.error
+                    })
+                );
             })
-        ));
-        });
-        
+            .catch(e => Observable.of(
+                renderRecord.failed({
+                    params: action.payload,
+                    error: e.error
+                })
+            ));
+    });
+
 export default EcosystemKeyEpic;

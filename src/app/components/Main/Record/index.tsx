@@ -38,8 +38,6 @@ class Record extends React.Component<IRecordPromptProps> {
        this.props.getRecord();
     }
     render() {
-        // console.log(this.props.cmd);
-        // console.log(this.props.data);
         return (
             <div style={{ margin: '0 20px' }}>
                 <Row className="show-grid" >

@@ -22,6 +22,7 @@
 
 declare module 'gachain/api' {
     import { TProtypoElement } from 'gachain/protypo';
+    import { IRecordCall } from 'gachain/auth';
 
     interface IUIDResponse {
         uid: string;
@@ -342,31 +343,22 @@ declare module 'gachain/api' {
     }
 
     interface IEcosystemKeyRequest {
-            version: string;
-            msgtype: string;
-            interface: string;
-            remark: string;
-            cmd: string;
-            page_size: number;
-            current_page: number;
-            ecosystem: string;
-            wallet: string;
+        version: string;
+        msgtype: string;
+        interface: string;
+        remark: string;
+        cmd: string;
+        page_size: number;
+        current_page: number;
+        ecosystem: string;
+        wallet: string;
     }
 
     interface IEcosystemKeyResponse {
         body: {
             cmd: string,
-            // data: {
-                amount: string,
-                blocked: number,
-                deleted: number,
-                ecosystem: number,
-                id: string,
-                maxpay: string,
-                multi: number,
-                publickey: string
-            // }[]
+            data: IRecordCall
+        }
     }
-}
 
 }

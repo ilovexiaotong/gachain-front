@@ -26,7 +26,6 @@ import { Reducer } from 'modules';
 
 const recordFailedHandler: Reducer<typeof renderRecord.failed, State> = (state, payload) => ({
     ...state,
-    // isLoggingIn: false
 });
 
 export default recordFailedHandler;

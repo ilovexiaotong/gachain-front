@@ -22,7 +22,6 @@
 
 import actionCreatorFactory from 'typescript-fsa';
 import { IRecordCall } from 'gachain/auth';
-// import {ISession, IAccountContext } from 'gachain/auth';
 
 const actionCreator = actionCreatorFactory('record');
 
