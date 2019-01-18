@@ -9,6 +9,12 @@ const mapStateToProps = (state: IRootState) => {
         isAuthorized: !!state.auth.privateKey,
         section: state.sections.section,
         sections: state.sections.sections,
+        visible: state.sections.sections[state.sections.section] && (
+            state.sections.sections[state.sections.section].menuDisabled ?
+                false :
+                state.sections.sections[state.sections.section].menuVisible
+        ),
+        width: state.storage.navigationSize,
         menus: section ? section.menus : []
     };  
 };

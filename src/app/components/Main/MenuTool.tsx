@@ -13,9 +13,9 @@ const StyledMenuToolBody = themed.div`
     position: absolute;
     z-index: 1000;
     width: 300px;
-    height: 80%;
     background: #FFFFFF;
-    bottom: 0;
+    top: 20px;
+    bottom: 20px;
     right: -300px;
     transition: right 0.5s;
     &.menutool-active {
@@ -84,45 +84,45 @@ const StyledMenus = themed.div`
 
 const StyledMenuContent = themed.div``;
 
-const StyledBackButton = themed.button`
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 58px;
-    padding: 10px 25px;
-    color: ${props => props.theme.menuPrimaryForeground};
-    font-weight: 300;
-    text-decoration: none;
-    outline: none;
-    border: none;
-    text-align: left;
-    background: transparent;
+// const StyledBackButton = themed.button`
+//     position: relative;
+//     display: block;
+//     width: 100%;
+//     height: 58px;
+//     padding: 10px 25px;
+//     color: ${props => props.theme.menuPrimaryForeground};
+//     font-weight: 300;
+//     text-decoration: none;
+//     outline: none;
+//     border: none;
+//     text-align: left;
+//     background: transparent;
     
-    &.disabled {
-        &:hover {
-            color: ${props => props.theme.menuPrimaryForeground};
-        }
-    }
+//     &.disabled {
+//         &:hover {
+//             color: ${props => props.theme.menuPrimaryForeground};
+//         }
+//     }
 
-    &:hover {
-        color: ${props => props.theme.menuPrimaryActive};
-    }
+//     &:hover {
+//         color: ${props => props.theme.menuPrimaryActive};
+//     }
 
-    .icon {
-        vertical-align: top;
-        display: inline-block;
-        width: 30px;
-    }
+//     .icon {
+//         vertical-align: top;
+//         display: inline-block;
+//         width: 30px;
+//     }
 
-    em {
-        font-size: 15px;
-    }
+//     em {
+//         font-size: 15px;
+//     }
 
-    span {
-        font-size: 21px;
-        font-weight: 300;
-    }
-`;
+//     span {
+//         font-size: 21px;
+//         font-weight: 300;
+//     }
+// `;
 
 export interface IMenuToolProps {
     active: boolean;
@@ -180,7 +180,9 @@ class MenuTool extends React.Component<IMenuToolProps, IMenuToolState> {
                             items={this.props.menus.map((menu, index) => (
                                 <ScrollView disableHorizontal>
                                     <StyledMenuContent>
-                                        {index > 0 && (
+                                        {
+                                            // console.log(menu)
+                                            /* {index > 0 && (
                                             <StyledBackButton onClick={() => this.props.menuPop()} disabled={1 >= this.props.menus.length}>
                                                 <div className="title-wrap">
                                                     <span className="icon">
@@ -189,7 +191,7 @@ class MenuTool extends React.Component<IMenuToolProps, IMenuToolState> {
                                                     <span>{menu.name}</span>
                                                 </div>
                                             </StyledBackButton>
-                                        )}
+                                        )} */}
                                         <Protypo
                                             context="menu"
                                             content={menu.content}
