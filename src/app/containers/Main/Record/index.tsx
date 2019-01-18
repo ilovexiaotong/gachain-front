@@ -44,13 +44,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Record);
-
-// interface: 'get_ecosystem_key',
-//         msgtype: 'request',
-//         remark: '',
-//         version: '1.0',
-//         cmd: '001',
-//         page_size: 10,
-//         current_page: 1,
-//         ecosystem: wallet.access.ecosystem,
-//         wallet: wallet.wallet.id
