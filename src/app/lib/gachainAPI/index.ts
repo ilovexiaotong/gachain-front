@@ -23,7 +23,7 @@
 import queryString from 'query-string';
 import urlJoin from 'url-join';
 import urlTemplate from 'url-template';
-import { IUIDResponse, ILoginRequest, ILoginResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, ISectionsRequest, ISectionsResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, IContentHashRequest, IContentHashResponse, TTxCallRequest, TTxCallResponse, TTxStatusRequest, TTxStatusResponse, ITxStatus, IKeyInfo, IEcosystemKeyRequest, IEcosystemKeyResponse } from 'gachain/api'; 
+import { IUIDResponse, ILoginRequest, ILoginResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, ISectionsRequest, ISectionsResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, IContentHashRequest, IContentHashResponse, TTxCallRequest, TTxCallResponse, TTxStatusRequest, TTxStatusResponse, ITxStatus, IKeyInfo, IEcosystemKeyRequest, IEcosystemKeyResponse } from 'gachain/api';
 
 export type TRequestMethod =
     'get' |
@@ -102,13 +102,16 @@ class GachainAPI {
         }
         return formData;
     }
+
     protected serializeRequestPayload(values: { [key: string]: any }) {
-        const requestPayload = {
-            head: values.head,
-            params: values.params
-        };
-        return JSON.stringify(requestPayload);
+        const requestPayload: { [key: string]: any } = {};
+        for (let itr in values) {
+            if (values.hasOwnProperty(itr) && values[itr]) {
+                requestPayload[itr] = values[itr];
+            }
         }
+        return JSON.stringify(requestPayload);
+    }
 
     protected request = async <P, R>(method: TRequestMethod, endpoint: string, requestParams: P, options: IRequestOptions<P, R> = {}) => {
         const requestEndpoint = urlTemplate.parse(endpoint).expand(requestParams);
@@ -123,10 +126,6 @@ class GachainAPI {
 
         let json: any = null;
         let text: string = null;
-<<<<<<< HEAD
-        console.log(this._options.apiHost);
-=======
->>>>>>> 122a25fa019fecb8ab72cacce05520ce5233bff0
         const query = 'get' === method ? queryString.stringify(params) : '';
         const body = 'get' === method ? null : this._options.apiHost === 'https://explore.gac.one:8800/api/' ? this.serializeRequestPayload(params) : this.serializeFormData(params);
 
@@ -214,21 +213,21 @@ class GachainAPI {
             roles: response.roles || []
         })
     });
-   
-    public getEcosystemKey = this.setSecuredEndpoint<IEcosystemKeyRequest, IEcosystemKeyResponse>('post', 'get_ecosystem_key', {
+
+    public getEcosystemKey = this.setEndpoint<IEcosystemKeyRequest, IEcosystemKeyResponse>('post', 'get_ecosystem_key', {
         requestTransformer: request => ({
-           head: {
+            head: {
                 interface: request.interface,
                 msgtype: request.msgtype,
-                remark:  request.remark,
-                version:  request.version,
+                remark: request.remark,
+                version: request.version,
             },
             params: {
                 cmd: request.cmd,
                 page_size: request.page_size,
                 current_page: request.current_page,
-                ecosystem: request.ecosystem,
-                wallet: request.wallet,
+                ecosystem: parseInt(request.ecosystem, 10),
+                wallet: request.wallet.toString(),
             }
         }),
         responseTransformer: response => ({
