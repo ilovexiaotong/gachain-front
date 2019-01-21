@@ -52,7 +52,7 @@ export const readBinaryFile = (file: Blob) => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const loadedFile = reader.result;
-            loadedFile ? resolve(loadedFile) : reject();
+            loadedFile ? resolve(loadedFile as any) : reject();
         };
         reader.readAsDataURL(file);
     });

@@ -29,7 +29,8 @@ import Record from 'components/Main/Record';
 const mapStateToProps = (state: IRootState) => ({
     cmd: state.record.cmd,
     data: state.record.data,
-    ret_data_type: state.record.ret_data_type
+    ret_data_type: state.record.ret_data_type,
+    flowData: state.record.flowData
 });
 
 const mapDispatchToProps = {

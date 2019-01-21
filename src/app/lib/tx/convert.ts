@@ -71,10 +71,10 @@ export const concatBuffer = (a: Uint8Array | ArrayBuffer, b: Uint8Array | ArrayB
         b = new Uint8Array(b);
     }
 
-    const uint8 = new Uint8Array(a.length + b.length);
+    const uint8 = new Uint8Array((a as any).length + (b as any).length);
 
-    uint8.set(a, 0);
-    uint8.set(b, a.length);
+    uint8.set((a as any), 0);
+    uint8.set((b as any), (a as any).length);
 
     return uint8.buffer;
 };
@@ -84,7 +84,7 @@ export const encodeLengthPlusData = (buffer: Uint8Array | ArrayBuffer): ArrayBuf
         buffer = new Uint8Array(buffer);
     }
 
-    return concatBuffer(encodeLength(buffer.length), buffer);
+    return concatBuffer(encodeLength((buffer as any).length), buffer);
 };
 
 export const toMoney = (value: number | string) => {
@@ -101,6 +101,51 @@ export const toMoney = (value: number | string) => {
     }
     if (fraction.length > MONEY_POWER) {
         result = result + `.${fraction.slice(MONEY_POWER, MONEY_POWER * 2)}`;
+    }
+    return result;
+};
+
+const fmoney = (s: number | string, n: number) => {
+    let result;
+    if (s > 1) {
+        n = n > 0 && n <= 20 ? n : 2;
+        s = String(parseFloat(String(s).replace(/[^\d\.-]/g, '')).toFixed(n));
+        let l = s
+            .split('.')[0]
+            .split('')
+            .reverse();
+        let r = s.split('.')[1];
+        let t = '';
+        for (let i = 0; i < l.length; i++) {
+            t += l[i] + ((i + 1) % 3 === 0 && i + 1 !== l.length ? ',' : '');
+        }
+        result = (t.split('').reverse().join('') + '.' + r);
+    } else {
+        result = s;
+    }
+    return result;
+};
+
+export const qGacToGac = (value: number | string) => {
+    let result;
+    let s = String(value);
+    if (s.length > MONEY_POWER) {
+        let sArr = [
+            s.substr(0, s.length - MONEY_POWER),
+            s.substr(-MONEY_POWER)
+        ];
+        let sStr = parseFloat(sArr.join('.'));
+        result = fmoney(sStr, 4);
+    } else {
+        let prefix = '';
+        for (let i = 0; i <= MONEY_POWER - s.length; i++) {
+            if (i === 0) {
+                prefix += '0.';
+            } else {
+                prefix += '0';
+            }
+        }
+        result = parseFloat(`${prefix}${value}`);
     }
     return result;
 };

@@ -1,11 +1,27 @@
 import React from 'react';
 import { Row, Col, Table } from 'react-bootstrap';
-import { IRecordCall } from 'gachain/auth';
+import QRCode from 'qrcode.react';
+import { IRecordCall, IFlowingCall } from 'gachain/auth';
+import { qGacToGac } from 'lib/tx/convert';
+import CopyToClipboard from 'react-copy-to-clipboard';
 export interface IRecordPromptProps {
   data: IRecordCall;
+  flowData: IFlowingCall;
 }
 
-const Member: React.SFC < IRecordCall > = props => {
+class Member extends React.PureComponent<IRecordPromptProps>  {
+  state = {
+    value: ''
+  };
+
+  clickCp = (val: string) => {
+    // let localInfo = '复制成功';
+    // alert(localInfo);
+    return val;
+  }
+
+  render() {
+    console.log(this.props);
     return (
       <Row style={{ padding: '0 40px 0 40px', color: 'rgba(0,0,0,.85)' }}>
         <Row style={{ textAlign: 'center' }}>
@@ -13,8 +29,8 @@ const Member: React.SFC < IRecordCall > = props => {
         </Row>
         <Row style={{ lineHeight: '50px', margin: '20px' }}>
           <Row style={{ textAlign: 'center', color: '#333' }}>
-            <strong>{props.id}</strong>
-            <span onClick={() => { console.log(123); }} style={{ margin: '0 0 0 20px', fontSize: '24px' }}><em className="fa fa-copy" /></span>
+            <strong>{this.props.data.id}</strong>
+            <CopyToClipboard text={this.clickCp(this.state.value)} onCopy={() => this.setState({ value: this.props.data.id })}><span style={{ margin: '0 0 0 20px', fontSize: '24px' }}><em className="fa fa-copy" /></span></CopyToClipboard>
           </Row>
           <Row>
             <Col xs={12} md={4}><span>资产名称</span></Col>
@@ -22,7 +38,7 @@ const Member: React.SFC < IRecordCall > = props => {
           </Row>
           <Row>
             <Col xs={12} md={4}><span>GAC</span></Col>
-            <Col xs={12} md={8}><span style={{ width: '8rem', background: '#00b1ec', color: '#fff', height: '2rem', textAlign: 'center', borderRadius: '.5rem', padding: '.25rem 1rem' }}>{props.amount}GAC</span></Col>
+            <Col xs={12} md={8}><span style={{ width: '8rem', background: '#00b1ec', color: '#fff', height: '2rem', textAlign: 'center', borderRadius: '.5rem', padding: '.25rem 1rem' }}><span>{qGacToGac(this.props.data.amount)}</span><span style={{ marginLeft: '5px' }}>GAC</span></span></Col>
           </Row>
           <Row>
             <Row><span style={{ margin: '0 0 0 30%', position: 'absolute', display: 'block', padding: '0 2px 0 2px', backgroundColor: '#fff', fontSize: '16px' }}>交易信息</span><hr style={{ border: '1px dashed #eee' }} /></Row>
@@ -52,12 +68,12 @@ const Member: React.SFC < IRecordCall > = props => {
           <Row>
             <Row><span style={{ margin: '0 0 0 31%', position: 'absolute', display: 'block', padding: '0 2px 0 2px', backgroundColor: '#fff', fontSize: '16px' }}>二维码</span><hr style={{ border: '1px dashed #eee' }} /></Row>
             <Row style={{ textAlign: 'center', marginTop: '20px' }}>
-              <span style={{ padding: '20px 20px', backgroundColor: '#000' }}>.</span>
+              <QRCode value={this.props.data.id} />
             </Row>
           </Row>
         </Row>
       </Row>
     );
-  };
-  
+  }
+}
 export default Member;
