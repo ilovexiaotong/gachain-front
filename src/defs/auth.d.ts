@@ -71,5 +71,19 @@ declare module 'gachain/auth' {
         maxpay: string,
         multi: number,
         publickey: string
-      }
+    }
+    interface IFlowingCall {
+        amount: string,
+        block_id: number,
+        comment: string,
+        created_at: string,
+        id: number,
+        recipient_id: string,
+        sender_id: string,
+        txhash: string,
+    }
+
+    interface  ISearchCall {
+        searchType: string
+    }
 }

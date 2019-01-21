@@ -22,7 +22,7 @@
 
 declare module 'gachain/api' {
     import { TProtypoElement } from 'gachain/protypo';
-    import { IRecordCall } from 'gachain/auth';
+    import { IRecordCall, IFlowingCall} from 'gachain/auth';
 
     interface IUIDResponse {
         uid: string;
@@ -342,6 +342,7 @@ declare module 'gachain/api' {
         [K in keyof T]: ITxStatus;
     }
 
+
     interface IEcosystemKeyRequest {
         version: string;
         msgtype: string;
@@ -358,6 +359,33 @@ declare module 'gachain/api' {
         body: {
             cmd: string,
             data: IRecordCall
+        }
+    }
+    interface IFlowingWaterRequest {
+        version: string;
+        msgtype: string;
+        interface: string;
+        remark: string;
+        cmd: string;
+        current_page: number;
+        ecosystem: string;
+        page_size: number;
+        searchType: string;
+        wallet: string;
+    }
+
+    interface IFlowingWaterResponse {
+        body: {
+            cmd: string,
+            current_page: number,
+            data: IFlowingCall,
+            page_size: number,
+            ret: string,
+            ret_data_type: string,
+            retcode: number,
+            retinfo: string,
+            sum: string,
+            total: number
         }
     }
 

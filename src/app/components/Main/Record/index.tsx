@@ -22,7 +22,7 @@
 
 import React from 'react';
 import { Row, Col, Panel } from 'react-bootstrap';
-import { IRecordCall } from 'gachain/auth';
+import { IRecordCall, ISearchCall } from 'gachain/auth';
 
 import Member from './Member';
 import Affair from './Affair';
@@ -30,14 +30,20 @@ import Affair from './Affair';
 export interface IRecordPromptProps {
     cmd: string;
     data: IRecordCall;
+    ret_data_type: string;
     getRecord?: () => any;
+    getFlowing?: (params: ISearchCall) => void;
 }
 
 class Record extends React.Component<IRecordPromptProps> {
     componentDidMount () {
        this.props.getRecord();
+       this.props.getFlowing({
+        searchType: 'outcome'
+        });
     }
     render() {
+        // if(this.props.data ===  null) return false;
         return (
             <div style={{ margin: '0 20px' }}>
                 <Row className="show-grid" >
@@ -47,7 +53,9 @@ class Record extends React.Component<IRecordPromptProps> {
                                 bsStyle="primary"
                                 header={< span >成员信息</span>}
                             >
-                                <Member />
+                                <Member
+                                  {...this.props.data}
+                                />
                             </Panel>
                         </code>
                     </Col>

@@ -20,11 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { combineEpics } from 'redux-observable';
-import EcosystemKeyEpic from './epics/EcosystemKeyEpic';
-import FlowingWaterEpic from './epics/FlowingWaterEpic';
+import { State } from '../reducer';
+import { renderFlowing } from '../actions';
+import { Reducer } from 'modules';
 
-export default combineEpics(
-    EcosystemKeyEpic,
-    FlowingWaterEpic
-);
+const flowingFailedHandler: Reducer<typeof renderFlowing.failed, State> = (state, payload) => ({
+    ...state,
+});
+
+export default flowingFailedHandler;

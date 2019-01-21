@@ -20,11 +20,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { combineEpics } from 'redux-observable';
-import EcosystemKeyEpic from './epics/EcosystemKeyEpic';
-import FlowingWaterEpic from './epics/FlowingWaterEpic';
+import { State } from '../reducer';
+import { renderFlowing } from '../actions';
+import { Reducer } from 'modules';
 
-export default combineEpics(
-    EcosystemKeyEpic,
-    FlowingWaterEpic
-);
+const flowingDoneHandler: Reducer<typeof renderFlowing.done, State> = (state, payload) => ({
+    ...state,
+    cmd: payload.result.cmd,
+    flowData: payload.result.flowData,
+    current_page: payload.result.current_page,
+    page_size:  payload.result.page_size,
+    ret:  payload.result.ret,
+    ret_data_type:  payload.result.ret_data_type,
+    retcode: payload.result.retcode,
+    retinfo: payload.result.retinfo,
+    sum:  payload.result.sum,
+    total:  payload.result.total
+});
+
+export default flowingDoneHandler;

@@ -22,25 +22,19 @@
 
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { renderRecord } from 'modules/record/actions';
+import { ISearchCall } from 'gachain/auth';
+import { renderRecord, renderFlowing } from 'modules/record/actions';
 import Record from 'components/Main/Record';
 
 const mapStateToProps = (state: IRootState) => ({
     cmd: state.record.cmd,
-    data: {
-        amount: state.record.data.amount,
-        blocked: state.record.data.blocked,
-        deleted: state.record.data.deleted,
-        ecosystem: state.record.data.ecosystem,
-        id: state.record.data.id,
-        maxpay: state.record.data.maxpay,
-        multi: state.record.data.multi,
-        publickey: state.record.data.publickey,
-    }
+    data: state.record.data,
+    ret_data_type: state.record.ret_data_type
 });
 
 const mapDispatchToProps = {
-    getRecord: renderRecord.started
+    getRecord: renderRecord.started,
+    getFlowing: ( params: ISearchCall ) => renderFlowing.started(params)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Record);

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Row, Col, Table } from 'react-bootstrap';
+import { IRecordCall } from 'gachain/auth';
+export interface IRecordPromptProps {
+  data: IRecordCall;
+}
 
-class Member extends React.PureComponent {
-  render() {
+const Member: React.SFC < IRecordCall > = props => {
     return (
       <Row style={{ padding: '0 40px 0 40px', color: 'rgba(0,0,0,.85)' }}>
         <Row style={{ textAlign: 'center' }}>
@@ -10,8 +13,8 @@ class Member extends React.PureComponent {
         </Row>
         <Row style={{ lineHeight: '50px', margin: '20px' }}>
           <Row style={{ textAlign: 'center', color: '#333' }}>
-            <strong>1429582920081315677</strong>
-            <span style={{ margin: '0 0 0 20px', fontSize: '24px' }}><em className="fa fa-copy" /></span>
+            <strong>{props.id}</strong>
+            <span onClick={() => { console.log(123); }} style={{ margin: '0 0 0 20px', fontSize: '24px' }}><em className="fa fa-copy" /></span>
           </Row>
           <Row>
             <Col xs={12} md={4}><span>资产名称</span></Col>
@@ -19,7 +22,7 @@ class Member extends React.PureComponent {
           </Row>
           <Row>
             <Col xs={12} md={4}><span>GAC</span></Col>
-            <Col xs={12} md={8}><span style={{ width: '8rem', background: '#00b1ec', color: '#fff', height: '2rem', textAlign: 'center', borderRadius: '.5rem', padding: '.25rem 1rem' }}>1,555.4000 GAC</span></Col>
+            <Col xs={12} md={8}><span style={{ width: '8rem', background: '#00b1ec', color: '#fff', height: '2rem', textAlign: 'center', borderRadius: '.5rem', padding: '.25rem 1rem' }}>{props.amount}GAC</span></Col>
           </Row>
           <Row>
             <Row><span style={{ margin: '0 0 0 30%', position: 'absolute', display: 'block', padding: '0 2px 0 2px', backgroundColor: '#fff', fontSize: '16px' }}>交易信息</span><hr style={{ border: '1px dashed #eee' }} /></Row>
@@ -55,7 +58,6 @@ class Member extends React.PureComponent {
         </Row>
       </Row>
     );
-  }
-}
-
+  };
+  
 export default Member;

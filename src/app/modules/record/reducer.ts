@@ -22,14 +22,27 @@
 
 import * as actions from './actions';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { IRecordCall } from 'gachain/auth';
+import { IRecordCall, IFlowingCall } from 'gachain/auth';
 import recordHandler from './reducers/recordHandler';
 import recordDoneHandler from './reducers/recordDoneHandler';
 import recordFailedHandler from './reducers/recordFailedHandler';
 
+import flowingHandler from './reducers/flowingHandler';
+import flowingDoneHandler from './reducers/flowingDoneHandler';
+import flowingFailedHandler from './reducers/flowingFailedHandler';
+
 export type State = {
     readonly cmd: string,
-    readonly data: IRecordCall
+    readonly data: IRecordCall,
+    readonly flowData: IFlowingCall,
+    readonly current_page: number,
+    readonly page_size: number,
+    readonly ret: string,
+    readonly ret_data_type: string,
+    readonly retcode: number,
+    readonly retinfo: string,
+    readonly sum: string,
+    readonly total: number
 };
 
 export const initialState: State = {
@@ -44,9 +57,31 @@ export const initialState: State = {
         multi: null,
         publickey: '',
     },
+    flowData: {
+        amount: '',
+        block_id: null,
+        comment: '',
+        created_at: '',
+        id: null,
+        recipient_id: '',
+        sender_id: '',
+        txhash: '',
+    },
+    current_page: null,
+    page_size: null,
+    ret: '',
+    ret_data_type: '',
+    retcode: null,
+    retinfo: '',
+    sum: '',
+    total: null
 };
 
 export default reducerWithInitialState<State>(initialState)
     .case(actions.renderRecord.started, recordHandler)
     .case(actions.renderRecord.done, recordDoneHandler)
-    .case(actions.renderRecord.failed, recordFailedHandler);
+    .case(actions.renderRecord.failed, recordFailedHandler)
+
+    .case(actions.renderFlowing.started, flowingHandler)
+    .case(actions.renderFlowing.done, flowingDoneHandler)
+    .case(actions.renderFlowing.failed, flowingFailedHandler);

@@ -21,45 +21,52 @@
 // SOFTWARE.
 import { Action } from 'redux';
 import { Epic } from 'modules';
-import { renderRecord } from '../actions';
+import { renderFlowing } from '../actions';
 import { Observable } from 'rxjs/Observable';
 
-const EcosystemKeyEpic: Epic = (action$, store, { api }) => action$.ofAction(renderRecord.started)
+const FlowingWaterEpic: Epic = (action$, store, { api }) => action$.ofAction(renderFlowing.started)
     .flatMap(action => {
         const wallet = store.getState().auth.wallet;
         const client = api({ apiHost: 'https://explore.gac.one:8800/api/' });
-
-        return Observable.from(client.getEcosystemKey(
+        return Observable.from(client.getFlowingWater(
             {
-                interface: 'get_ecosystem_key',
+                interface: 'get_find_tranhistory',
                 msgtype: 'request',
                 remark: '',
                 version: '1.0',
                 cmd: '001',
-                page_size: 10,
                 current_page: 1,
+                page_size: 10,
+                searchType: action.payload.searchType,
                 ecosystem: wallet.access.ecosystem,
-                // wallet: wallet.wallet.id
-                wallet: '1429582920081315677'
+                wallet: wallet.wallet.id
             }
         ))
             .flatMap(session => {
                 return Observable.of<Action>(
-                    renderRecord.done({
+                    renderFlowing.done({
                         params: action.payload,
                         result: {
                             cmd: session.body.cmd,
-                            data: session.body.data
+                            flowData: session.body.data,
+                            current_page: session.body.current_page,
+                            page_size: session.body.page_size,
+                            ret: session.body.ret,
+                            ret_data_type: session.body.ret_data_type,
+                            retcode: session.body.retcode,
+                            retinfo: session.body.retinfo,
+                            sum: session.body.sum,
+                            total: session.body.total
                         }
                     })
                 );
             })
             .catch(e => Observable.of(
-                renderRecord.failed({
+                renderFlowing.failed({
                     params: action.payload,
                     error: e.error
                 })
             ));
     });
 
-export default EcosystemKeyEpic;
+export default FlowingWaterEpic;

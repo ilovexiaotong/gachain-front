@@ -21,8 +21,9 @@
 // SOFTWARE.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IRecordCall } from 'gachain/auth';
+import { IRecordCall, IFlowingCall, ISearchCall } from 'gachain/auth';
 
 const actionCreator = actionCreatorFactory('record');
 
 export const renderRecord = actionCreator.async< void, { cmd: string, data: IRecordCall }, undefined >('RENDER_RECORD');
+export const renderFlowing = actionCreator.async< ISearchCall, { cmd: string, flowData: IFlowingCall, current_page: number, page_size: number, ret: string, ret_data_type: string, retcode: number, retinfo: string, sum: string,  total: number }, undefined >('RENDER_FLOWING');
