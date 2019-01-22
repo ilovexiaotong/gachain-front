@@ -57,7 +57,7 @@ const comparePoints = (a: [number, number], b: [number, number]) => {
 
 class MapView extends React.Component<IMapViewProps> {
     private _mapView: __esri.MapView = null;
-    private _defaultCenter = [36.07574221562708, 5.0921630859375];
+    private _defaultCenter = [36.07574221562708, 116.4072154982];
 
     componentDidMount() {
         this.processEvents(this.props);

@@ -82,7 +82,9 @@ const StyledMenus = themed.div`
     height: 100%;
 `;
 
-const StyledMenuContent = themed.div``;
+const StyledMenuContent = themed.div`
+    background: #fff;
+`;
 
 const StyledBackButton = themed.button`
     position: relative;
