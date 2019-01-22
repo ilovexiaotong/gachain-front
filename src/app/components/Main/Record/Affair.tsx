@@ -1,14 +1,19 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { intlShape, injectIntl } from 'react-intl';
 import { Tabs, Tab } from 'react-bootstrap';
 import { IFlowingCall, ISearchCall } from 'gachain/auth';
 
 import Details from './Details';
 export interface IRecordPromptProps {
+    intl?: any;
     flowData: IFlowingCall[];
     getFlowing?: (params: ISearchCall) => void;
 }
 class Affair extends React.PureComponent<IRecordPromptProps> {
+    static propTypes = {
+        intl: intlShape.isRequired
+    };
+
     state = {
         key: 1
     };
@@ -38,12 +43,16 @@ class Affair extends React.PureComponent<IRecordPromptProps> {
     }
 
     render() {
+        let {
+            intl: { formatMessage }
+        } = this.props;
+
         return (
             <Tabs defaultActiveKey={1} id="uncontrolled-tab-example" activeKey={this.state.key} onSelect={this.onOutInt.bind(this)}>
-                <Tab eventKey={1} title={<FormattedMessage id="record.changeInto" defaultMessage="To change into" />}>
+                <Tab eventKey={1} title={formatMessage({id: 'record.changeInto'})}>
                    <Details {...this.props} />  
                 </Tab>
-                <Tab eventKey={2} title={<FormattedMessage id="record.changeOut" defaultMessage="Turn out" />}>
+                <Tab eventKey={2} title={formatMessage({id: 'record.changeOut'})}>
                    <Details {...this.props} />  
                 </Tab>
             </Tabs>
@@ -51,4 +60,4 @@ class Affair extends React.PureComponent<IRecordPromptProps> {
     }
 }
 
-export default Affair;
+export default injectIntl(Affair as any);
