@@ -14,7 +14,9 @@ const mapStateToProps = (state: IRootState) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-    menuPop,
+    menuPop: () => {
+        dispatch(menuPop());
+    },
     menuPush,
     onSwitchSection: (section: string) => {
         dispatch(renderSection(section));
