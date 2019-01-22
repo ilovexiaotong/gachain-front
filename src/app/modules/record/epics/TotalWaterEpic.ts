@@ -36,8 +36,7 @@ const TotalWaterEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
                 version: '1.0',
                 cmd: '001',
                 ecosystem: wallet.access.ecosystem,
-                // wallet: wallet.wallet.id
-                wallet: '7694195010442557058'
+                wallet: wallet.wallet.id
             }
         ))
             .flatMap(session => {

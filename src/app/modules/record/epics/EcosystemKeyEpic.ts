@@ -39,8 +39,7 @@ const EcosystemKeyEpic: Epic = (action$, store, { api }) => action$.ofAction(ren
                 page_size: 10,
                 current_page: 1,
                 ecosystem: wallet.access.ecosystem,
-                // wallet: wallet.wallet.id
-                wallet: '1429582920081315677'
+                wallet: wallet.wallet.id
             }
         ))
             .flatMap(session => {
