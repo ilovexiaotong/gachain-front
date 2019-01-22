@@ -25,6 +25,8 @@ import urlJoin from 'url-join';
 import urlTemplate from 'url-template';
 import { IUIDResponse, ILoginRequest, ILoginResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, ISectionsRequest, ISectionsResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, IContentHashRequest, IContentHashResponse, TTxCallRequest, TTxCallResponse, TTxStatusRequest, TTxStatusResponse, ITxStatus, IKeyInfo, IEcosystemKeyRequest, IEcosystemKeyResponse, IFlowingWaterRequest, IFlowingWaterResponse, ITotalWaterRequest, ITotalWaterResponse } from 'gachain/api';
 
+import { explorerEndpoint } from 'modules/dependencies';
+
 export type TRequestMethod =
     'get' |
     'post';
@@ -127,7 +129,7 @@ class GachainAPI {
         let json: any = null;
         let text: string = null;
         const query = 'get' === method ? queryString.stringify(params) : '';
-        const body = 'get' === method ? null : this._options.apiHost === 'https://explore.gac.one:8800/api/' ? this.serializeRequestPayload(params) : this.serializeFormData(params);
+        const body = 'get' === method ? null : this._options.apiHost === explorerEndpoint ? this.serializeRequestPayload(params) : this.serializeFormData(params);
 
         try {
             const response = await this._options.transport({

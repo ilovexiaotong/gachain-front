@@ -23,8 +23,8 @@
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { ISearchCall } from 'gachain/auth';
-import { renderRecord, renderFlowing, renderTotal } from 'modules/record/actions';
-import Record from 'components/Main/Record';
+import { renderRecord, renderFlowing, renderTotal } from 'modules/transactions/actions';
+import Record from 'components/Main/Transactions';
 
 const mapStateToProps = (state: IRootState) => ({
     cmd: state.record.cmd,

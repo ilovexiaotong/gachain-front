@@ -22,7 +22,7 @@
 
 import React from 'react';
 import Backup from 'containers/Main/Backup';
-import Record from 'containers/Main/Record';
+import Transactions from 'containers/Main/Transactions';
 import Editor from 'containers/Main/Editor';
 
 export interface ILegacyPage {
@@ -32,7 +32,7 @@ export interface ILegacyPage {
 }
 
 const LEGACY_PAGES: { [page: string]: ILegacyPage } = {
-    'record': { section: null, menu: null, render: () => <Record /> },
+    'record': { section: null, menu: null, render: () => <Transactions /> },
     'backup': { section: null, menu: null, render: () => <Backup /> },
     'editor': { section: 'editor', menu: null, render: (props: { open?: string, create?: string, name?: string, vde?: string }) => <Editor {...props} /> }
 };

@@ -24,13 +24,18 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import PageLink from 'containers/Routing/PageLink';
 import { CloseDropdownButton } from 'components/DropdownButton';
+import themed from 'components/Theme/themed';
 
 import SystemButton from './SystemButton';
+
+const StyledTransactionButton = themed.span`
+    text-align: 'center'
+`;
 
 const TransactionMenu: React.SFC<{}> = props => (
     <SystemButton
         className="p0"
-        width={225}
+        width={180}
         align="right"
         content={
             (
@@ -38,10 +43,10 @@ const TransactionMenu: React.SFC<{}> = props => (
                     <li>
                         <PageLink page="record">
                             <CloseDropdownButton>
-                                <em className="icon icon-shield text-muted" />
-                                <span>
+                                {/* <em className="icon icon-shield text-muted" /> */}
+                                <StyledTransactionButton>
                                     <FormattedMessage id="general.transaction.record" defaultMessage="Transaction record" />
-                                </span>
+                                </StyledTransactionButton>
                             </CloseDropdownButton>
                         </PageLink>
                     </li>
@@ -49,7 +54,7 @@ const TransactionMenu: React.SFC<{}> = props => (
             )
         }
     >
-        <em className="fa fa-rmb" />
+        <em className="icon fa fa-file-text" />
     </SystemButton>
 );
 
