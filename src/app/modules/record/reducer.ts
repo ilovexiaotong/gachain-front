@@ -22,7 +22,7 @@
 
 import * as actions from './actions';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { IRecordCall, IFlowingCall } from 'gachain/auth';
+import { IRecordCall, IFlowingCall, ITotalCall } from 'gachain/auth';
 import recordHandler from './reducers/recordHandler';
 import recordDoneHandler from './reducers/recordDoneHandler';
 import recordFailedHandler from './reducers/recordFailedHandler';
@@ -31,10 +31,15 @@ import flowingHandler from './reducers/flowingHandler';
 import flowingDoneHandler from './reducers/flowingDoneHandler';
 import flowingFailedHandler from './reducers/flowingFailedHandler';
 
+import totalHandler from './reducers/totalHandler';
+import totalDoneHandler from './reducers/totalDoneHandler';
+import totalFailedHandler from './reducers/totalFailedHandler';
+
 export type State = {
     readonly cmd: string,
     readonly data: IRecordCall,
-    readonly flowData: IFlowingCall,
+    readonly flowData: IFlowingCall[],
+    readonly totalData: ITotalCall,
     readonly current_page: number,
     readonly page_size: number,
     readonly ret: string,
@@ -42,7 +47,13 @@ export type State = {
     readonly retcode: number,
     readonly retinfo: string,
     readonly sum: string,
-    readonly total: number
+    readonly total: number,
+    readonly amount: string,
+    readonly inamount: string,
+    readonly outamount: string,
+    readonly transaction: number,
+    readonly ecosystem: number,
+    readonly wallet: string
 };
 
 export const initialState: State = {
@@ -57,7 +68,7 @@ export const initialState: State = {
         multi: null,
         publickey: '',
     },
-    flowData: {
+    flowData: [{
         amount: '',
         block_id: null,
         comment: '',
@@ -66,7 +77,19 @@ export const initialState: State = {
         recipient_id: '',
         sender_id: '',
         txhash: '',
+    }],
+    totalData: {
+        transaction: null,
+        inamount: '',
+        outamount: '',
+        amount: ''
     },
+    amount: '',
+    inamount: '',
+    outamount: '',
+    transaction: null,
+    ecosystem: null,
+    wallet: '',
     current_page: null,
     page_size: null,
     ret: '',
@@ -84,4 +107,8 @@ export default reducerWithInitialState<State>(initialState)
 
     .case(actions.renderFlowing.started, flowingHandler)
     .case(actions.renderFlowing.done, flowingDoneHandler)
-    .case(actions.renderFlowing.failed, flowingFailedHandler);
+    .case(actions.renderFlowing.failed, flowingFailedHandler)
+
+    .case(actions.renderTotal.started, totalHandler)
+    .case(actions.renderTotal.done, totalDoneHandler)
+    .case(actions.renderTotal.failed, totalFailedHandler);

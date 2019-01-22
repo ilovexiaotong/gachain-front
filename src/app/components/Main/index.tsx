@@ -32,7 +32,7 @@ import Titlebar from './Titlebar';
 import UserMenu from 'containers/Widgets/UserMenu';
 import ToolMenu from 'containers/Widgets/ToolMenu';
 import Navigation from 'containers/Main/Navigation';
-// import Transaction from 'containers/Widgets/TransactionRecord';
+import Transaction from 'containers/Widgets/TransactionRecord';
 import NotificationsMenu from 'containers/Widgets/NotificationsMenu';
 import Toolbar from './Toolbar';
 import SectionButton from 'components/Main/SectionButton';
@@ -157,7 +157,7 @@ class Main extends React.Component<IMainProps> {
                             </li>
                         ) : null)}
                         <li className="user-menu">
-                            {/* <Transaction /> */}
+                            <Transaction />
                             <NotificationsMenu />
                             {/* <TransactionsMenu /> */}
                             <UserMenu />

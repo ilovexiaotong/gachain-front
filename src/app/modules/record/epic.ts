@@ -23,8 +23,10 @@
 import { combineEpics } from 'redux-observable';
 import EcosystemKeyEpic from './epics/EcosystemKeyEpic';
 import FlowingWaterEpic from './epics/FlowingWaterEpic';
+import TotalWaterEpic from './epics/TotalWaterEpic';
 
 export default combineEpics(
     EcosystemKeyEpic,
-    FlowingWaterEpic
+    FlowingWaterEpic,
+    TotalWaterEpic
 );

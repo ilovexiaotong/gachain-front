@@ -1,19 +1,50 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Tabs, Tab } from 'react-bootstrap';
+import { IFlowingCall, ISearchCall } from 'gachain/auth';
 
-class Affair extends React.PureComponent {
+import Details from './Details';
+export interface IRecordPromptProps {
+    flowData: IFlowingCall[];
+    getFlowing?: (params: ISearchCall) => void;
+}
+class Affair extends React.PureComponent<IRecordPromptProps> {
+    state = {
+        key: 1
+    };
+
+    componentDidMount() {
+        this.getTransfer('income');
+    }
+
+    getTransfer = (value: string) => {
+        this.props.getFlowing({
+            searchType: value
+        });
+    }
+
+    onOutInt = () => {
+        if (this.state.key === 1) {
+            this.setState({
+                key: 2
+            });
+            this.getTransfer('outcome');
+        } else {
+            this.setState({
+                key: 1
+            });
+            this.getTransfer('income');
+        }
+    }
+
     render() {
         return (
-            <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                <Tab eventKey={1} title="转入">
-                    <div style={{ textAlign: 'center', color: 'rgb(153, 153, 153)' }}>
-                        <span>暂无转入记录</span>
-                    </div>
+            <Tabs defaultActiveKey={1} id="uncontrolled-tab-example" activeKey={this.state.key} onSelect={this.onOutInt.bind(this)}>
+                <Tab eventKey={1} title={<FormattedMessage id="record.changeInto" defaultMessage="To change into" />}>
+                   <Details {...this.props} />  
                 </Tab>
-                <Tab eventKey={2} title="转出">
-                    <div style={{ textAlign: 'center', color: 'rgb(153, 153, 153)' }}>
-                        <span>暂无转出记录</span>
-                    </div>
+                <Tab eventKey={2} title={<FormattedMessage id="record.changeOut" defaultMessage="Turn out" />}>
+                   <Details {...this.props} />  
                 </Tab>
             </Tabs>
         );

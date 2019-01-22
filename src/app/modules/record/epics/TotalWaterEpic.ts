@@ -21,23 +21,20 @@
 // SOFTWARE.
 import { Action } from 'redux';
 import { Epic } from 'modules';
-import { renderFlowing } from '../actions';
+import { renderTotal } from '../actions';
 import { Observable } from 'rxjs/Observable';
 
-const FlowingWaterEpic: Epic = (action$, store, { api }) => action$.ofAction(renderFlowing.started)
+const TotalWaterEpic: Epic = (action$, store, { api }) => action$.ofAction(renderTotal.started)
     .flatMap(action => {
         const wallet = store.getState().auth.wallet;
         const client = api({ apiHost: 'https://explore.gac.one:8800/api/' });
-        return Observable.from(client.getFlowingWater(
+        return Observable.from(client.getTotalWater(
             {
-                interface: 'get_find_tranhistory',
+                interface: 'get_wallettotal',
                 msgtype: 'request',
                 remark: '',
                 version: '1.0',
                 cmd: '001',
-                current_page: 1,
-                page_size: 10,
-                searchType: action.payload.searchType,
                 ecosystem: wallet.access.ecosystem,
                 // wallet: wallet.wallet.id
                 wallet: '7694195010442557058'
@@ -45,29 +42,31 @@ const FlowingWaterEpic: Epic = (action$, store, { api }) => action$.ofAction(ren
         ))
             .flatMap(session => {
                 return Observable.of<Action>(
-                    renderFlowing.done({
+                    renderTotal.done({
                         params: action.payload,
                         result: {
                             cmd: session.body.cmd,
-                            flowData: session.body.data,
-                            current_page: session.body.current_page,
-                            page_size: session.body.page_size,
+                            totalData: session.body.data,
+                            amount: session.body.amount,
+                            inamount: session.body.inamount,
+                            outamount: session.body.outamount,
+                            transaction: session.body.transaction,
+                            ecosystem: session.body.ecosystem,
                             ret: session.body.ret,
-                            ret_data_type: session.body.ret_data_type,
                             retcode: session.body.retcode,
                             retinfo: session.body.retinfo,
                             sum: session.body.sum,
-                            total: session.body.total
+                            wallet: session.body.wallet,
                         }
                     })
                 );
             })
             .catch(e => Observable.of(
-                renderFlowing.failed({
+                renderTotal.failed({
                     params: action.payload,
                     error: e.error
                 })
             ));
     });
 
-export default FlowingWaterEpic;
+export default TotalWaterEpic;

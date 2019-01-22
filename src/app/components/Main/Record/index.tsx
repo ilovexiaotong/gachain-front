@@ -21,9 +21,9 @@
 // SOFTWARE.
 
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Row, Col, Panel } from 'react-bootstrap';
-import { IRecordCall, ISearchCall, IFlowingCall } from 'gachain/auth';
-
+import { IRecordCall, ISearchCall, IFlowingCall, ITotalCall } from 'gachain/auth';
 import Member from './Member';
 import Affair from './Affair';
 
@@ -31,17 +31,17 @@ export interface IRecordPromptProps {
     cmd: string;
     data: IRecordCall;
     ret_data_type: string;
-    flowData: IFlowingCall;
+    flowData: IFlowingCall[];
+    totalData: ITotalCall;
     getRecord?: () => any;
     getFlowing?: (params: ISearchCall) => void;
+    getTotal?: () => any;
 }
 
 class Record extends React.Component<IRecordPromptProps> {
     componentDidMount () {
        this.props.getRecord();
-       this.props.getFlowing({
-        searchType: 'outcome'
-        });
+       this.props.getTotal();
     }
     render() {
         return (
@@ -51,7 +51,7 @@ class Record extends React.Component<IRecordPromptProps> {
                         <code>
                             <Panel
                                 bsStyle="primary"
-                                header={< span >成员信息</span>}
+                                header={<FormattedMessage id="record.member" defaultMessage="Member information" />}
                             >
                                 <Member
                                   {...this.props}
@@ -64,9 +64,11 @@ class Record extends React.Component<IRecordPromptProps> {
                             <div>
                                 <Panel
                                     bsStyle="primary"
-                                    header={<span>交易/事务</span>}
+                                    header={<FormattedMessage id="record.transaction" defaultMessage="Transaction/transaction" />}
                                 >
-                                    <Affair />
+                                    <Affair 
+                                       {...this.props}
+                                    />
                                 </Panel>
                             </div>
                         </code>

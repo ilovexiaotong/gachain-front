@@ -23,7 +23,7 @@
 import queryString from 'query-string';
 import urlJoin from 'url-join';
 import urlTemplate from 'url-template';
-import { IUIDResponse, ILoginRequest, ILoginResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, ISectionsRequest, ISectionsResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, IContentHashRequest, IContentHashResponse, TTxCallRequest, TTxCallResponse, TTxStatusRequest, TTxStatusResponse, ITxStatus, IKeyInfo, IEcosystemKeyRequest, IEcosystemKeyResponse, IFlowingWaterRequest, IFlowingWaterResponse } from 'gachain/api';
+import { IUIDResponse, ILoginRequest, ILoginResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, ISectionsRequest, ISectionsResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, IContentHashRequest, IContentHashResponse, TTxCallRequest, TTxCallResponse, TTxStatusRequest, TTxStatusResponse, ITxStatus, IKeyInfo, IEcosystemKeyRequest, IEcosystemKeyResponse, IFlowingWaterRequest, IFlowingWaterResponse, ITotalWaterRequest, ITotalWaterResponse } from 'gachain/api';
 
 export type TRequestMethod =
     'get' |
@@ -249,6 +249,25 @@ class GachainAPI {
                 ecosystem: parseInt(request.ecosystem, 10),
                 page_size: request.page_size,
                 searchType: request.searchType,
+                wallet: request.wallet.toString(),
+            }
+        }),
+        responseTransformer: response => ({
+            ...response,
+        })
+    });
+
+    public getTotalWater = this.setEndpoint<ITotalWaterRequest, ITotalWaterResponse>('post', 'get_wallettotal', {
+        requestTransformer: request => ({
+            head: {
+                interface: request.interface,
+                msgtype: request.msgtype,
+                remark: request.remark,
+                version: request.version,
+            },
+            params: {
+                cmd: request.cmd,
+                ecosystem: parseInt(request.ecosystem, 10),
                 wallet: request.wallet.toString(),
             }
         }),

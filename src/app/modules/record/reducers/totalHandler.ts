@@ -19,12 +19,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+import { State } from '../reducer';
+import { renderTotal } from '../actions';
+import { Reducer } from 'modules';
 
-import actionCreatorFactory from 'typescript-fsa';
-import { IRecordCall, IFlowingCall, ISearchCall, ITotalCall } from 'gachain/auth';
+const totalHandler: Reducer<typeof renderTotal.started, State> = (state, payload) => ({
+    ...state,
+});
 
-const actionCreator = actionCreatorFactory('record');
-
-export const renderRecord = actionCreator.async< void, { cmd: string, data: IRecordCall }, undefined >('RENDER_RECORD');
-export const renderFlowing = actionCreator.async< ISearchCall, { cmd: string, flowData: IFlowingCall[], current_page: number, page_size: number, ret: string, ret_data_type: string, retcode: number, retinfo: string, sum: string,  total: number }, undefined >('RENDER_FLOWING');
-export const renderTotal = actionCreator.async< void, { cmd: string, totalData: ITotalCall, amount: string, inamount: string, outamount: string, transaction: number, ecosystem: number, ret: string, retcode: number, retinfo: string, sum: string, wallet: string }, undefined >('RENDER_TOTAL');
+export default totalHandler;

@@ -86,4 +86,11 @@ declare module 'gachain/auth' {
     interface  ISearchCall {
         searchType: string
     }
+
+    interface ITotalCall {
+        transaction: number, 
+        inamount: string, 
+        outamount: string, 
+        amount: string
+    }
 }

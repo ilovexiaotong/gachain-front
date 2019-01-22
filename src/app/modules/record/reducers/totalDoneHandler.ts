@@ -20,11 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import actionCreatorFactory from 'typescript-fsa';
-import { IRecordCall, IFlowingCall, ISearchCall, ITotalCall } from 'gachain/auth';
+import { State } from '../reducer';
+import { renderTotal } from '../actions';
+import { Reducer } from 'modules';
 
-const actionCreator = actionCreatorFactory('record');
+const totalDoneHandler: Reducer<typeof renderTotal.done, State> = (state, payload) => ({
+    ...state,
+    cmd: payload.result.cmd,
+    totalData: payload.result.totalData,
+    amount: payload.result.amount,
+    inamount: payload.result.inamount,
+    outamount: payload.result.outamount,
+    transaction: payload.result.transaction,
+    ecosystem: payload.result.ecosystem,
+    ret: payload.result.ret,
+    retcode: payload.result.retcode,
+    retinfo: payload.result.retinfo,
+    sum: payload.result.sum,
+    wallet: payload.result.wallet,
+});
 
-export const renderRecord = actionCreator.async< void, { cmd: string, data: IRecordCall }, undefined >('RENDER_RECORD');
-export const renderFlowing = actionCreator.async< ISearchCall, { cmd: string, flowData: IFlowingCall[], current_page: number, page_size: number, ret: string, ret_data_type: string, retcode: number, retinfo: string, sum: string,  total: number }, undefined >('RENDER_FLOWING');
-export const renderTotal = actionCreator.async< void, { cmd: string, totalData: ITotalCall, amount: string, inamount: string, outamount: string, transaction: number, ecosystem: number, ret: string, retcode: number, retinfo: string, sum: string, wallet: string }, undefined >('RENDER_TOTAL');
+export default totalDoneHandler;
