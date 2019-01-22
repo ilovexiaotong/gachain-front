@@ -23,11 +23,12 @@ import { Action } from 'redux';
 import { Epic } from 'modules';
 import { renderRecord } from '../actions';
 import { Observable } from 'rxjs/Observable';
+import { explorerEndpoint } from 'modules/dependencies';
 
 const EcosystemKeyEpic: Epic = (action$, store, { api }) => action$.ofAction(renderRecord.started)
     .flatMap(action => {
         const wallet = store.getState().auth.wallet;
-        const client = api({ apiHost: 'https://explore.gac.one:8800/api/' });
+        const client = api({ apiHost: explorerEndpoint });
 
         return Observable.from(client.getEcosystemKey(
             {

@@ -23,11 +23,12 @@ import { Action } from 'redux';
 import { Epic } from 'modules';
 import { renderFlowing } from '../actions';
 import { Observable } from 'rxjs/Observable';
+import { explorerEndpoint } from 'modules/dependencies';
 
 const FlowingWaterEpic: Epic = (action$, store, { api }) => action$.ofAction(renderFlowing.started)
     .flatMap(action => {
         const wallet = store.getState().auth.wallet;
-        const client = api({ apiHost: 'https://explore.gac.one:8800/api/' });
+        const client = api({ apiHost: explorerEndpoint });
         return Observable.from(client.getFlowingWater(
             {
                 interface: 'get_find_tranhistory',
