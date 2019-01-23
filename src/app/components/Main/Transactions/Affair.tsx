@@ -15,7 +15,9 @@ class Affair extends React.PureComponent<IRecordPromptProps> {
     };
 
     state = {
-        key: 1
+        key: 1,
+        detailsValue: 'noTransfer',
+        detailsMessage: 'No transfer to record'
     };
 
     componentDidMount() {
@@ -31,12 +33,16 @@ class Affair extends React.PureComponent<IRecordPromptProps> {
     onOutInt = () => {
         if (this.state.key === 1) {
             this.setState({
-                key: 2
+                key: 2,
+                detailsValue: 'noTurningout',
+                detailsMessage: 'No transfer record'
             });
             this.getTransfer('outcome');
         } else {
             this.setState({
-                key: 1
+                key: 1,
+                detailsValue: 'noTransfer',
+                detailsMessage: 'No transfer to record'
             });
             this.getTransfer('income');
         }
@@ -50,10 +56,10 @@ class Affair extends React.PureComponent<IRecordPromptProps> {
         return (
             <Tabs defaultActiveKey={1} id="uncontrolled-tab-example" activeKey={this.state.key} onSelect={this.onOutInt.bind(this)}>
                 <Tab eventKey={1} title={formatMessage({id: 'record.changeInto'})}>
-                   <Details {...this.props} />  
+                   <Details {...this.props}  detailsValue={this.state.detailsValue} detailsMessage={this.state.detailsMessage}/>  
                 </Tab>
                 <Tab eventKey={2} title={formatMessage({id: 'record.changeOut'})}>
-                   <Details {...this.props} />  
+                   <Details {...this.props}  detailsValue={this.state.detailsValue} detailsMessage={this.state.detailsMessage}/>  
                 </Tab>
             </Tabs>
         );

@@ -6,13 +6,14 @@ import { IFlowingCall } from 'gachain/auth';
 import moment from 'moment';
 export interface IRecordPromptProps {
     flowData: IFlowingCall[];
+    detailsValue: string;
+    detailsMessage: string;
 }
 class Details extends React.PureComponent<IRecordPromptProps> {
     render() {
         return (
                     <div style={{ textAlign: 'center', color: 'rgb(153, 153, 153)' }}>
-                        {
-                            this.props.flowData === null ? <FormattedMessage id="record.noTransfer" defaultMessage="No transfer to record" /> :
+                        {this.props.flowData === null ? <FormattedMessage id={`record.${this.props.detailsValue}`} defaultMessage={this.props.detailsMessage} /> :
                                 this.props.flowData.map((item, k) => (
                                     <Row key={k} style={{ border: '1px solid #e6e6e6', textAlign: 'left', marginTop: '20px' }}>
                                         <div style={{ borderRadius: '0 0 4px 4px', lineHeight: '22px', padding: '12px 0 12px 40px', backgroundColor: '#fafafa', color: 'rgba(0,0,0,.85)', cursor: 'pointer', borderBottom: '1px solid #e6e6e6' }}><span>{moment(item.created_at).fromNow()}</span></div>
@@ -32,8 +33,7 @@ class Details extends React.PureComponent<IRecordPromptProps> {
                                             </Row>
                                         </div>
                                     </Row>
-                                ))
-                        }
+                                ))}
                     </div>
         );
     }
