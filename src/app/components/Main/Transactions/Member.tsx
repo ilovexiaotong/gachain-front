@@ -17,14 +17,6 @@ export interface IRecordPromptProps {
 }
 
 class Member extends React.PureComponent<IRecordPromptProps>  {
-  state = {
-    value: ''
-  };
-
-  clickCp = (val: string) => {
-    return val;
-  }
-
   render() {
     return (
       <Row style={{ padding: '0 40px 0 40px', color: 'rgba(0,0,0,.85)' }}>
@@ -39,7 +31,7 @@ class Member extends React.PureComponent<IRecordPromptProps>  {
         <Row style={{ lineHeight: '50px', margin: '20px' }}>
           <Row style={{ textAlign: 'center', color: '#333' }}>
             <strong>{this.props.data.id}</strong>
-            <CopyToClipboard text={this.clickCp(this.state.value)} onCopy={this.props.onCopy}>
+            <CopyToClipboard text={this.props.data.id} onCopy={this.props.onCopy}>
               <Button bsStyle="link" className="p0 ml">
                 <em className="icon fa fa-clipboard" />
               </Button>
