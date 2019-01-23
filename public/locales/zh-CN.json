@@ -211,6 +211,7 @@
     "tx.error.E_SERVER.desc": "{error}",
     "record.member": "成员信息",
     "record.transaction": "交易/事务",
+    "record.transaction.desc": "这个部分是用来查询个人信息和当前发送的 交易/事务 信息",
     "record.assetsName": "资产名称",
     "record.balance": " 余额",
     "record.into": "转入总数",

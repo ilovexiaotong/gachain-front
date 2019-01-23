@@ -210,6 +210,7 @@
     "tx.error.E_SERVER.desc": "{error}",
     "record.member": "Member information",
     "record.transaction": "Transaction/transaction",
+    "record.transaction.desc": "This section is for querying personal information and individual sent transactions/transactions",
     "record.assetsName": "Asset name",
     "record.balance": "Balance",
     "record.information": "Transaction information",

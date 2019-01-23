@@ -211,6 +211,7 @@
     "tx.error.E_SERVER.desc": "{error}",
     "record.member": "成員資訊",
     "record.transaction": "交易/事務",
+    "record.transaction.desc": "這個部分是用來査詢個人資訊和當前發送的交易/事務資訊",
     "record.assetsName": "資產名稱",
     "record.balance": " 餘額",
     "record.information": "交易資訊",

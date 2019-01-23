@@ -23,7 +23,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col, Panel } from 'react-bootstrap';
-import { IRecordCall, ISearchCall, IFlowingCall, ITotalCall } from 'gachain/auth';
+import { IRecordCall, ISearchCall, IFlowingCall, ITotalCall, IAccountContext } from 'gachain/auth';
+
+import Wrapper from 'components/Wrapper';
+
 import Member from './Member';
 import Affair from './Affair';
 
@@ -33,48 +36,65 @@ export interface IRecordPromptProps {
     ret_data_type: string;
     flowData: IFlowingCall[];
     totalData: ITotalCall;
+    wallet: IAccountContext;
     getRecord?: () => any;
     getFlowing?: (params: ISearchCall) => void;
     getTotal?: () => any;
 }
 
 class Record extends React.Component<IRecordPromptProps> {
-    componentDidMount () {
-       this.props.getRecord();
-       this.props.getTotal();
+    componentDidMount() {
+        this.props.getRecord();
+        this.props.getTotal();
     }
     render() {
         return (
-            <div style={{ margin: '0 20px' }}>
-                <Row className="show-grid" >
-                    <Col xs={12} md={5}>
-                        <code>
-                            <Panel
-                                bsStyle="primary"
-                                header={<FormattedMessage id="record.member" defaultMessage="Member information" />}
-                            >
-                                <Member
-                                  {...this.props}
-                                />
-                            </Panel>
-                        </code>
-                    </Col>
-                    <Col xs={12} md={7}>
-                        <code>
-                            <div>
+            <Wrapper
+                type="default"
+                title={{
+                    title: 'record.transaction',
+                    defaultTitle: 'Transaction'
+                }}
+                heading={{
+                    content: (
+                        <FormattedMessage id="record.transaction" defaultMessage="Transaction" />
+                    )
+                }}
+                description={
+                    <FormattedMessage id="record.transaction.desc" defaultMessage="This section is used to backup your wallet data. You will not be able to restore access to your wallet if you forget your password or lose the private key" />
+                }
+            >
+                <Panel>
+                    <Row className="show-grid" >
+                        <Col xs={12} md={5}>
+                            <code>
                                 <Panel
                                     bsStyle="primary"
-                                    header={<FormattedMessage id="record.transaction" defaultMessage="Transaction/transaction" />}
+                                    header={<FormattedMessage id="record.member" defaultMessage="Member information" />}
                                 >
-                                    <Affair 
-                                       {...this.props}
+                                    <Member
+                                        {...this.props}
                                     />
                                 </Panel>
-                            </div>
-                        </code>
-                    </Col>
-                </Row>
-            </div>
+                            </code>
+                        </Col>
+                        <Col xs={12} md={7}>
+                            <code>
+                                <div>
+                                    <Panel
+                                        bsStyle="primary"
+                                        header={<FormattedMessage id="record.transaction" defaultMessage="Transaction/transaction" />}
+                                    >
+                                        <Affair
+                                            {...this.props}
+                                        />
+                                    </Panel>
+                                </div>
+                            </code>
+                        </Col>
+                    </Row>
+                </Panel>
+            </Wrapper>
         );
     }
 }

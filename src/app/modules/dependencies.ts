@@ -28,7 +28,7 @@ import resolveTagHandler from 'lib/constructor/tags';
 import 'whatwg-fetch';
 
 export const apiEndpoint = 'api/v2';
-export const explorerEndpoint = 'https://explore.gac.one:8800/api/';
+export const explorerEndpoint = 'https://devexplore.gac.one:8800/api/';
 
 export interface IStoreDependencies {
     api: IAPIDependency;

@@ -1,14 +1,19 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Row, Col, Table } from 'react-bootstrap';
+import { Row, Col, Table, Button } from 'react-bootstrap';
 import QRCode from 'qrcode.react';
-import { IRecordCall, IFlowingCall, ITotalCall } from 'gachain/auth';
+import { IRecordCall, IFlowingCall, ITotalCall, IAccountContext } from 'gachain/auth';
 import { qGacToGac } from 'lib/tx/convert';
 import CopyToClipboard from 'react-copy-to-clipboard';
+
+import Avatar from 'containers/Avatar';
+
 export interface IRecordPromptProps {
+  wallet: IAccountContext;
   data: IRecordCall;
   flowData: IFlowingCall[];
   totalData: ITotalCall;
+  onCopy?: () => any;
 }
 
 class Member extends React.PureComponent<IRecordPromptProps>  {
@@ -24,12 +29,21 @@ class Member extends React.PureComponent<IRecordPromptProps>  {
     return (
       <Row style={{ padding: '0 40px 0 40px', color: 'rgba(0,0,0,.85)' }}>
         <Row style={{ textAlign: 'center' }}>
-          <span style={{ backgroundColor: 'rgb(135, 208, 104)', borderRadius: '50%', fontSize: '36px', padding: '10px 20px', color: '#fff' }}><em className="fa fa-user-o" /></span>
+          <Avatar
+            className="user-avatar"
+            size={64}
+            keyID={this.props.wallet.wallet && this.props.wallet.wallet.id}
+            ecosystem={this.props.wallet.access.ecosystem}
+          />
         </Row>
         <Row style={{ lineHeight: '50px', margin: '20px' }}>
           <Row style={{ textAlign: 'center', color: '#333' }}>
             <strong>{this.props.data.id}</strong>
-            <CopyToClipboard text={this.clickCp(this.state.value)} onCopy={() => this.setState({ value: this.props.data.id })}><span style={{ margin: '0 0 0 20px', fontSize: '24px', cursor: 'pointer' }}><em className="fa fa-copy" title="双击复制" /></span></CopyToClipboard>
+            <CopyToClipboard text={this.clickCp(this.state.value)} onCopy={this.props.onCopy}>
+              <Button bsStyle="link" className="p0 ml">
+                <em className="icon fa fa-clipboard" />
+              </Button>
+            </CopyToClipboard>
           </Row>
           <Row>
             <Col xs={12} md={4}><FormattedMessage id="record.assetsName" defaultMessage="Asset name" /></Col>

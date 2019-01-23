@@ -29,7 +29,6 @@ import themed from 'components/Theme/themed';
 import SystemButton from './SystemButton';
 
 const StyledTransactionButton = themed.span`
-    text-align: 'center'
 `;
 
 const TransactionMenu: React.SFC<{}> = props => (
@@ -54,7 +53,7 @@ const TransactionMenu: React.SFC<{}> = props => (
             )
         }
     >
-        <em className="icon fa fa-file-text" />
+        <em className="icon fa fa-file-text-o" />
     </SystemButton>
 );
 

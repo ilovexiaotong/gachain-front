@@ -211,6 +211,7 @@
     "tx.error.E_SERVER.desc": "{エラー}",
     "record.member": "メンバー情報",
     "record.transaction": "取引/事務",
+    "record.transaction.desc": "この部分は、個人情報と現在送信された取引/事務情報を検索するために使用されています。",
     "record.assetsName": "資産の名称",
     "record.balance": " 残高",
     "record.information": "取引情報",
