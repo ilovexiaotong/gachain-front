@@ -31,7 +31,7 @@ import Heading from 'components/Auth/Heading';
 export interface ICreateProps {
     seed: string;
     seedConfirm: string;
-    onCreate: (params: { seed: string, password: string }) => void;
+    onCreate: (params: { seed: string, password: string, flag: boolean }) => void;
     onGenerateSeed: () => void;
     onChangeSeed: (seed: string) => void;
     onChangeSeedConfirmation: (value: string) => void;
@@ -44,6 +44,7 @@ interface ICreateState {
     isConfirming: boolean;
     password: string;
     passwordConfirm: string;
+    flag: boolean;
 }
 
 class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateState> {
@@ -54,7 +55,8 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
         this.state = {
             isConfirming: false,
             password: '',
-            passwordConfirm: ''
+            passwordConfirm: '',
+            flag: false,
         };
     }
 
@@ -64,28 +66,32 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
 
     onReturn = () => {
         this.setState({
-            isConfirming: false
+            isConfirming: false,
+            flag: true
         });
     }
 
     onSubmit = (values: { [key: string]: any }) => {
         if (this.state.isConfirming) {
-            this.props.onCreate({
-                seed: this.props.seedConfirm,
-                password: this.state.passwordConfirm
+            this.props.onCreate({ 
+                seed: this.state.flag === false ? '' : this.props.seedConfirm,
+                password: this.state.passwordConfirm,
+                flag: false
             });
         }
         else {
             this.props.onChangeSeedConfirmation('');
             this.setState({
-                isConfirming: true,
-                password: values.password
+                isConfirming: this.state.flag === false ? false : true,
+                password: values.password,
+                flag: false
             });
         }
     }
 
     onGenerate = () => {
         this.props.onGenerateSeed();
+        this.onInput();
     }
 
     onSeedConfirmationChange = (seedConfirm: string) => {
@@ -119,7 +125,12 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
         else {
             this.props.onImportSeed(e.target.files[0]);
         }
+        this.onInput();
     }
+
+    onInput = () => {
+        this.setState({ flag: true });
+     }
 
     render() {
         return (
@@ -133,10 +144,11 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                         <Validation.components.ValidatedForm onSubmitSuccess={this.onSubmit}>
                             {!this.state.isConfirming && (
                                 <Generator
-                                    seed={this.props.seed}
+                                    seed={this.state.flag === false ? '' : this.props.seed}
                                     onGenerate={this.onGenerate}
                                     onLoad={this.onLoad}
                                     onSave={this.onSave}
+                                    onInput={this.onInput}
                                     onSeedChange={this.props.onChangeSeed}
                                     onPasswordChange={this.onPasswordChange}
                                     password={this.state.password}
@@ -151,8 +163,9 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                             )}
                             {this.state.isConfirming && (
                                 <Generator
-                                    seed={this.props.seedConfirm}
+                                    seed={this.state.flag === false ? '' : this.props.seedConfirm}
                                     onLoad={this.onLoad}
+                                    onInput={this.onInput}
                                     onSeedChange={this.onSeedConfirmationChange}
                                     onPasswordChange={this.onPasswordConfirmationChange}
                                     password={this.state.passwordConfirm}

@@ -20,35 +20,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'gachain/content' {
-    import { TProtypoElement } from 'gachain/protypo';
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { IRootState } from 'modules';
+import { ISearchCall } from 'gachain/auth';
+import { renderRecord, renderFlowing, renderTotal } from 'modules/transactions/actions';
+import Record from 'components/Main/Transactions';
+import { modalShow } from 'modules/modal/actions';
+import { FormattedMessage } from 'react-intl';
 
-    type TMenu = {
-        readonly name: string;
-        readonly content: TProtypoElement[];
-    };
+const mapStateToProps = (state: IRootState) => ({
+    cmd: state.record.cmd,
+    data: state.record.data,
+    ret_data_type: state.record.ret_data_type,
+    flowData: state.record.flowData,
+    totalData: state.record.totalData,
+    wallet: state.auth.wallet
+});
 
-    type TPage = {
-        readonly name: string;
-        readonly legacy?: boolean;
-        readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
-        readonly error?: string;
-    };
+const mapDispatchToProps = {
+    getRecord: renderRecord.started,
+    getFlowing: ( params: ISearchCall ) => renderFlowing.started(params),
+    getTotal: renderTotal.started,
+    onCopy: () => modalShow({
+        id: 'I_COPIED',
+        type: 'INFO',
+        params: {
+            value: (<FormattedMessage id="alert.clipboard.copied" defaultMessage="alert.clipboard.copied" />)
+        }
+    })
+};
 
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
-        readonly name: string;
-        readonly title: string;
-        readonly force: boolean;
-        readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
-    }
-}
-
+export default connect(mapStateToProps, mapDispatchToProps)(Record);

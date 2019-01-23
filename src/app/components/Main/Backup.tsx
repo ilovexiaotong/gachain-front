@@ -142,7 +142,7 @@ class Backup extends React.Component<IBackupProps, IBackupState> {
                             <td>
                                 <FormattedMessage id="general.address" defaultMessage="Address" />
                             </td>
-                            <td>{this.props.wallet.wallet.address}</td>
+                            <td>{this.props.wallet.wallet ? this.props.wallet.wallet.address : ''}</td>
                         </tr>
                         <tr>
                             <td>
@@ -177,7 +177,7 @@ class Backup extends React.Component<IBackupProps, IBackupState> {
                     )
                 }}
                 description={
-                    <FormattedMessage id="general.wallet.backup" defaultMessage="This section is used to backup your wallet data. You will not be able to restore access to your wallet if you forget your password or lose the private key" />
+                    <FormattedMessage id="general.wallet.backup.desc" defaultMessage="This section is used to backup your wallet data. You will not be able to restore access to your wallet if you forget your password or lose the private key" />
                 }
             >
                 {this.props.wallet && (

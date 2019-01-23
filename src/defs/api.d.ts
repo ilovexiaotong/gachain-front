@@ -22,6 +22,7 @@
 
 declare module 'gachain/api' {
     import { TProtypoElement } from 'gachain/protypo';
+    import { IRecordCall, IFlowingCall, ITotalCall} from 'gachain/auth';
 
     interface IUIDResponse {
         uid: string;
@@ -340,4 +341,77 @@ declare module 'gachain/api' {
     type TTxStatusResponse<T> = {
         [K in keyof T]: ITxStatus;
     }
+
+
+    interface IEcosystemKeyRequest {
+        version: string;
+        msgtype: string;
+        interface: string;
+        remark: string;
+        cmd: string;
+        page_size: number;
+        current_page: number;
+        ecosystem: string;
+        wallet: string;
+    }
+
+    interface IEcosystemKeyResponse {
+        body: {
+            cmd: string,
+            data: IRecordCall
+        }
+    }
+    interface IFlowingWaterRequest {
+        version: string;
+        msgtype: string;
+        interface: string;
+        remark: string;
+        cmd: string;
+        current_page: number;
+        ecosystem: string;
+        page_size: number;
+        searchType: string;
+        wallet: string;
+    }
+
+    interface IFlowingWaterResponse {
+        body: {
+            cmd: string,
+            current_page: number,
+            data: IFlowingCall[],
+            page_size: number,
+            ret: string,
+            ret_data_type: string,
+            retcode: number,
+            retinfo: string,
+            sum: string,
+            total: number
+        }
+    }
+    interface ITotalWaterResponse {
+        body: {
+            cmd: string,
+            data: ITotalCall,
+            amount: string,
+            inamount: string,
+            outamount: string,
+            transaction: number,
+            ecosystem: number,
+            ret: string,
+            retcode: number,
+            retinfo: string,
+            sum: string,
+            wallet: string
+        }
+    }
+    interface ITotalWaterRequest {
+        version: string;
+        msgtype: string;
+        interface: string;
+        remark: string;
+        cmd: string;
+        ecosystem: string;
+        wallet: string;
+    }
+
 }

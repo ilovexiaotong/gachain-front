@@ -86,7 +86,7 @@ class AuthChangePasswordModal extends Modal<IAuthChangePasswordModalProps, {}, I
                         <label htmlFor="password_old">
                             <FormattedMessage id="general.password.old" defaultMessage="Old password" />
                         </label>
-                        <Validation.components.ValidatedControl key="password_old" name="password_old" type="password" validators={[Validation.validators.password]} />
+                        <Validation.components.ValidatedControl key="password_old" name="password_old" type="password" validators={[Validation.validators.password, Validation.validators.space ]} />
                         <div className="visible-md visible-lg text-left">
                             <Validation.components.ValidationMessage for="password_old" />
                         </div>
@@ -99,7 +99,7 @@ class AuthChangePasswordModal extends Modal<IAuthChangePasswordModalProps, {}, I
                             name="password_new"
                             type="password"
                             value={this.state.newPassword}
-                            validators={[Validation.validators.password]}
+                            validators={[Validation.validators.password, Validation.validators.space]}
                             onChange={(e: any) => this.onNewPasswordChange(e.target.value)}
                         />
                         <div className="visible-md visible-lg text-left">
@@ -115,7 +115,7 @@ class AuthChangePasswordModal extends Modal<IAuthChangePasswordModalProps, {}, I
                             name="password_new_repeat"
                             type="password"
                             value={this.state.newPasswordRepeat}
-                            validators={[Validation.validators.password, Validation.validators.compare(this.state.newPassword)]}
+                            validators={[Validation.validators.password, Validation.validators.space, Validation.validators.compare(this.state.newPassword)]}
                             onChange={(e: any) => this.onNewPasswordRepeatChange(e.target.value)}
                         />
                         <div className="visible-md visible-lg text-left">

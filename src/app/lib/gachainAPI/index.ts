@@ -23,7 +23,9 @@
 import queryString from 'query-string';
 import urlJoin from 'url-join';
 import urlTemplate from 'url-template';
-import { IUIDResponse, ILoginRequest, ILoginResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, ISectionsRequest, ISectionsResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, IContentHashRequest, IContentHashResponse, TTxCallRequest, TTxCallResponse, TTxStatusRequest, TTxStatusResponse, ITxStatus, IKeyInfo } from 'gachain/api';
+import { IUIDResponse, ILoginRequest, ILoginResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, ISectionsRequest, ISectionsResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, IContentHashRequest, IContentHashResponse, TTxCallRequest, TTxCallResponse, TTxStatusRequest, TTxStatusResponse, ITxStatus, IKeyInfo, IEcosystemKeyRequest, IEcosystemKeyResponse, IFlowingWaterRequest, IFlowingWaterResponse, ITotalWaterRequest, ITotalWaterResponse } from 'gachain/api';
+
+import { explorerEndpoint } from 'modules/dependencies';
 
 export type TRequestMethod =
     'get' |
@@ -35,7 +37,7 @@ export interface IRequest {
     headers?: {
         [key: string]: string;
     };
-    body?: FormData;
+    body?: FormData | any;
 }
 
 export interface IRequestOptions<P, R> {
@@ -103,6 +105,16 @@ class GachainAPI {
         return formData;
     }
 
+    protected serializeRequestPayload(values: { [key: string]: any }) {
+        const requestPayload: { [key: string]: any } = {};
+        for (let itr in values) {
+            if (values.hasOwnProperty(itr) && values[itr]) {
+                requestPayload[itr] = values[itr];
+            }
+        }
+        return JSON.stringify(requestPayload);
+    }
+
     protected request = async <P, R>(method: TRequestMethod, endpoint: string, requestParams: P, options: IRequestOptions<P, R> = {}) => {
         const requestEndpoint = urlTemplate.parse(endpoint).expand(requestParams);
         const requestUrl = urlJoin(this._options.apiHost, this._options.apiEndpoint, requestEndpoint);
@@ -116,9 +128,8 @@ class GachainAPI {
 
         let json: any = null;
         let text: string = null;
-
         const query = 'get' === method ? queryString.stringify(params) : '';
-        const body = 'get' === method ? null : this.serializeFormData(params);
+        const body = 'get' === method ? null : this._options.apiHost === explorerEndpoint ? this.serializeRequestPayload(params) : this.serializeFormData(params);
 
         try {
             const response = await this._options.transport({
@@ -204,6 +215,69 @@ class GachainAPI {
             roles: response.roles || []
         })
     });
+
+    public getEcosystemKey = this.setEndpoint<IEcosystemKeyRequest, IEcosystemKeyResponse>('post', 'get_ecosystem_key', {
+        requestTransformer: request => ({
+            head: {
+                interface: request.interface,
+                msgtype: request.msgtype,
+                remark: request.remark,
+                version: request.version,
+            },
+            params: {
+                cmd: request.cmd,
+                page_size: request.page_size,
+                current_page: request.current_page,
+                ecosystem: parseInt(request.ecosystem, 10),
+                wallet: request.wallet.toString(),
+            }
+        }),
+        responseTransformer: response => ({
+            ...response,
+        })
+    });
+
+    public getFlowingWater = this.setEndpoint<IFlowingWaterRequest, IFlowingWaterResponse>('post', 'get_find_tranhistory', {
+        requestTransformer: request => ({
+            head: {
+                interface: request.interface,
+                msgtype: request.msgtype,
+                remark: request.remark,
+                version: request.version,
+            },
+            params: {
+                cmd: request.cmd,
+                current_page: request.current_page,
+                ecosystem: parseInt(request.ecosystem, 10),
+                page_size: request.page_size,
+                searchType: request.searchType,
+                wallet: request.wallet.toString(),
+            }
+        }),
+        responseTransformer: response => ({
+            ...response,
+        })
+    });
+
+    public getTotalWater = this.setEndpoint<ITotalWaterRequest, ITotalWaterResponse>('post', 'get_wallettotal', {
+        requestTransformer: request => ({
+            head: {
+                interface: request.interface,
+                msgtype: request.msgtype,
+                remark: request.remark,
+                version: request.version,
+            },
+            params: {
+                cmd: request.cmd,
+                ecosystem: parseInt(request.ecosystem, 10),
+                wallet: request.wallet.toString(),
+            }
+        }),
+        responseTransformer: response => ({
+            ...response,
+        })
+    });
+
     public keyinfo = this.setEndpoint<{ id: string }, IKeyInfo[]>('get', 'keyinfo/{id}', {
         requestTransformer: request => null
     });

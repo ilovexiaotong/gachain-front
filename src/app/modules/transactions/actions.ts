@@ -20,35 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'gachain/content' {
-    import { TProtypoElement } from 'gachain/protypo';
+import actionCreatorFactory from 'typescript-fsa';
+import { IRecordCall, IFlowingCall, ISearchCall, ITotalCall } from 'gachain/auth';
 
-    type TMenu = {
-        readonly name: string;
-        readonly content: TProtypoElement[];
-    };
+const actionCreator = actionCreatorFactory('record');
 
-    type TPage = {
-        readonly name: string;
-        readonly legacy?: boolean;
-        readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
-        readonly error?: string;
-    };
-
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
-        readonly name: string;
-        readonly title: string;
-        readonly force: boolean;
-        readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
-    }
-}
-
+export const renderRecord = actionCreator.async< void, { cmd: string, data: IRecordCall }, undefined >('RENDER_RECORD');
+export const renderFlowing = actionCreator.async< ISearchCall, { cmd: string, flowData: IFlowingCall[], current_page: number, page_size: number, ret: string, ret_data_type: string, retcode: number, retinfo: string, sum: string,  total: number }, undefined >('RENDER_FLOWING');
+export const renderTotal = actionCreator.async< void, { cmd: string, totalData: ITotalCall, amount: string, inamount: string, outamount: string, transaction: number, ecosystem: number, ret: string, retcode: number, retinfo: string, sum: string, wallet: string }, undefined >('RENDER_TOTAL');

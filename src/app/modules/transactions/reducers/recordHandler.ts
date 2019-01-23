@@ -19,36 +19,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+import { State } from '../reducer';
+import { renderRecord } from '../actions';
+import { Reducer } from 'modules';
 
-declare module 'gachain/content' {
-    import { TProtypoElement } from 'gachain/protypo';
+const recordHandler: Reducer<typeof renderRecord.started, State> = (state, payload) => ({
+    ...state,
+});
 
-    type TMenu = {
-        readonly name: string;
-        readonly content: TProtypoElement[];
-    };
-
-    type TPage = {
-        readonly name: string;
-        readonly legacy?: boolean;
-        readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
-        readonly error?: string;
-    };
-
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
-        readonly name: string;
-        readonly title: string;
-        readonly force: boolean;
-        readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
-    }
-}
-
+export default recordHandler;

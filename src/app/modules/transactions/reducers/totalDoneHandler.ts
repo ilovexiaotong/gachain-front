@@ -20,35 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'gachain/content' {
-    import { TProtypoElement } from 'gachain/protypo';
+import { State } from '../reducer';
+import { renderTotal } from '../actions';
+import { Reducer } from 'modules';
 
-    type TMenu = {
-        readonly name: string;
-        readonly content: TProtypoElement[];
-    };
+const totalDoneHandler: Reducer<typeof renderTotal.done, State> = (state, payload) => ({
+    ...state,
+    cmd: payload.result.cmd,
+    totalData: payload.result.totalData,
+    amount: payload.result.amount,
+    inamount: payload.result.inamount,
+    outamount: payload.result.outamount,
+    transaction: payload.result.transaction,
+    ecosystem: payload.result.ecosystem,
+    ret: payload.result.ret,
+    retcode: payload.result.retcode,
+    retinfo: payload.result.retinfo,
+    sum: payload.result.sum,
+    wallet: payload.result.wallet,
+});
 
-    type TPage = {
-        readonly name: string;
-        readonly legacy?: boolean;
-        readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
-        readonly error?: string;
-    };
-
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
-        readonly name: string;
-        readonly title: string;
-        readonly force: boolean;
-        readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
-    }
-}
-
+export default totalDoneHandler;

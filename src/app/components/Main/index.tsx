@@ -31,6 +31,7 @@ import themed from 'components/Theme/themed';
 import Titlebar from './Titlebar';
 import UserMenu from 'containers/Widgets/UserMenu';
 import Navigation from 'containers/Main/Navigation';
+import Transaction from 'containers/Widgets/TransactionRecord';
 import NotificationsMenu from 'containers/Widgets/NotificationsMenu';
 import Toolbar from './Toolbar';
 import SectionButton from 'components/Main/SectionButton';
@@ -39,6 +40,7 @@ import EditorToolbar from 'containers/Main/Toolbar/EditorToolbar';
 import ToolIndicator from 'components/Main/Toolbar/ToolIndicator';
 import LoadingBar from './LoadingBar';
 // import TransactionsMenu from './TransactionsMenu';
+// import ToolMenu from 'containers/Widgets/ToolMenu';
 
 const StyledWrapper = themed.div`
     background-color: #f6f8fa;
@@ -155,8 +157,9 @@ class Main extends React.Component<IMainProps> {
                             </li>
                         ) : null)}
                         <li className="user-menu">
+                            <Transaction />
                             <NotificationsMenu />
-                            {/*<TransactionsMenu />*/}
+                            {/* <TransactionsMenu /> */}
                             <UserMenu />
                         </li>
                     </StyledMenu>
@@ -195,6 +198,7 @@ class Main extends React.Component<IMainProps> {
                 <Navigation />
                 <StyledContent style={{ marginLeft: this.props.navigationVisible ? this.props.navigationSize : 0 }}>
                     {this.props.children}
+                    {/* <ToolMenu /> */}
                 </StyledContent>
             </StyledWrapper >
         );

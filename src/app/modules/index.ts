@@ -39,6 +39,7 @@ import * as io from './io';
 import * as notifications from './notifications';
 import * as storage from './storage';
 import * as socket from './socket';
+import * as transactions from './transactions';
 import { ActionCreator, Failure, Success } from 'typescript-fsa';
 
 export type Epic = NativeEpic<Action, IRootState, IStoreDependencies>;
@@ -63,6 +64,7 @@ export interface IRootState {
     socket: socket.State;
     loadingBar: number;
     router: RouterState;
+    record: transactions.State;
 }
 
 export const rootEpic = combineEpics(
@@ -77,7 +79,8 @@ export const rootEpic = combineEpics(
     io.epic,
     notifications.epic,
     storage.epic,
-    socket.epic
+    socket.epic,
+    transactions.epic
 );
 
 export default combineReducers<IRootState>({
@@ -92,5 +95,6 @@ export default combineReducers<IRootState>({
     notifications: notifications.reducer,
     storage: storage.reducer,
     socket: socket.reducer,
-    loadingBar: loadingBarReducer
+    loadingBar: loadingBarReducer,
+    record: transactions.reducer
 });

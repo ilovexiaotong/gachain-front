@@ -32,12 +32,13 @@ export interface IImportProps {
     backup: string;
     pending: boolean;
     onImportBackup: (file: File) => void;
-    onConfirm: (params: { backup: string, password: string }) => void;
+    onConfirm: (params: { backup: string, password: string, flag: boolean}) => void;
 }
 
 interface IImportState {
     backup: string;
     password: string;
+    flag: boolean;
 }
 
 class Import extends React.Component<IImportProps & InjectedIntlProps, IImportState> {
@@ -47,24 +48,26 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
         super(props);
         this.state = {
             backup: '',
-            password: ''
+            password: '',
+            flag: false
         };
     }
 
     componentWillReceiveProps(props: IImportProps) {
         this._inputFile.setAttribute('value', null);
 
-        if (this.props.backup !== props.backup) {
+        // if (this.props.backup !== props.backup) {
             this.setState({
                 backup: props.backup
             });
-        }
+        // }
     }
 
     onSubmit = (values: { [key: string]: any }) => {
         this.props.onConfirm({
-            backup: this.state.backup,
-            password: this.state.password
+            backup: this.state.flag === false ? ' ' : this.state.backup,
+            password: this.state.password,
+            flag: false
         });
     }
 
@@ -86,6 +89,11 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
 
     onLoadSuccess = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.props.onImportBackup(e.target.files[0]);
+        this.onInput();
+    }
+
+    onInput = () => {
+       this.setState({ flag: true });
     }
 
     render() {
@@ -99,8 +107,9 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
                     <div className="text-center">
                         <Validation.components.ValidatedForm onSubmitSuccess={this.onSubmit}>
                             <Generator
-                                seed={this.state.backup}
+                                seed={this.state.flag === false ? '' : this.state.backup}
                                 onLoad={this.onLoad}
+                                onInput={this.onInput}
                                 onSeedChange={this.onBackupChange}
                                 onPasswordChange={this.onPasswordChange}
                                 password={this.state.password}
