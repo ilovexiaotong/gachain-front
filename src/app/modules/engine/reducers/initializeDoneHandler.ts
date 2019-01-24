@@ -30,6 +30,7 @@ const initializeDoneHandler: Reducer<typeof initialize.done, State> = (state, pa
     isOffline: false,
     isConnecting: false,
     nodeHost: payload.result.nodeHost,
+    explorerHost: payload.result.explorerHost,
     activationEmail: payload.result.activationEmail
 });
 

@@ -55,6 +55,7 @@ const initializeEpic: Epic = (action$, store, { api, defaultKey, defaultPassword
                 fullNodes: (platform.args.fullNode && platform.args.fullNode.length) ? platform.args.fullNode :
                     (result.fullNodes && Array.isArray(result.fullNodes) && result.fullNodes.length) ? result.fullNodes :
                         fullNodesFallback,
+                explorerHost: platform.args.explorerHost || result.explorerHost,
                 activationEmail: platform.args.activationEmail || result.activationEmail,
                 socketUrl: platform.args.socketUrl || ((result.socketUrl && 'string' === typeof result.socketUrl) ? result.socketUrl : null),
                 disableFullNodesSync: 'boolean' === typeof platform.args.disableFullNodesSync ? platform.args.disableFullNodesSync :
@@ -84,6 +85,7 @@ const initializeEpic: Epic = (action$, store, { api, defaultKey, defaultPassword
                         result: {
                             fullNodes: fullNodes,
                             nodeHost: node,
+                            explorerHost: config.explorerHost,
                             activationEmail: config.activationEmail
                         }
                     })),

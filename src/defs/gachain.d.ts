@@ -23,6 +23,7 @@
 declare module 'gachain' {
     interface IWebSettings {
         fullNodes?: string[];
+        explorerHost?: string,
         socketUrl?: string;
         activationEmail?: string;
         disableFullNodesSync?: boolean;

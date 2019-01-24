@@ -27,6 +27,7 @@ declare module 'gachain/gui' {
     interface IInferredArguments {
         readonly privateKey?: string;
         readonly fullNode?: string[];
+        readonly explorerHost?: string;
         readonly dry?: boolean;
         readonly offsetX?: number;
         readonly offsetY?: number;
