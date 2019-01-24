@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import GachainAPI from 'lib/gachainAPI';
+import GachainAPI, { TBodyType } from 'lib/gachainAPI';
 import CodeGenerator, { setIds, convertToTreeData, findTagById, copyObject, idGenerator, updateChildrenText, html2childrenTags } from 'lib/constructor';
 import Properties from 'lib/constructor/properties';
 import getConstructorTemplate from 'lib/constructor/templates';
@@ -38,7 +38,7 @@ export interface IStoreDependencies {
 }
 
 export interface IAPIDependency {
-    (options: { apiHost: string, sessionToken?: string }): GachainAPI;
+    (options: { apiHost: string, sessionToken?: string, bodyType?: TBodyType }): GachainAPI;
 }
 
 interface IConstructorDependenies {
@@ -56,7 +56,7 @@ interface IConstructorDependenies {
 }
 
 const storeDependencies: IStoreDependencies = {
-    api: (params: { apiHost: string, sessionToken?: string } = { apiHost: null }) => new GachainAPI({
+    api: (params: { apiHost: string, sessionToken?: string, bodyType?: TBodyType } = { apiHost: null, bodyType: 'formdata' }) => new GachainAPI({
         transport: request => fetch(request.url, {
             method: request.method,
             headers: request.headers,
@@ -78,6 +78,7 @@ const storeDependencies: IStoreDependencies = {
         }),
         apiHost: params.apiHost,
         apiEndpoint: params.apiHost !== explorerEndpoint ? apiEndpoint : '',
+        bodyType: params.bodyType,
         session: params.sessionToken
     }),
     defaultKey: 'e5a87a96a445cb55a214edaad3661018061ef2936e63a0a93bdb76eb28251c1f',
